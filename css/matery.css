@@ -34,7 +34,11 @@
 }
 
 img.responsive-img {
-  object-fit: cover;
+    object-fit: cover;
+}
+
+#toc-content ol li {
+    padding-left: 10px;
 }
 
 body {
