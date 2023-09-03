@@ -41,6 +41,20 @@ img.responsive-img {
     padding-bottom: 10px;
 }
 
+/* 移动端样式 */
+@media screen and (max-width: 1129px) {
+  iframe.netease-music {
+    width: 90%;
+  }
+}
+
+/* 电脑端样式 */
+@media screen and (min-width: 1130px) {
+  iframe.netease-music {
+    width: 850px; /* 设置电脑端宽度 */
+  }
+}
+
 body {
   background:
   radial-gradient(circle, transparent 20%, #B4EEB4 20%, #B4EEB4 80%, transparent 80%, transparent),
