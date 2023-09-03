@@ -33,6 +33,10 @@
     }
 }
 
+img.responsive-img {
+  object-fit: cover;
+}
+
 body {
   background:
   radial-gradient(circle, transparent 20%, #B4EEB4 20%, #B4EEB4 80%, transparent 80%, transparent),
