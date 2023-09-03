@@ -747,6 +747,12 @@ header .go-back i {
     padding-top: 30px;
 }
 
+#recommend-sections iframe {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .index-card .card .card-content {
     padding: 20px 40px;
 }
@@ -1689,7 +1695,7 @@ thead {
 }
 
 #aboutme .introduction {
-    margin: 1.5rem auto 3rem;
+    margin: 1.5rem auto 1rem;
     max-width: 600px;
     color: #999;
 }
