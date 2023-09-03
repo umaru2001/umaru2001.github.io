@@ -789,7 +789,7 @@ header .go-back i {
     left: 0;
     top: 0;
     content: "";
-    background-color: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, .5);
     border-radius: 10px;
 }
 
@@ -1313,7 +1313,7 @@ thead {
 
 .chip-container .chip-active {
     color: #FFF !important;
-    background: linear-gradient(to bottom right, #FF5E3A 0%, #FF2A68 100%) !important;
+    background: #0f9d58 !important;
     box-shadow: 2px 5px 10px #aaa !important;
 }
 
@@ -1918,7 +1918,7 @@ footer .copy-right {
 }
 
 .top-scroll .btn-floating {
-    background: linear-gradient(to bottom right, #FF5E3A 0%, #FF2A68 100%);
+    background: #0f9d58;
     width: 48px;
     height: 48px;
 }
@@ -2034,7 +2034,7 @@ footer .copy-right {
     /* fix the problem of hidden failure */
     margin-top: 0.4em;
     /* bg color = bg color under block */
-    background: white;
+    background: #dcffdc;
 }
 
 /*二级菜单*/
