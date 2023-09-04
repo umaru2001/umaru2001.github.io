@@ -322,6 +322,16 @@
     </div>
 </div>
 
+<script>
+// 每天切换 banner 图.  Switch banner image every day.
+var dayOfWeek = new Date().getDay();
+if (dayOfWeek === 1 || dayOfWeek === 6) {
+  document.body.classList.add('purple');
+} else if (dayOfWeek >= 2 && dayOfWeek <= 4) {
+  document.body.classList.add('blue');
+}
+</script>
+
 
 
 
@@ -799,15 +809,6 @@
     
 
 </main>
-<script>
-  // 每天切换 banner 图.  Switch banner image every day.
-  var dayOfWeek = new Date().getDay();
-  if (dayOfWeek === 1 || dayOfWeek === 6) {
-    document.body.classList.add('purple');
-  } else if (dayOfWeek >= 2 && dayOfWeek <= 4) {
-    document.body.classList.add('blue');
-  }
-</script>
 
 
 

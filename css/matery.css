@@ -1718,6 +1718,14 @@ thead {
     color: #42b983;
 }
 
+.blue .post-statis .statis .count a {
+    color: #4169E1;
+}
+
+.purple .post-statis .statis .count a {
+    color: #6A5ACD;
+}
+
 .post-statis .statis .name {
     font-size: 0.9rem;
     color: #777;
@@ -1737,10 +1745,19 @@ thead {
     padding: 0;
     color: #fff;
     border: 1px solid #0f9d58;
-    background: radial-gradient(#4cbf30, #0f9d58);
+    background: #0f9d58;
     font-size: 0.9rem;
     border-radius: 50%;
-    box-shadow: 0 4px 6px rgba(50, 50, 93, .21), 0 2px 3px rgba(0, 0, 0, .1);
+}
+
+.blue #aboutme .social-link a {
+  border: 1px solid #4169E1;
+  background: #4169E1;
+}
+
+.purple #aboutme .social-link a {
+  border: 1px solid #6A5ACD;
+  background: #6A5ACD;
 }
 
 .profile .avatar-img {
