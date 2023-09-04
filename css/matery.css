@@ -70,6 +70,21 @@ body {
     overflow-y: auto;
 }
 
+body.blue {
+  background:
+  radial-gradient(circle, transparent 20%, #1E90FF 20%, #1E90FF 80%, transparent 80%, transparent),
+  radial-gradient(circle, transparent 20%, #1E90FF 20%, #1E90FF 80%, transparent 80%, transparent) 50px 50px,
+  linear-gradient(#00BFFF 8px, transparent 8px) 0 -4px,
+  linear-gradient(90deg, #00BFFF 8px, transparent 8px) -4px 0;
+  background-color:#1E90FF;
+  background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;
+
+    margin: 0;
+    color: #34495e;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 h1 {
     margin: 48px 0 22px -5px;
     font-size: 2.0rem;
