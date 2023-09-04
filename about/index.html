@@ -261,7 +261,7 @@
     }
 
     .github-corner svg {
-        color: #0f9d58;
+        color: #000000;
         fill: #fff;
         height: 64px;
         width: 64px;
@@ -347,8 +347,14 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
+    var dayOfWeek = new Date().getDay();
+    var bannerUrl = "/medias/banner/" + dayOfWeek + '.jpg';
     $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
+    if (dayOfWeek === 1 || dayOfWeek === 6) {
+      document.body.classList.add('purple');
+    } else if (dayOfWeek >= 2 && dayOfWeek <= 4) {
+      document.body.classList.add('blue');
+    }
 </script>
 
 

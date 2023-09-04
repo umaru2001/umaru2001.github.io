@@ -261,7 +261,7 @@
     }
 
     .github-corner svg {
-        color: #0f9d58;
+        color: #000000;
         fill: #fff;
         height: 64px;
         width: 64px;
@@ -387,8 +387,14 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
+    var dayOfWeek = new Date().getDay();
+    var bannerUrl = "/medias/banner/" + dayOfWeek + '.jpg';
     $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
+    if (dayOfWeek === 1 || dayOfWeek === 6) {
+      document.body.classList.add('purple');
+    } else if (dayOfWeek >= 2 && dayOfWeek <= 4) {
+      document.body.classList.add('blue');
+    }
 </script>
 
 
@@ -568,7 +574,7 @@
                     <h3 class="post-title">你好呀!</h3>
                 </a>
                 <p class="post-description">hi，你好ʕ•ﻌ•ʔ！初次到访，不来先认识下我嘛~</p>
-                <a href="/2021/02/03/hello/" class="read-more btn waves-effect waves-light" style="background: #0f9d58" target="_blank">
+                <a href="/2021/02/03/hello/" class="read-more btn waves-effect waves-light" target="_blank">
                     <i class="icon far fa-eye fa-fw"></i>阅读更多
                 </a>
             </div>

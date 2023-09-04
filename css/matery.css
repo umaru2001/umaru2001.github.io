@@ -56,14 +56,13 @@ img.responsive-img {
 }
 
 body {
-  background:
-  radial-gradient(circle, transparent 20%, #B4EEB4 20%, #B4EEB4 80%, transparent 80%, transparent),
-  radial-gradient(circle, transparent 20%, #B4EEB4 20%, #B4EEB4 80%, transparent 80%, transparent) 50px 50px,
-  linear-gradient(#C1FFC1 8px, transparent 8px) 0 -4px,
-  linear-gradient(90deg, #C1FFC1 8px, transparent 8px) -4px 0;
-  background-color:#B4EEB4;
-  background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;
-
+    background:
+    radial-gradient(circle, transparent 20%, #B4EEB4 20%, #B4EEB4 80%, transparent 80%, transparent),
+    radial-gradient(circle, transparent 20%, #B4EEB4 20%, #B4EEB4 80%, transparent 80%, transparent) 50px 50px,
+    linear-gradient(#C1FFC1 8px, transparent 8px) 0 -4px,
+    linear-gradient(90deg, #C1FFC1 8px, transparent 8px) -4px 0;
+    background-color:#B4EEB4;
+    background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;
     margin: 0;
     color: #34495e;
     overflow-x: hidden;
@@ -71,19 +70,25 @@ body {
 }
 
 body.blue {
-  background:
-  radial-gradient(circle, transparent 20%, #1E90FF 20%, #1E90FF 80%, transparent 80%, transparent),
-  radial-gradient(circle, transparent 20%, #1E90FF 20%, #1E90FF 80%, transparent 80%, transparent) 50px 50px,
-  linear-gradient(#00BFFF 8px, transparent 8px) 0 -4px,
-  linear-gradient(90deg, #00BFFF 8px, transparent 8px) -4px 0;
-  background-color:#1E90FF;
-  background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;
-
-    margin: 0;
-    color: #34495e;
-    overflow-x: hidden;
-    overflow-y: auto;
+    background:
+    radial-gradient(circle, transparent 20%, #1E90FF 20%, #1E90FF 80%, transparent 80%, transparent),
+    radial-gradient(circle, transparent 20%, #1E90FF 20%, #1E90FF 80%, transparent 80%, transparent) 50px 50px,
+    linear-gradient(#00BFFF 8px, transparent 8px) 0 -4px,
+    linear-gradient(90deg, #00BFFF 8px, transparent 8px) -4px 0;
+    background-color:#1E90FF;
+    background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;
 }
+
+body.purple {
+    background:
+    radial-gradient(circle, transparent 20%, SlateBlue 20%, SlateBlue 80%, transparent 80%, transparent),
+    radial-gradient(circle, transparent 20%, SlateBlue 20%, SlateBlue 80%, transparent 80%, transparent) 50px 50px,
+    linear-gradient(#8470FF 8px, transparent 8px) 0 -4px,
+    linear-gradient(90deg, #8470FF 8px, transparent 8px) -4px 0;
+    background-color: SlateBlue;
+    background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;
+}
+
 
 h1 {
     margin: 48px 0 22px -5px;
@@ -275,6 +280,14 @@ mark {
     box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07) !important;
 }
 
+.blue .card {
+    background-color: #b3d7fa;
+}
+
+.purple .card {
+  background-color: #cdc9fb;
+}
+
 .card .card-image img {
     border-radius: 8px 8px 0 0;
     /* 修改文章列表图片填充样式为 cover 以覆盖整个区域而不会被缩放 */
@@ -287,6 +300,14 @@ mark {
 
 .bg-color {
     background-image: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
+}
+
+.blue .bg-color {
+  background-image: linear-gradient(to right, #1E90FF 0%, #4169E1 100%);
+}
+
+.purple .bg-color {
+  background-image: linear-gradient(to right, #8977fe 0%, #6A5ACD 100%);
 }
 
 .text-color {
@@ -304,6 +325,14 @@ mark {
     z-index: 300;
     background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
     opacity: 0.8;
+}
+
+.blue .progress-bar {
+  background-image: linear-gradient(to right, #1E90FF 0%, #4169E1 100%);
+}
+
+.purple .progress-bar {
+  background-image: linear-gradient(to right, #8977fe 0%, #6A5ACD 100%);
 }
 
 .sidenav-overlay {
@@ -886,6 +915,7 @@ header .go-back i {
 }
 
 .recommend .post-card .read-more {
+    background: #0f9d58;
     height: 40px;
     margin: .6rem 1px;
     font-size: 0.9rem;
@@ -893,7 +923,14 @@ header .go-back i {
     line-height: 40px;
     color: #fff;
     border-radius: 30px;
-    box-shadow: 0 2px 2px 0 rgba(244, 67, 54, .14), 0 3px 1px -2px rgba(244, 67, 54, .2), 0 1px 5px 0 rgba(244, 67, 54, .12);
+}
+
+.blue .recommend .post-card .read-more {
+    background: #4169E1;;
+}
+
+.purple .recommend .post-card .read-more {
+    background: #624cee;
 }
 
 .recommend .post-card .read-more .icon {
@@ -1962,6 +1999,14 @@ footer .copy-right {
     height: 48px;
 }
 
+.blue .top-scroll .btn-floating {
+  background: #4169E1;;
+}
+
+.purple .top-scroll .btn-floating {
+  background: #624cee;
+}
+
 .top-scroll .btn-floating i {
     line-height: 48px;
     font-size: 1.8rem;
@@ -2074,6 +2119,14 @@ footer .copy-right {
     margin-top: 0.4em;
     /* bg color = bg color under block */
     background: #dcffdc;
+}
+
+.blue .block-with-text:after {
+  background: #b3d7fa;
+}
+
+.purple .block-with-text:after {
+  background: #cdc9fb;
 }
 
 /*二级菜单*/
