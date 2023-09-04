@@ -1253,6 +1253,14 @@ article .article-tags .chip {
     font-weight: 500;
 }
 
+.purple #artDetail .reprint a {
+    color: #4169E1;
+}
+
+.blue #artDetail .reprint a {
+    color: #6A5ACD;
+}
+
 #articleContent p {
     margin: 2px 2px 10px;
     font-size: 1.05rem;
@@ -1388,9 +1396,17 @@ thead {
 }
 
 .chip-container .chip-active {
-    color: #FFF !important;
+    color: #FFF;
     background: #0f9d58 !important;
-    box-shadow: 2px 5px 10px #aaa !important;
+    box-shadow: 2px 5px 10px #aaa;
+}
+
+.blue .chip-container .chip-active {
+    background: #4169E1 !important;
+}
+
+.purple .chip-container .chip-active {
+    background: #6A5ACD !important;
 }
 
 .chip-container .chip {
