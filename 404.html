@@ -337,7 +337,9 @@
         $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
         if (dayOfWeek === 1 || dayOfWeek === 6) {
           document.body.classList.add('purple');
-        } else if (dayOfWeek >= 2 && dayOfWeek <= 4) {
+        } else if (dayOfWeek >= 2 && dayOfWeek <= 3) {
+          document.body.classList.add('orange');
+        } else if (dayOfWeek == 4) {
           document.body.classList.add('blue');
         }
     </script>

@@ -89,6 +89,15 @@ body.purple {
     background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;
 }
 
+body.orange {
+  background:
+  radial-gradient(circle, transparent 20%, #FF8C00 20%, #FF8C00 80%, transparent 80%, transparent),
+  radial-gradient(circle, transparent 20%, #FF8C00 20%, #FF8C00 80%, transparent 80%, transparent) 50px 50px,
+  linear-gradient(#FFAB10 8px, transparent 8px) 0 -4px,
+  linear-gradient(90deg, #FFAB10 8px, transparent 8px) -4px 0;
+  background-color: #FF8C00;
+  background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;
+}
 
 h1 {
     margin: 48px 0 22px -5px;
@@ -288,6 +297,10 @@ mark {
   background-color: #cdc9fb;
 }
 
+.orange .card {
+  background-color: #fbd590;
+}
+
 .card .card-image img {
     border-radius: 8px 8px 0 0;
     /* 修改文章列表图片填充样式为 cover 以覆盖整个区域而不会被缩放 */
@@ -303,15 +316,31 @@ mark {
 }
 
 .blue .bg-color {
-  background-image: linear-gradient(to right, #1E90FF 0%, #4169E1 100%);
+    background-image: linear-gradient(to right, #1E90FF 0%, #4169E1 100%);
 }
 
 .purple .bg-color {
-  background-image: linear-gradient(to right, #8977fe 0%, #6A5ACD 100%);
+    background-image: linear-gradient(to right, #8977fe 0%, #6A5ACD 100%);
+}
+
+.orange .bg-color {
+    background-image: linear-gradient(to right, #FFAB10 0%, #FF8C00 100%);
 }
 
 .text-color {
     color: #0f9d58 !important;
+}
+
+.blue .text-color {
+  color: #4169E1 !important;
+}
+
+.purple .text-color {
+  color: #6A5ACD !important;
+}
+
+.orange .text-color {
+  color: #FF8C00 !important;
 }
 
 .white-color {
@@ -335,6 +364,10 @@ mark {
   background-image: linear-gradient(to right, #8977fe 0%, #6A5ACD 100%);
 }
 
+.orange .progress-bar {
+  background-image: linear-gradient(to right, #FFAB10 0%, #FF8C00 100%);
+}
+
 .sidenav-overlay {
     z-index: 500;
 }
@@ -353,9 +386,9 @@ nav {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 7px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-header .nav-transparent {
+header nav#headNav.nav-transparent {
     background-color: transparent !important;
-    background-image: none;
+    background-image: none !important;
     box-shadow: none;
 }
 
@@ -933,6 +966,10 @@ header .go-back i {
     background: #624cee;
 }
 
+.orange .recommend .post-card .read-more {
+  background: #FF8C00;
+}
+
 .recommend .post-card .read-more .icon {
     font-size: 1.05rem;
     padding-right: 10px;
@@ -1253,12 +1290,16 @@ article .article-tags .chip {
     font-weight: 500;
 }
 
-.purple #artDetail .reprint a {
+.blue #artDetail .reprint a {
     color: #4169E1;
 }
 
-.blue #artDetail .reprint a {
+.purple #artDetail .reprint a {
     color: #6A5ACD;
+}
+
+.orange #artDetail .reprint a {
+  color: #FF8C00;
 }
 
 #articleContent p {
@@ -1407,6 +1448,10 @@ thead {
 
 .purple .chip-container .chip-active {
     background: #6A5ACD !important;
+}
+
+.orange .chip-container .chip-active {
+  background: #FF8C00 !important;
 }
 
 .chip-container .chip {
@@ -1726,6 +1771,10 @@ thead {
     color: #6A5ACD;
 }
 
+.orange .post-statis .statis .count a {
+    color: #FF8C00;
+}
+
 .post-statis .statis .name {
     font-size: 0.9rem;
     color: #777;
@@ -1758,6 +1807,11 @@ thead {
 .purple #aboutme .social-link a {
   border: 1px solid #6A5ACD;
   background: #6A5ACD;
+}
+
+.orange #aboutme .social-link a {
+  border: 1px solid #FF8C00;
+  background: #FF8C00;
 }
 
 .profile .avatar-img {
@@ -2040,6 +2094,10 @@ footer .copy-right {
   background: #624cee;
 }
 
+.orange .top-scroll .btn-floating {
+  background: #FF8C00;
+}
+
 .top-scroll .btn-floating i {
     line-height: 48px;
     font-size: 1.8rem;
@@ -2160,6 +2218,10 @@ footer .copy-right {
 
 .purple .block-with-text:after {
   background: #cdc9fb;
+}
+
+.orange .block-with-text:after {
+  background: #fbd590;
 }
 
 /*二级菜单*/
