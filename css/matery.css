@@ -518,6 +518,20 @@ header .side-nav .social-link {
     animation: scroll-down 1.5s infinite;
 }
 
+.iframe-error-fallback {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.iframe-error-fallback-text {
+  width: 75%
+}
+
 @-moz-keyframes scroll-down {
     0% {
         opacity: 0.4;
@@ -836,6 +850,7 @@ header .go-back i {
 #recommend-sections {
     margin-top: -30px;
     padding-top: 30px;
+    position: relative;
 }
 
 #recommend-sections iframe {
