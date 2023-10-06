@@ -831,6 +831,10 @@ header .go-back i {
     font-weight: 700;
 }
 
+.card .card-image .card-title {
+  font-weight: 500;
+}
+
 .dream .text {
     opacity: .6;
     font-size: 1.1rem;
