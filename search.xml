@@ -4,11 +4,30 @@
   
     
     <entry>
+      <title>swf-game-mota24</title>
+      <link href="/2023/10/09/swf-game-mota24/"/>
+      <url>/2023/10/09/swf-game-mota24/</url>
+      
+        <content type="html"><![CDATA[<p>第一次尝试在博客里面放置游戏内容，等以后有空了可以写写这个效果是如何做出来的。总之多弄弄游戏，日后方便摸鱼。</p><p>游戏的内容是我小时候最喜欢的魔塔系列~ 24层魔塔是最经典的魔塔之一了，也是我第一个通关的魔塔。</p><iframe src="https://pengdonglai.com/ruffle-swf-player/swf-games/mota24/" width="700px" height="560px" frameborder="0" scrolling="no"></iframe><p>本游戏并非本人制作，源文件为网络资料，如有侵权，请联系我，我会在收到侵权告知后24小时内删除。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 游戏 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>英语听力磨耳朵之一串数字号码</title>
       <link href="/2023/10/06/english-number-listening/"/>
       <url>/2023/10/06/english-number-listening/</url>
       
-        <content type="html"><![CDATA[<h2 id="听力音频"><a href="#听力音频" class="headerlink" title="听力音频"></a>听力音频</h2><p>​<audio src="audio.mp3" controls loop preload="metadata"><br>  你的浏览器不支持 audio 标签。<br></audio></p><h2 id="Level-1"><a href="#Level-1" class="headerlink" title="Level 1"></a>Level 1</h2><p>88452964</p><p>52578638</p><p>68256895</p><p>67849265</p><p>15672853</p><p>93727956</p><p>46249717</p><p>68278075</p><p>9672356730</p><p>2564759102</p><p>6829374857</p><p>4762895634</p><p>5782947819</p><h2 id="Level-2"><a href="#Level-2" class="headerlink" title="Level 2"></a>Level 2</h2><p>3797 89657284</p><p>7569 20397619</p><p>5736 97658296</p><p>4720 75439765</p><p>7639 76854157</p><p>8760 29765397</p><p>118 337 78549286</p><p>879 865 97281674</p><p>407 285 30972943</p><p>896 043 86549760</p><p>974 039 76763985</p><h2 id="Level-3"><a href="#Level-3" class="headerlink" title="Level 3"></a>Level 3</h2><p>1104 9879 1043 87692219 702</p><p>7856 7523 7846 29763480 523</p><p>7856 2785 6857 37585367 297</p><p>8453 2658 3865 10087628 465</p><p>5748 6287 7845 39867276 675</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="听力音频"><a href="#听力音频" class="headerlink" title="听力音频"></a>听力音频</h2><p><code>&lt;audio src=&quot;audio.mp3&quot; controls loop preload=&quot;metadata&quot;&gt;</code><br>  你的浏览器不支持 audio 标签。</p><h2 id="Level-1"><a href="#Level-1" class="headerlink" title="Level 1"></a>Level 1</h2><p>88452964</p><p>52578638</p><p>68256895</p><p>67849265</p><p>15672853</p><p>93727956</p><p>46249717</p><p>68278075</p><p>9672356730</p><p>2564759102</p><p>6829374857</p><p>4762895634</p><p>5782947819</p><h2 id="Level-2"><a href="#Level-2" class="headerlink" title="Level 2"></a>Level 2</h2><p>3797 89657284</p><p>7569 20397619</p><p>5736 97658296</p><p>4720 75439765</p><p>7639 76854157</p><p>8760 29765397</p><p>118 337 78549286</p><p>879 865 97281674</p><p>407 285 30972943</p><p>896 043 86549760</p><p>974 039 76763985</p><h2 id="Level-3"><a href="#Level-3" class="headerlink" title="Level 3"></a>Level 3</h2><p>1104 9879 1043 87692219 702</p><p>7856 7523 7846 29763480 523</p><p>7856 2785 6857 37585367 297</p><p>8453 2658 3865 10087628 465</p><p>5748 6287 7845 39867276 675</p>]]></content>
       
       
       
