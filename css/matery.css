@@ -2052,6 +2052,7 @@ footer .copy-right {
 #searchModal {
     min-height: 500px;
     width: 80%;
+    border-radius: 10px;
 }
 
 #searchModal .search-header .title {
