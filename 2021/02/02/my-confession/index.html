@@ -75,17 +75,6 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -161,17 +150,6 @@
 			    <i class="fa-fw fas fa-tags"></i>
 			
 			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
 		</a>
           
         </li>
@@ -285,6 +263,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = 'c4ba5b65643dd21de5da4bf6adf272ccb10f3b5ed44677f70deffe9ce541d159';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -498,7 +489,10 @@ if (dayOfWeek === 1 || dayOfWeek === 6) {
 <p>确实，都已经把该说的都说出来了，秘密藏在心底会让我更不好受。虽然说博客没有人看，旧时光的朋友们也根本看不到这篇文章。但这不重要。</p>
 <p>现在想来，都只是不成熟的想法罢了。忏悔的意义是让我成长。</p>
 <p>话说现在我正好也在玩原神，它更新到了枫丹版本。歌剧院是让人们接受审判的地方，梅洛彼得堡是人们服刑的地方。但当人们洗刷了自己的罪名，等待着他们的就是美好与阳光，还有——喷泉。所以，放轻松，让自己开心点吧。嗯嗯，来一首喷泉下的 BGM 助助兴！</p>
-<p>​<audio src="audio.mp3" controls loop preload="metadata"><br>  你的浏览器不支持 audio 标签。<br></audio></p>
+<audio src="audio.mp3" controls loop preload="metadata">
+  你的浏览器不支持 audio 标签。
+</audio>
+
 <h4 id="01"><a href="#01" class="headerlink" title="01"></a>01</h4><p>在高二至高三的那段时间，我的精神状态发生了非常大的变化——我在那个时候将我的同学都暗地里视作对手，并且与他们展开激烈竞争，应该属于非常典型的社会达尔文主义的行为。在那段时间里面，我的情绪被一次又一次的考试和排位深刻影响，但是在那个时候我十分推崇这种行为，并且会非常主观的排斥一些同学，说出的话经常带有一定的攻击性。</p>
 <ul>
 <li>当初的早自习，大家都在一个教室里面读书，实际上我读书的时候我并不能很清楚的听到自己的声音——因此我觉得那时候的读书只是为了锻炼肌肉记忆。为了可以让其他人读书的声音小一些，我曾经和其他同学发生过争论的行为，影响了和同学们之间的感情。</li>
@@ -915,6 +909,9 @@ if (dayOfWeek === 1 || dayOfWeek === 6) {
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">16.9k</span>&nbsp;字
             
             
             

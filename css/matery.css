@@ -1212,9 +1212,33 @@ article .article-tags .chip {
     transition: all 0.6s ease-in-out;
 }
 
+.blue #artDetail .tag_share .article-tag .chip {
+    color: #4169E1;
+}
+
+.purple #artDetail .tag_share .article-tag .chip {
+    color: #6A5ACD;
+}
+
+.orange #artDetail .tag_share .article-tag .chip {
+    color: #FF8C00;
+}
+
 #artDetail .tag_share .article-tag .chip:hover {
     color: #fff;
     background: #42b983;
+}
+
+.blue #artDetail .tag_share .article-tag .chip:hover {
+    background: #4169E1;
+}
+
+.purple #artDetail .tag_share .article-tag .chip:hover {
+    background: #6A5ACD;
+}
+
+.orange #artDetail .tag_share .article-tag .chip:hover {
+    background: #FF8C00;
 }
 
 #artDetail .post-cate {
@@ -1490,6 +1514,18 @@ thead {
 .chip-container .chip:hover {
     color: #fff;
     background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%) !important;
+}
+
+.blue .chip-container .chip:hover {
+    background: linear-gradient(to right, #1E90FF 0%, #4169E1 100%) !important;
+}
+
+.purple .chip-container .chip:hover {
+    background: linear-gradient(to right, #8977fe 0%, #6A5ACD 100%) !important;
+}
+
+.orange .chip-container .chip:hover {
+    background: linear-gradient(to right, #FFAB10 0%, #FF8C00 100%) !important;
 }
 
 .chip .tag-length {

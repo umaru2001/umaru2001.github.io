@@ -75,17 +75,6 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -161,17 +150,6 @@
 			    <i class="fa-fw fas fa-tags"></i>
 			
 			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
 		</a>
           
         </li>
@@ -285,6 +263,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -608,19 +599,19 @@ if (dayOfWeek === 1 || dayOfWeek === 6) {
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/10/05/bombit4/">
+                <a href="/2023/10/05/commando2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Bomb it!（Q版泡泡堂）——我在博客打游戏">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Commando2（二战前线）——我在博客打游戏">
                         
-                        <span class="card-title">Bomb it!（Q版泡泡堂）——我在博客打游戏</span>
+                        <span class="card-title">Commando2（二战前线）——我在博客打游戏</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            小时候最喜欢玩的游戏之一——Q版泡泡堂
+                            小时候最喜欢玩的游戏之一——二战前线
                         
                     </div>
                     <div class="publish-info">
@@ -885,6 +876,9 @@ if (dayOfWeek === 1 || dayOfWeek === 6) {
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">16.9k</span>&nbsp;字
             
             
             
