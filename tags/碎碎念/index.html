@@ -35,6 +35,67 @@
 
 
 <body>
+    <script>
+      // 每天切换 banner 图.  Switch banner image every day.
+      const _dayOfWeek = new Date().getDay();
+      if (_dayOfWeek === 1 || _dayOfWeek === 6) {
+        document.body.classList.add('purple');
+      } else if (_dayOfWeek >= 2 && _dayOfWeek <= 3) {
+        document.body.classList.add('orange');
+      } else if (_dayOfWeek == 4) {
+        document.body.classList.add('blue');
+      }
+      _setCookie = (name, value, days) => {
+        if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          var expires = "; expires=" + date.toGMTString()
+        } else var expires = "";
+        document.cookie = name + "https://pengdonglaicom=" + value + expires + "; path=/"
+      }
+
+      _getCookie = (name) => {
+        var nameEQ = name + "https://pengdonglaicom=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length)
+        }
+        return null
+      }
+
+      window.DarkReader = {
+        darkmode: _getCookie('targetDarkmode') === '1',
+        changeMode: function () {
+            if (this.darkmode) {
+                document.body.classList.remove('black');
+                const d = new Date().getDay();
+                if (d === 1 || d === 6) {
+                    document.body.classList.add('purple');
+                } else if (d >= 2 && d <= 3) {
+                    document.body.classList.add('orange');
+                } else if (d == 4) {
+                    document.body.classList.add('blue');
+                }
+                this.darkmode = false;
+                _setCookie('targetDarkmode', 0, 7);
+                changePostCalendarDarkMode?.();
+            } else {
+                document.body.classList.remove('purple', 'orange', 'blue');
+                document.body.classList.add('black');
+                this.darkmode = true;
+                _setCookie('targetDarkmode', 1, 7);
+                changePostCalendarDarkMode?.();
+            }
+        }
+      }
+      if (_getCookie('targetDarkmode') === '1') {
+          document.body.classList.remove('purple', 'orange', 'blue');
+          document.body.classList.add('black');
+      }
+    </script>
+
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
@@ -109,6 +170,11 @@
   <li>
     <a href="#searchModal" class="modal-trigger waves-effect waves-light">
       <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:DarkReader?.changeMode()" class="waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-moon" title="搜索" style="zoom: 0.85;"></i>
     </a>
   </li>
 </ul>
@@ -299,13 +365,6 @@
     var dayOfWeek = new Date().getDay();
     var bannerUrl = "/medias/banner/" + dayOfWeek + '.jpg';
     $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-    if (dayOfWeek === 1 || dayOfWeek === 6) {
-      document.body.classList.add('purple');
-    } else if (dayOfWeek >= 2 && dayOfWeek <= 3) {
-      document.body.classList.add('orange');
-    } else if (dayOfWeek == 4) {
-      document.body.classList.add('blue');
-    }
 </script>
 
 
@@ -334,10 +393,19 @@
                 </a>
                 
                 
+                <a href="/tags/%E5%B7%A5%E5%85%B7/" title="工具: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="工具" style="background-color: #F5EEF8;">工具
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
                 <a href="/tags/English/" title="English: 8">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="English" style="background-color: #F5EEF8;">English
+                            data-tagname="English" style="background-color: #D5F5E3;">English
                         <span class="tag-length">8</span>
                     </span>
                 </a>
@@ -346,17 +414,8 @@
                 <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" title="碎碎念: 3">
                     <span class="chip center-align waves-effect waves-light
                              chip-active "
-                            data-tagname="碎碎念" style="background-color: #D5F5E3;">碎碎念
+                            data-tagname="碎碎念" style="background-color: #E8F8F5;">碎碎念
                         <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E5%B7%A5%E5%85%B7/" title="工具: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="工具" style="background-color: #E8F8F5;">工具
-                        <span class="tag-length">1</span>
                     </span>
                 </a>
                 
@@ -533,7 +592,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.4k</span>&nbsp;字
+                class="white-color">23.1k</span>&nbsp;字
             
             
             

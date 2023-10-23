@@ -37,6 +37,10 @@ img.responsive-img {
     object-fit: cover;
 }
 
+.black #searchInput {
+    color: antiquewhite;
+}
+
 #toc-content ol li {
     padding-bottom: 5px;
     padding-top: 5px;
@@ -78,6 +82,16 @@ body.blue {
     linear-gradient(90deg, #00BFFF 8px, transparent 8px) -4px 0;
     background-color:#1E90FF;
     background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;
+}
+
+body.black {
+  background:
+  radial-gradient(circle, transparent 20%, #101010 20%, #101010 80%, transparent 80%, transparent),
+  radial-gradient(circle, transparent 20%, #101010 20%, #101010 80%, transparent 80%, transparent) 50px 50px,
+  linear-gradient(#404040 8px, transparent 8px) 0 -4px,
+  linear-gradient(90deg, #404040 8px, transparent 8px) -4px 0;
+  background-color:#101010;
+  background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;
 }
 
 body.purple {
@@ -286,12 +300,17 @@ mark {
 
 .card {
     background-color: #dcffdc;
-    border-radius: 10px;
+    border-radius: 8px;
     box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07) !important;
 }
 
 .blue .card {
     background-color: #b3d7fa;
+}
+
+.black .card {
+  background-color: #000000;
+  color: antiquewhite;
 }
 
 .purple .card {
@@ -320,6 +339,10 @@ mark {
     background-image: linear-gradient(to right, #1E90FF 0%, #4169E1 100%);
 }
 
+.black .bg-color {
+    background-image: linear-gradient(to right, #000000 0%, #000000 100%);
+}
+
 .purple .bg-color {
     background-image: linear-gradient(to right, #8977fe 0%, #6A5ACD 100%);
 }
@@ -334,6 +357,10 @@ mark {
 
 .blue .text-color {
   color: #4169E1 !important;
+}
+
+.black .text-color {
+  color: #000000 !important;
 }
 
 .purple .text-color {
@@ -359,6 +386,10 @@ mark {
 
 .blue .progress-bar {
   background-image: linear-gradient(to right, #1E90FF 0%, #4169E1 100%);
+}
+
+.black .progress-bar {
+  background-image: linear-gradient(to right, antiquewhite 0%, antiquewhite 100%);
 }
 
 .purple .progress-bar {
@@ -680,6 +711,11 @@ header .go-back i {
     background: rgba(0, 0, 0, 0.5);
 }
 
+.black .bg-cover:after {
+    -webkit-background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.8);
+}
+
 .bg-cover:before,
 .bg-cover:after {
     position: absolute;
@@ -914,6 +950,10 @@ header .go-back i {
     border-radius: 10px;
 }
 
+.black .recommend .post-card:before {
+    background-color: rgba(0, 0, 0, .7);
+}
+
 .recommend .post-card {
     position: relative;
     width: 100%;
@@ -979,7 +1019,11 @@ header .go-back i {
 }
 
 .blue .recommend .post-card .read-more {
-    background: #4169E1;;
+    background: #4169E1;
+}
+
+.black .recommend .post-card .read-more {
+    background: #000000;
 }
 
 .purple .recommend .post-card .read-more {
@@ -987,7 +1031,7 @@ header .go-back i {
 }
 
 .orange .recommend .post-card .read-more {
-  background: #FF8C00;
+    background: #FF8C00;
 }
 
 .recommend .post-card .read-more .icon {
@@ -1033,7 +1077,6 @@ article a:hover {
 }
 
 article .card {
-    border-radius: 8px;
     overflow: hidden;
 }
 
@@ -1092,6 +1135,10 @@ article .article-tags .chip {
     line-height: 22px;
     color: #fff;
     border-radius: 10px;
+}
+
+.black article .article-tags .chip {
+    background-image: linear-gradient(to right, #404040 0%, #404040 100%);
 }
 
 .prev-next {
@@ -1198,6 +1245,10 @@ article .article-tags .chip {
     margin-bottom: 2px;
 }
 
+.black #artDetail .article-tag .chip {
+  background-image: linear-gradient(to right, #404040 0%, #404040 100%);
+}
+
 #artDetail .tag_share .article-tag .chip {
     font-size: 1rem;
     font-weight: 400;
@@ -1216,6 +1267,10 @@ article .article-tags .chip {
     color: #4169E1;
 }
 
+.black #artDetail .tag_share .article-tag .chip {
+  color: #000000;
+}
+
 .purple #artDetail .tag_share .article-tag .chip {
     color: #6A5ACD;
 }
@@ -1231,6 +1286,10 @@ article .article-tags .chip {
 
 .blue #artDetail .tag_share .article-tag .chip:hover {
     background: #4169E1;
+}
+
+.black #artDetail .tag_share .article-tag .chip:hover {
+  background: #000000;
 }
 
 .purple #artDetail .tag_share .article-tag .chip:hover {
@@ -1260,19 +1319,23 @@ article .article-tags .chip {
     color: #525f7f;
 }
 
+.black #artDetail .post-info {
+    color: antiquewhite;
+}
+
 #artDetail .post-info .post-category {
     padding-right: 4px;
     color: #525f7f;
+}
+
+.black #artDetail .post-info .post-category {
+    color: antiquewhite;
 }
 
 #artDetail .post-info .post-category:hover {
     font-weight: bold;
     color: #42b983;
     text-decoration: underline;
-}
-
-#artDetail .post-info .post-date {
-    color: #525f7f;
 }
 
 #artDetail .post-info .post-word-count {
@@ -1336,6 +1399,10 @@ article .article-tags .chip {
 
 .blue #artDetail .reprint a {
     color: #4169E1;
+}
+
+.black #artDetail .reprint a {
+    color: rgb(215, 238, 250);
 }
 
 .purple #artDetail .reprint a {
@@ -1425,11 +1492,20 @@ thead {
     background-color: #fafafa;
 }
 
+.black table tr:nth-child(2n),
+.black thead {
+    background-color: #404040;
+}
+
 #articleContent table th {
     background-color: #f2f2f2;
     min-width: 80px;
     border: 1px solid #dfe2e5;
     padding: 6px 6px;
+}
+
+.black #articleContent table th {
+    background-color: #202020;
 }
 
 #articleContent table td {
@@ -1490,6 +1566,10 @@ thead {
     background: #4169E1 !important;
 }
 
+.black .chip-container .chip-active {
+  background: #000000 !important;
+}
+
 .purple .chip-container .chip-active {
     background: #6A5ACD !important;
 }
@@ -1518,6 +1598,10 @@ thead {
 
 .blue .chip-container .chip:hover {
     background: linear-gradient(to right, #1E90FF 0%, #4169E1 100%) !important;
+}
+
+.black .chip-container .chip:hover {
+  background: #000000 !important;
 }
 
 .purple .chip-container .chip:hover {
@@ -1823,6 +1907,10 @@ thead {
     color: #4169E1;
 }
 
+.black .post-statis .statis .count a {
+    color: antiquewhite;
+}
+
 .purple .post-statis .statis .count a {
     color: #6A5ACD;
 }
@@ -1860,6 +1948,11 @@ thead {
   background: #4169E1;
 }
 
+.black #aboutme .social-link a {
+  border: 1px solid salmon;
+  background: salmon;
+}
+
 .purple #aboutme .social-link a {
   border: 1px solid #6A5ACD;
   background: #6A5ACD;
@@ -1890,6 +1983,10 @@ thead {
     font-size: 1.8rem;
     font-weight: 500;
     color: #3C4858;
+}
+
+.black .profile .author .title {
+  color: antiquewhite;
 }
 
 .profile .author .career {
@@ -2041,7 +2138,6 @@ thead {
 .other-skills .chip:hover {
     color: #fff;
     background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
-    border: 1px solid #4cbf30;
     box-shadow: 0 5px 5px rgba(0, 0, 0, .25)
 }
 
@@ -2091,10 +2187,19 @@ footer .copy-right {
     border-radius: 10px;
 }
 
+.black #searchModal {
+    background: #000000;
+}
+
 #searchModal .search-header .title {
     font-size: 1.6rem;
     color: #333;
 }
+
+.black #searchModal .search-header .title {
+    color: antiquewhite;
+}
+
 
 #searchResult {
     margin: -15px 0 10px 10px;
@@ -2104,6 +2209,10 @@ footer .copy-right {
     margin-left: -8px;
     padding-left: 0;
     color: #666;
+}
+
+.black #searchResult .search-result-list {
+    color: antiquewhite;
 }
 
 .search-result-list .search-result-title {
@@ -2126,6 +2235,10 @@ footer .copy-right {
     white-space: pre-wrap;
 }
 
+.black .search-result-list .search-keyword {
+    background-color: #404040;
+}
+
 /*回到顶部按钮样式*/
 .top-scroll {
     display: none;
@@ -2145,6 +2258,10 @@ footer .copy-right {
 
 .blue .top-scroll .btn-floating {
   background: #4169E1;;
+}
+
+.black .top-scroll .btn-floating {
+  background: #404040;;
 }
 
 .purple .top-scroll .btn-floating {
@@ -2271,6 +2388,10 @@ footer .copy-right {
 
 .blue .block-with-text:after {
   background: #b3d7fa;
+}
+
+.black .block-with-text:after {
+  background: #000000;
 }
 
 .purple .block-with-text:after {

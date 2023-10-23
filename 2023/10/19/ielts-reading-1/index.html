@@ -35,6 +35,67 @@
 
 
 <body>
+    <script>
+      // 每天切换 banner 图.  Switch banner image every day.
+      const _dayOfWeek = new Date().getDay();
+      if (_dayOfWeek === 1 || _dayOfWeek === 6) {
+        document.body.classList.add('purple');
+      } else if (_dayOfWeek >= 2 && _dayOfWeek <= 3) {
+        document.body.classList.add('orange');
+      } else if (_dayOfWeek == 4) {
+        document.body.classList.add('blue');
+      }
+      _setCookie = (name, value, days) => {
+        if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          var expires = "; expires=" + date.toGMTString()
+        } else var expires = "";
+        document.cookie = name + "https://pengdonglaicom=" + value + expires + "; path=/"
+      }
+
+      _getCookie = (name) => {
+        var nameEQ = name + "https://pengdonglaicom=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length)
+        }
+        return null
+      }
+
+      window.DarkReader = {
+        darkmode: _getCookie('targetDarkmode') === '1',
+        changeMode: function () {
+            if (this.darkmode) {
+                document.body.classList.remove('black');
+                const d = new Date().getDay();
+                if (d === 1 || d === 6) {
+                    document.body.classList.add('purple');
+                } else if (d >= 2 && d <= 3) {
+                    document.body.classList.add('orange');
+                } else if (d == 4) {
+                    document.body.classList.add('blue');
+                }
+                this.darkmode = false;
+                _setCookie('targetDarkmode', 0, 7);
+                changePostCalendarDarkMode?.();
+            } else {
+                document.body.classList.remove('purple', 'orange', 'blue');
+                document.body.classList.add('black');
+                this.darkmode = true;
+                _setCookie('targetDarkmode', 1, 7);
+                changePostCalendarDarkMode?.();
+            }
+        }
+      }
+      if (_getCookie('targetDarkmode') === '1') {
+          document.body.classList.remove('purple', 'orange', 'blue');
+          document.body.classList.add('black');
+      }
+    </script>
+
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
@@ -109,6 +170,11 @@
   <li>
     <a href="#searchModal" class="modal-trigger waves-effect waves-light">
       <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:DarkReader?.changeMode()" class="waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-moon" title="搜索" style="zoom: 0.85;"></i>
     </a>
   </li>
 </ul>
@@ -291,18 +357,6 @@
     </div>
 </div>
 
-<script>
-// 每天切换 banner 图.  Switch banner image every day.
-var dayOfWeek = new Date().getDay();
-if (dayOfWeek === 1 || dayOfWeek === 6) {
-  document.body.classList.add('purple');
-} else if (dayOfWeek >= 2 && dayOfWeek <= 3) {
-  document.body.classList.add('orange');
-} else if (dayOfWeek == 4) {
-  document.body.classList.add('blue');
-}
-</script>
-
 
 
 
@@ -463,7 +517,7 @@ if (dayOfWeek === 1 || dayOfWeek === 6) {
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.1k
+                    5.9k
                 </div>
                 
 
@@ -661,6 +715,81 @@ if (dayOfWeek === 1 || dayOfWeek === 6) {
 
 <div align="center">
   <img src="/2023/10/19/ielts-reading-1/3.jpeg">
+</div>
+
+<h2 id="剑7-TEST4-2"><a href="#剑7-TEST4-2" class="headerlink" title="剑7-TEST4.2"></a>剑7-TEST4.2</h2><p><strong>Endless Harvest</strong></p>
+<p>More than two hundred years ago, Russian explorers and fur hunters landed on the Aleutian Islands, a volcanic archipelago in the North Pacific, and learned of a land mass that lay farther to the north. The islands’ native inhabitants called this land mass Aleyska, the ‘Great Land’; today, we know it as Alaska.</p>
+<p>The forty-ninth state to join the United States of America (in 1959), Alaska is fully one-fifth the size of the mainland 48 states combined. It shares, with Canada, <strong>the second longest river system in North America and has over half the coastline of the United States</strong>. The rivers feed into the Bering Sea and Gulf of Alaska - cold, nutrient-rich waters which support tens of millions of seabirds, and over 400 species of fish, shellfish, crustaceans, and mollusks. Taking advantage of this rich bounty, Alaska’s commercial fisheries have developed into some of the largest in the world.</p>
+<details>
+  <summary>点我查看解析</summary>
+  <div>archipelago: 群岛</div>
+  <div>land mass: 约等于 land，就是表示一块大陆</div>
+  <div>shellfish, crustaceans, and mollusks: 贝类、甲壳类动物和软体动物</div>
+  <div>bounty: 恩惠</div>
+  <div>fishery、fisheries: 渔业</div>
+  <div>这两段主要说明了阿拉斯加的来历，历史，以及拥有丰富的资源。为下文做铺垫。</div>
+</details>
+<br>
+
+<p>According to the Alaska Department of Fish and Game (ADF&amp;G), Alaska’s commercial fisheries landed hundreds of thousands of tonnes of shellfish and herring, and well over a million tonnes of groundfish (cod, sole, perch and pollock) in 2000. <strong>The true cultural heart and soul of Alaska’s fisheries, however, is salmon.</strong> ‘Salmon,’ notes writer Susan Ewing in The Great Alaska Nature Factbook, ‘pump through Alaska like blood through a heart, bringing rhythmic, circulating nourishment to land, animals and people.’ The ‘predictable abundance of salmon allowed some native cultures to flourish,’ and ‘dying spawners* feed bears, eagles, other animals, and ultimately the soil itself.’ All five species of Pacific salmon - chinook, or king; chum, or dog; coho, or silver; sockeye, or red; and pink, or humpback - spawn** in Alaskan waters, and 90% of all Pacific salmon commercially caught in North America are produced there. Indeed, <strong>if Alaska was an independent nation, it would be the largest producer of wild salmon in the world</strong>. During 2000, commercial catches of Pacific salmon in Alaska exceeded 320,000 tonnes, with an ex-vessel value of over US260 million.</p>
+<details>
+  <summary>点我查看解析</summary>
+  <div>Game: ADF&G 这里的 G 表示狩猎的意思。和渔业紧密相关。</div>
+  <div>land: 这里的 land 除了有陆地的意思，还有捕捞的意思。</div>
+  <div>herring、groundfish, cod, sole, perch and pollock: 鲱鱼、底层鱼类（鳕鱼、鳎目鱼、鲈鱼和狭鳕）</div>
+  <div>spawn、spawners: 产卵、产卵者</div>
+  <div>vessel: 船舶、血管</div>
+  <div>这一段承上启下，说明了阿拉斯加的鲑鱼数量之多，足足有 90% 占比的鲑鱼是阿拉斯加出产的，举例（例如 The Great Alaska Nature Factbook）说明了鲑鱼对于阿拉斯加的重要性。强化了「阿拉斯加非常依靠鲑鱼」这一结论。</div>
+</details>
+<br>
+
+<p>Catches have not always been so healthy. <strong>Between 1940 and 1959, overfishing led to crashes in salmon populations so severe</strong> that <strong>in 1953 Alaska was declared a federal disaster area</strong>. With the onset of statehood, however, the State of Alaska took over management of its own fisheries, guided by a state constitution which mandates that Alaska’s natural resources be managed on a sustainable basis. At that time, statewide harvests totaled around 25 million salmon. <strong>Over the next few decades average catches steadily increased as a result of this policy of sustainable management, until, during the 1990s</strong>, annual harvests were well in excess of 100 million, and on several occasions over 200 million fish.</p>
+<details>
+  <summary>点我查看解析</summary>
+  <div>onset: 建立。</div>
+  <div>mandate: 要求, =ask.</div>
+  <div>herring、groundfish, cod, sole, perch and pollock: 鲱鱼、底层鱼类（鳕鱼、鳎目鱼、鲈鱼和狭鳕）</div>
+  <div>several occasions: 有的时候, =sometimes</div>
+  <div>这一段主要说明了阿拉斯加州政府成立后要求当地可持续发展的需要，之后捕捞的数量稳定的增长，到了 1990 年代，年产量远远超过 1 亿条，有时甚至超过 2 亿条。</div>
+</details>
+<br>
+
+<p>The primary reason for such increases is what is known as ‘In-Season Abundance-Based Management’. There are biologists throughout the state constantly, <strong>monitoring adult fish as they show up to spawn</strong>. The biologists sit in streamside counting towers, study sonar, watch from aeroplanes, and talk to fishermen. The salmon season in Alaska is not pre-set. The fishermen know the approximate time of year when they will be allowed to fish, but on any given day, one or more field biologists in a particular area can put a halt to fishing. Even sport fishing can be brought to a halt. It is this management mechanism that has allowed salmon stocks - and, accordingly, Alaska salmon fisheries - to prosper, even as salmon populations in the rest of the United States are increasingly considered threatened or even endangered.</p>
+<details>
+  <summary>点我查看解析</summary>
+  <div>put a halt to fishing: halt 是阻止，禁止的意思，这里当成名词使用。意思就是：阻止捕捞鱼。</div>
+  <div>mandate: 要求, =ask.</div>
+  <div>even as: 这个=however，表示转折。</div>
+  <div>sport fishing: 游钓，娱乐钓鱼。是一种钓鱼活动，娱乐钓鱼更注重钓鱼过程的乐趣和挑战，而不仅仅关注捕获鱼类的数量或价值。</div>
+  <div>这一段主要讲述了「基于季节丰度的管理」带来了影响。生物学家通过各种方式查看鲑鱼的排卵期，以便于确定哪些时候不可以捕捞。通过管理，鲑鱼渔业得以繁荣。但是最后也提到了过度捕捞会带来灾害。</div>
+</details>
+<br>
+
+<p>In 1999, the Marine Stewardship Council (MSC) commissioned a review of the Alaska salmon fishery. <strong>The Council, which was founded in 1996, certifies fisheries that meet high environmental standards, enabling them to use a label that recognises their environmental responsibility.</strong> The MSC has established a set of criteria by which commercial fisheries can be judged. <strong>Recognising the potential benefits of being identified as environmentally responsible, fisheries approach the Council requesting to undergo the certification process.</strong> The MSC then appoints a <strong>certification committee</strong>, composed of a panel of fisheries experts, <strong>which gathers information and opinions</strong> from fishermen, biologists, government officials, industry representatives, non-governmental organisations and others.</p>
+<details>
+  <summary>点我查看解析</summary>
+  <div>put a halt to fishing: halt 是阻止，禁止的意思，这里当成名词使用。意思就是：阻止捕捞鱼。</div>
+  <div>undergo: 经受、接受。在本文里面是接受认证程序。</div>
+  <div>a panel of fisheries experts: panel 在这里是一组的意思，同 group.</div>
+  <div>这一段主要讲述了海洋管理委员会制定了一套判断商业渔业的标准。并且渔业向理事会请求接受认证程序的时候，MSC 组件了专门的认证委员会收集意见。</div>
+</details>
+<br>
+
+<p>Some observers thought the Alaska salmon fisheries would not have any chance of certification when, in the months leading up to MSC’s final decision, salmon runs throughout western Alaska completely collapsed. In the Yukon and Kuskokwim rivers, chinook and chum runs were probably the poorest since statehood; <strong>subsistence communities throughout the region, who normally have priority over commercial fishing, were devastated.</strong></p>
+<p>The crisis was completely unexpected, but researchers believe it had nothing to do with impacts of fisheries. Rather, <strong>they contend, it was almost certainly the result of climatic shifts, prompted in part by cumulative effects of the el El Nino &#x2F; La Nina phenomenon on Pacific Ocean temperatures</strong>, culminating in a harsh winter in which huge numbers of salmon eggs were frozen. <strong>It could have meant the end as far as the certification process was concerned. However, the state reacted quickly, closing down all fisheries, even those necessary for subsistence purposes</strong>.</p>
+<p>In September 2000, MSC announced that the Alaska salmon fisheries qualified for certification. Seven companies producing Alaska salmon were immediately granted permission to display the MSC logo on their products. Certification is for an initial period of five years, with an annual review to ensure that the fishery is continuing to meet the required standards.</p>
+<details>
+  <summary>点我查看解析</summary>
+  <div>in the months leading up to MSC's final decision: leading up to 在...之前。</div>
+  <div>be devastated: 遭到了破坏。</div>
+  <div>subsistence: 生存</div>
+  <div>culminating in a harsh winter: 最终造成了严酷的冬季。</div>
+  <div>这三段主要讲述了，因为生态环境遭到破坏，认证可能会遭遇失败的危机。在一众找借口，逃避的声音中，州政府及时出手直面问题关闭渔场。最终获得了胜利，MSC宣布阿拉斯加鲑鱼渔业获得认证资格，并在之后一直监督他们。</div>
+</details>
+<br>
+
+<div align="center">
+  <img src="/2023/10/19/ielts-reading-1/4.jpeg">
 </div>
 
                 
@@ -1057,7 +1186,7 @@ if (dayOfWeek === 1 || dayOfWeek === 6) {
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.4k</span>&nbsp;字
+                class="white-color">23.1k</span>&nbsp;字
             
             
             
