@@ -53,6 +53,10 @@ img.responsive-img {
   }
 }
 
+.black textarea {
+  color: antiquewhite;
+}
+
 /* 电脑端样式 */
 @media screen and (min-width: 1130px) {
   iframe.netease-music {
