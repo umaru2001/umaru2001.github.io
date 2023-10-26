@@ -869,7 +869,7 @@ header .go-back i {
 .music-player .title,
 .video-player .title {
     margin-bottom: 20px;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
 }
 
@@ -1547,6 +1547,10 @@ thead {
     font-weight: 400;
 }
 
+.black .chip-container .tag-title {
+    color: antiquewhite;
+}
+
 .chip-container .tag-chips {
     margin: 1rem auto 0.5rem;
     max-width: 850px;
@@ -2023,7 +2027,7 @@ thead {
 .my-projects .title,
 .my-skills .title,
 .my-gallery .title {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: 2.25rem;
 }
 
