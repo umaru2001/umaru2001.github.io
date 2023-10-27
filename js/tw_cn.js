@@ -29,12 +29,14 @@ function translateBody(fobj) {
 }
 function translatePage() {
 	if (targetEncoding == 1) {
+    document.body.setAttribute('lang', 'zh-CN');
 		currentEncoding = 1;
 		targetEncoding = 2;
 		translateButtonObject.innerHTML = msgToTraditionalChinese;
 		setCookie(targetEncodingCookie, targetEncoding, 7);
 		translateBody()
 	} else if (targetEncoding == 2) {
+    document.body.setAttribute('lang', 'zh-Hant-TW');
 		currentEncoding = 2;
 		targetEncoding = 1;
 		translateButtonObject.innerHTML = msgToSimplifiedChinese;
