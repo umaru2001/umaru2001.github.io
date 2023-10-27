@@ -100,7 +100,10 @@ function translateInitilization() {
 			}
 		}
 		if (currentEncoding != targetEncoding) {
-			setTimeout("translateBody()", translateDelay);
+			setTimeout(() => {
+        document.body.setAttribute('lang', targetEncoding == 1 ? 'zh-Hant-TW' : 'zh-CN');
+        translateBody();
+      }, translateDelay);
 			if (targetEncoding == 1) translateButtonObject.innerHTML = msgToSimplifiedChinese;
 			else translateButtonObject.innerHTML = msgToTraditionalChinese
 		}
