@@ -565,7 +565,8 @@ header .side-nav .social-link {
 }
 
 .iframe-error-fallback-text {
-  width: 75%
+  width: fit-content;
+  transform: translateY(-40px);
 }
 
 @-moz-keyframes scroll-down {
@@ -904,6 +905,11 @@ header .go-back i {
     left: 50%;
     transform: translateX(-50%);
 }
+
+.black #recommend-sections iframe {
+    filter: brightness(0.5);
+}
+
 
 .index-card .card .card-content {
     padding: 20px 40px;
