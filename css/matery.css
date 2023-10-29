@@ -33,6 +33,17 @@
     }
 }
 
+#artDetail details {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 3px 6px;
+}
+
+
+.black #artDetail details {
+    background: rgba(255, 255, 255, 0.1);
+}
+
 img.responsive-img {
     object-fit: cover;
 }
@@ -2138,7 +2149,7 @@ thead {
 }
 
 .other-skills .sub-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
 }
 
 .other-skills .tag-chips {
