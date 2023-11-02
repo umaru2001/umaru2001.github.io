@@ -174,7 +174,7 @@
   </li>
   <li>
     <a href="javascript:DarkReader?.changeMode()" class="waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-moon" title="搜索" style="zoom: 0.85;"></i>
+      <i id="searchIcon" class="fas darkmode-icon" title="搜索" style="zoom: 0.85;"></i>
     </a>
   </li>
 </ul>
@@ -518,7 +518,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    3.4k
                 </div>
                 
 
@@ -643,7 +643,7 @@ playerName <span class="token operator">=</span> answers<span class="token punct
 <p>Now all the other questions are implemented in the exact same way so now let’s implement the screen for the winner. The function will clear the console’s current output and then format a message called congrats player name. Here’s a million dollars we’ll then pass the message on to <strong>figlet which is actually a javascript implementation of a popular program implemented in the c language</strong> what it does is generate ascii art from text which is really useful for making your non-programmer friends think you’re some kind of genius on top of that.</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">winner</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">const</span> msg <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Congrats , </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>playerName<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> !\n $ 1 , 0 0 0 , 0 0 0;</span><span class="token template-punctuation string">`</span></span>
+  <span class="token keyword">const</span> msg <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Congrats , </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>playerName<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> !\n $ 1 , 0 0 0 , 0 0 0</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
   <span class="token function">figlet</span><span class="token punctuation">(</span>msg<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>gradient<span class="token punctuation">.</span>pastel<span class="token punctuation">.</span><span class="token function">multiline</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -658,6 +658,139 @@ playerName <span class="token operator">=</span> answers<span class="token punct
 <p>最后来张二次元，表示第一部分写完了！</p>
 <div align="center">
   <img src="/2023/11/09/create-a-cli/2.jpeg">
+</div>
+
+<h2 id="练手程序2"><a href="#练手程序2" class="headerlink" title="练手程序2"></a>练手程序2</h2><p>我们现在已经有了一个可以跑起来的程序，但是只做这些是没有用处的。CLI 最重要的职责还是方便的帮我们完成自动化的操作。</p>
+<p>例如，我们开发一个 web 页面，需要用到最多的工具是 Live Server。平时我们经常使用 <code>pnpm dev</code> 现在我们想让 <code>pnpm dev</code> 启动 <code>webpack</code> 或者 <code>esbuild</code> 的时候，同时启动 <code>live-server</code>，就需要用到多线程的知识了。</p>
+<p>进程和线程的主要差别在于它们是不同的操作系统资源管理方式。进程有独立的地址空间，一个进程崩溃后，在保护模式下不会对其它进程产生影响，而线程只是一个进程中的不同执行路径。线程有自己的堆栈和局部变量，但线程之间没有单独的地址空间，一个线程死掉就等于整个进程死掉，所以多进程的程序要比多线程的程序健壮，但在进程切换时，耗费资源较大，效率要差一些。但对于一些要求同时进行并且又要共享某些变量的并发操作，只能用线程，不能用进程。</p>
+<ol>
+<li><p>简而言之，一个程序至少有一个进程，一个进程至少有一个线程。</p>
+</li>
+<li><p>线程的划分尺度小于进程，使得多线程程序的并发性高。</p>
+</li>
+<li><p>另外，进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而极大地提高了程序的运行效率。</p>
+</li>
+<li><p>线程在执行过程中与进程还是有区别的。每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。</p>
+</li>
+<li><p>从逻辑角度来看，多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。但操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配。这就是进程和线程的重要区别。</p>
+</li>
+</ol>
+<p>JavaScript 是<strong>单线程</strong>语言，代表着一个 JS 进程程序只能拥有一个线程。所以在 Node.js 使用多线程，本质上是单独开辟了一个新进程，进程下有其他线程。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'http'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+http<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  process<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string">'testNodeJS'</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">process.pid: </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> process<span class="token punctuation">.</span>pid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>使用 <code>http.createServer()</code> 可以创建一个服务器进程，这个时候就可以通过 <code>console.log</code> 看到这个进程出现了。</p>
+<p>Node.js 中的进程 process 是全局对象可以直接访问，下面是一些常用的功能：</p>
+<ul>
+<li><code>process.env</code>：环境变量，例如通过 <code>process.env.NODE_ENV</code> 获取不同环境项目配置信息。</li>
+<li><code>process.nextTick</code>：这个在谈及 Event Loop 时经常为会提到，简单的来说它是用来执行异步操作的，执行顺序在promise.then之前，主任务之后。而在浏览器端，nextTick 会退化成 <code>setTimeout(callback, 0)</code>.</li>
+<li><code>process.pid</code>：获取当前进程 id。</li>
+<li><code>process.ppid</code>：当前进程对应的父进程。</li>
+<li><code>process.cwd()</code>：获取当前进程工作目录。</li>
+<li><code>process.platform</code>：获取当前进程运行的操作系统平台。</li>
+<li><code>process.uptime()</code>：当前进程已运行时间，例如：pm2 守护进程的 uptime 值。</li>
+<li>进程事件：<code>process.on(&#39;uncaughtException&#39;, cb)</code> 捕获异常信息、<code>process.on(&#39;exit&#39;, cb)</code> 进程推出监听。</li>
+<li>三个标准流：<code>process.stdout</code> 标准输出、<code>process.stdin</code> 标准输入、<code>process.stderr</code> 标准错误输出。</li>
+</ul>
+<p><code>node:child_process</code> 模块提供了以与 popen(3) 类似但不完全相同的方式衍生子进程的能力。 此功能主要由 <code>child_process.spawn()</code> 函数提供：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token punctuation">&#123;</span> spawn <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'node:child_process'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> ls <span class="token operator">=</span> <span class="token function">spawn</span><span class="token punctuation">(</span><span class="token string">'ls'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'-lh'</span><span class="token punctuation">,</span> <span class="token string">'/usr'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ls<span class="token punctuation">.</span>stdout<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'data'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">stdout: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>data<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ls<span class="token punctuation">.</span>stderr<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'data'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">stderr: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>data<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ls<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'close'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">code</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">child process exited with code </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>code<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>默认情况下，会在父 Node.js 进程和衍生的子进程之间建立 <code>stdin</code>、<code>stdout</code> 和 <code>stderr</code> 的管道。 这些管道的容量有限（且特定于平台）。 如果子进程在没有捕获输出的情况下写入标准输出超过该限制，则子进程会阻塞等待管道缓冲区接受更多数据。 这与 shell 中管道的行为相同。 如果不消费输出，则使用 <code>&#123; stdio: &#39;ignore&#39; &#125;</code> 选项。</p>
+<p>为方便起见，<code>node:child_process</code> 模块提供了一些同步和异步方法替代 <code>child_process.spawn()</code> 和 <code>child_process.spawnSync()</code>。 这些替代方法中的每一个都是基于 <code>child_process.spawn()</code> 或 <code>child_process.spawnSync()</code> 实现。</p>
+<ul>
+<li><code>child_process.exec()</code>: 衍生 shell 并在该 shell 中运行命令，完成后将 stdout 和 stderr 传给回调函数。</li>
+<li><code>child_process.execFile()</code>: 与 <code>child_process.exec()</code> 类似，不同之处在于，默认情况下，它直接衍生命令，而不先衍生 shell。</li>
+<li><code>child_process.fork()</code>: 衍生新的 Node.js 进程并使用建立的 IPC 通信通道（其允许在父子进程之间发送消息）调用指定的模块。</li>
+<li><code>child_process.execSync()</code>: <code>child_process.exec()</code> 的同步版本，其将阻塞 Node.js 事件循环。</li>
+<li><code>child_process.execFileSync()</code>: <code>child_process.execFile()</code> 的同步版本，其将阻塞 Node.js 事件循环。</li>
+</ul>
+<p>所以我们重写 <code>pnpm dev</code> 的时候，完全可以通过直接开一个子进程的方式运行 <code>http-server</code> 或者 <code>live-server</code>.</p>
+<p>以下是 fork() 和 spawn() 之间的区别：</p>
+<table>
+<thead>
+<tr>
+<th>
+<p style="text-align:center;">Spawn</p>
+</th>
+<th>
+<p style="text-align:center;">Fork</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>This starts sending data back to a parent process from the child process as soon as the child process starts executing.</td>
+<td>This does not send data automatically, but we can use a global module name process to send data from the child process and in the parent module, using the name of the child the process to send to the child process.</td>
+</tr>
+<tr>
+<td>It creates a new process through command rather than running on the same node process.</td>
+<td>It makes several individual processes (child processes) but all of them run on the same node process as the parent.</td>
+</tr>
+<tr>
+<td>In this, no new V8 instance is created.</td>
+<td>In this, a new V8 instance is created.</td>
+</tr>
+<tr>
+<td>It is used when we want the child process to return a large amount of data back to the parent process.</td>
+<td>It is used to separate computation-intensive tasks from the main event loop.</td>
+</tr>
+</tbody>
+</table>
+
+<p>以下是建立一个子进程的方式，通过 spawn 方法来实现。并且用过 pipe 方法让子进程的 stdout 和主进程的 stdout 相连接。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token punctuation">&#123;</span> spawn <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'child_process'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 创建一个子进程，展示当前目录所有文件，cwd 指定子进程的工作目录，默认当前目录</span>
+<span class="token keyword">const</span> child <span class="token operator">=</span> <span class="token function">spawn</span><span class="token punctuation">(</span><span class="token string">'ls'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'-l'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">cwd</span><span class="token operator">:</span> <span class="token string">'/xxx'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 让子进程的 stdio 和当前进程的 stdio 之间建立管道链接</span>
+child<span class="token punctuation">.</span>stdout<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span>stdout<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span>pid<span class="token punctuation">,</span> child<span class="token punctuation">.</span>pid<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>让我们继续，看一个例子。这个例子中父子进程之间相互通信。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 父进程代码</span>
+<span class="token keyword">const</span> <span class="token punctuation">&#123;</span> fork <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'child_process'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 创建子进程</span>
+<span class="token keyword">const</span> child <span class="token operator">=</span> <span class="token function">fork</span><span class="token punctuation">(</span><span class="token string">'child.js'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 监听子进程发送的消息</span>
+child<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> <span class="token parameter">message</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span>pid<span class="token punctuation">,</span> child<span class="token punctuation">.</span>pid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'父进程接收到消息:'</span><span class="token punctuation">,</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 向子进程发送消息</span>
+child<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'Hello from parent!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token comment">// 子进程代码</span>
+process<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> <span class="token parameter">message</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 这里的 process 等同于上述的 child.pid</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span>pid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'子进程接收到消息:'</span><span class="token punctuation">,</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 向父进程发送消息</span>
+  process<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'Hello from child!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>需要注意的是，父进程和子进程之间的通信是异步的。父进程发送消息后，不会阻塞等待子进程的响应，而是继续执行后续的代码。类似地，子进程发送消息后，也不会阻塞等待父进程的响应。</p>
+</blockquote>
+<p>通过这个示例，我们可以做到父子进程通信，这意味着我们的程序可以进一步完善了：当 <code>webpack</code> 或者 <code>esbuild</code> 主进程完成打包的时候，这个时候如果没有出错，我们完全可以执行 <code>console.clear()</code> 方法降低无效信息的密度，进而降低心智负担。</p>
+<div align="center">
+  <img src="/2023/11/09/create-a-cli/3.jpeg">
 </div>
 
                 
@@ -1056,7 +1189,7 @@ playerName <span class="token operator">=</span> answers<span class="token punct
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">31.8k</span>&nbsp;字
+                class="white-color">33.8k</span>&nbsp;字
             
             
             

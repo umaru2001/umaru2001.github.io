@@ -39,6 +39,14 @@
     padding: 3px 6px;
 }
 
+.darkmode-icon:before {
+    content: "\f186";
+}
+
+.black .darkmode-icon:before {
+    content: "\f185";
+}
+
 
 .black #artDetail details {
     background: rgba(255, 255, 255, 0.1);
