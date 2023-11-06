@@ -226,6 +226,10 @@ code {
     border-radius: 2px;
 }
 
+.black code {
+    background-color: #333333;
+}
+
 .code_copy {
     position: absolute;
     top: 0.7rem;
