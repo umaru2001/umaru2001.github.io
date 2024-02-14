@@ -197,22 +197,22 @@ blockquote {
 }
 
 .blue blockquote {
-  border-left: #4169E1;
+  border-left: 5px solid #4169E1;
   background-color: rgba(65, 105, 225, .1);
 }
 
 .black blockquote {
-  border-left: #000000;
+  border-left: 5px solid #000000;
   background-color: rgba(0, 0, 0, .1);
 }
 
 .purple blockquote {
-  border-left: #6A5ACD;
+  border-left: 5px solid #6A5ACD;
   background-color: rgba(106, 90, 205, .1);
 }
 
 .orange blockquote {
-  border-left: #FF8C00;
+  border-left: 5px solid #FF8C00;
   background-color: rgba(255, 140, 0, .1);
 }
 
