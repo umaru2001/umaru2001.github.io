@@ -44,6 +44,10 @@ span.heimu:hover, span.heimu:active {
   color: antiquewhite;
 }
 
+.black #articleContent input {
+  color: antiquewhite;
+}
+
 .blue .btn-large,
 .blue .btn-small {
   background-color: #4169E1;;
