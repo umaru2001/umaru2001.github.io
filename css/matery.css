@@ -44,6 +44,21 @@ span.heimu:hover, span.heimu:active {
   color: antiquewhite;
 }
 
+.blue .btn-large,
+.blue .btn-small {
+  background-color: #4169E1;;
+}
+
+.purple .btn-large,
+.purple .btn-small {
+  background-color: #624cee;
+}
+
+.orange .btn-large,
+.orange .btn-small {
+  background-color: #FF8C00;
+}
+
 #artDetail details {
     background: rgba(0, 0, 0, 0.1);
     border-radius: 5px;
