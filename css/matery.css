@@ -33,6 +33,17 @@
     }
 }
 
+span.heimu {
+  background-color: #000000;
+  transition: color 0.13s linear;
+  color: #000000;
+  text-shadow: none;
+}
+
+span.heimu:hover, span.heimu:active {
+  color: antiquewhite;
+}
+
 #artDetail details {
     background: rgba(0, 0, 0, 0.1);
     border-radius: 5px;

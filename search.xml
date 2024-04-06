@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>日语动词练习——N5上</title>
+      <link href="/2024/04/05/japanese-words-1/"/>
+      <url>/2024/04/05/japanese-words-1/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://pengdonglai.com/japanese/words/verb/words.css"><!-- <link rel="stylesheet" type="text/css" href="./words.css"> -->本博客会开始总结一些日语动词，并且可以提供一些打字练习。本篇为第一篇，用于试水的，会介绍 N5 的自动词篇。<ul><li>这里点击按钮你要学习的词性，点击后展开，再点击关闭</li></ul><div class="flex-row-box"><button class="btn-small waves-effect waves-light" onclick="hideALine(event, 'chinese')">隐藏中文</button><button class="btn-small waves-effect waves-light" onclick="hideALine(event, 'jisyo')">隐藏字典型</button><button class="btn-small waves-effect waves-light" onclick="hideALine(event, 'masu')">隐藏ます型</button><button class="btn-small waves-effect waves-light" onclick="hideALine(event, 'te')">展开て型</button><button class="btn-small waves-effect waves-light" onclick="hideALine(event, 'nai')">展开ない型</button><button class="btn-small waves-effect waves-light" onclick="hideALine(event, 'ta')">展开た型</button><button class="btn-small waves-effect waves-light" onclick="hideALine(event, 'meirei')">展开命令型</button><button class="btn-small waves-effect waves-light" onclick="hideALine(event, 'ishi')">展开意志型</button><button class="btn-small waves-effect waves-light" onclick="hideALine(event, 'ba')">展开ば型</button><button class="btn-small waves-effect waves-light" onclick="hideALine(event, 'kanou')">展开可能型</button><button class="btn-small waves-effect waves-light" onclick="hideALine(event, 'ukemi')">展开被动型</button><button class="btn-small waves-effect waves-light" onclick="hideALine(event, 'shieki')">展开使役型</button></div><ul><li>这里点击测试按钮，可以测试一下自己是否能正确打出单词，会以选择的词性为判断正确答案</li></ul><div class="flex-row-box"><button class="btn-small waves-effect waves-light" onclick="changeHeimuStatus('chinese')">测试中文</button><button class="btn-small waves-effect waves-light" onclick="changeHeimuStatus('jisyo')">测试字典型</button><button class="btn-small waves-effect waves-light" onclick="changeHeimuStatus('masu')">测试ます型</button><button class="btn-small waves-effect waves-light" onclick="changeHeimuStatus('te')">测试て型</button><button class="btn-small waves-effect waves-light" onclick="changeHeimuStatus('nai')">测试ない型</button><button class="btn-small waves-effect waves-light" onclick="changeHeimuStatus('ta')">测试た型</button><button class="btn-small waves-effect waves-light" onclick="changeHeimuStatus('meirei')">测试命令型</button><button class="btn-small waves-effect waves-light" onclick="changeHeimuStatus('ishi')">测试意志型</button><button class="btn-small waves-effect waves-light" onclick="changeHeimuStatus('ba')">测试ば型</button><button class="btn-small waves-effect waves-light" onclick="changeHeimuStatus('kanou')">测试可能型</button><button class="btn-small waves-effect waves-light" onclick="changeHeimuStatus('ukemi')">测试被动型</button><button class="btn-small waves-effect waves-light" onclick="changeHeimuStatus('shieki')">测试使役型</button></div><div class="test-mode">当前测试模式：无</div><div class="japanese-words"></div><script src="https://cdn.jsdelivr.net/npm/kuroshiro@1.1.0/dist/kuroshiro.min.js"></script><script src="https://cdn.jsdelivr.net/npm/kuroshiro-analyzer-kuromoji@1.1.0/dist/kuroshiro-analyzer-kuromoji.min.js"></script><script src="https://pengdonglai.com/japanese/words/verb/words.js"></script><!-- <script src="./words.js"></script> --><script>  process('n5t');</script><div align="center">  <img src="/2024/04/05/japanese-words-1/1.webp"></div>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 日本語 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>一些较为零散的日语语法点归总</title>
+      <link href="/2024/02/09/japanese-grammar-1/"/>
+      <url>/2024/02/09/japanese-grammar-1/</url>
+      
+        <content type="html"><![CDATA[<h2 id="总规则"><a href="#总规则" class="headerlink" title="总规则"></a>总规则</h2><h3 id="名词：N-二类形容词：A2"><a href="#名词：N-二类形容词：A2" class="headerlink" title="名词：N &#x2F; 二类形容词：A2"></a>名词：N &#x2F; 二类形容词：A2</h3><p>N＋の＋N・A2＋な＋N</p><p>Nではない＋N・A2ではない＋N</p><p>Nだった＋N・A2だった＋N</p><p>Nではなかった＋N・A2ではなかった＋N</p><h3 id="一类形容词：A1"><a href="#一类形容词：A1" class="headerlink" title="一类形容词：A1"></a>一类形容词：A1</h3><p>A1い＋N</p><p>A1くない＋N</p><p>A1かった＋N</p><p>A1くなかった＋N</p><h3 id="动词：する"><a href="#动词：する" class="headerlink" title="动词：する"></a>动词：する</h3><p>动词普通型+N</p><p>する＋N</p><p>しない＋N</p><p>した＋N</p><p>しなかった＋N</p><h2 id="名词语"><a href="#名词语" class="headerlink" title="名词语"></a>名词语</h2><p>①〜つもり 打算  大家的日语第31课<br>留学のつもり 打算留学<br>タバコを吸わないつもり　不打算抽烟</p><p>②〜はず  照理说应该 客观推断  第46课<br>行くはず、行かないはず、綺麗なはず、忙しいはず<br>留守のはず</p><p>③〜予定 计划(比つもり正式,有具体的安排)  第31课<br>一週間滞在の予定です。计划逗留一周<br>出張する予定。计划出差</p><p>④〜ほうがいい　我建议你还是~~的好   第32课<br>タバコは止めたほうがいいです。　我建议你香烟还是别抽的好<br>飲まないほうがいいです。 我建议你还是不要吃的好</p><p>⑤〜とおりに〜　按照、照着    第34课<br>彼が言ったとおりに、やってください。请照着他说的做<br>見たとおりに、話してください。请把你看见的说出来<br>説明書のとおりに、組み立てました。按说明书进行了组装</p><p>⑥〜あとで　之后 第34课<br>ご飯を食べたあとで散歩します。吃饭之后散步<br>食事のあとで、散歩します。吃饭之后散步つもり・决定</p><p>⑦〜ように　为了(〜ようになる、〜ようにする）よう：様、表示一个状态<br>第36课,去看书理解比较好.<br>生のものも食べ慣れるようになりました。可以吃生的东西了(以前吃不了生的东西)<br>(以前没有的东西现在变得有了)<br>毎日運動して、何でも食べるようにしています。<br>我每天运动,什么都吃.(表示有一个持续性的的动作，表示习惯的或持续努力的动作)</p><p>⑧〜のは、のを、のが就是动词的名词化　第38课<br>テニスをするのは面白い　打网球很有趣<br>歩くのが速い　走路很快<br>バナナを買うのを忘れた　忘了买香蕉</p><p>⑨〜途中で　~的路上  　第39课<br>学校へ行く途中で 　去学校的路上<br>ジョギングの途中で   跑步的路上</p><p>⑩〜ところ 正要（强调瞬间完成的事情)第46课<br>これから大阪へ行くところです。我这就去大阪.</p><p>⑪〜ばかり  刚刚(相比ところ时间拉的更长一些,只要说话者觉得时间短就行)第46课<br>先週会社に入ったばかりですから、何もわかりません。<br>我上周刚进公司,啥都不懂</p><p>⑫〜ために 为了第42课<br>日本語を勉強するために　为了学习日语<br>人は何のために生きているのだろう。　人是为什么而活的呢</p><p>⑬〜場合は  在~~的时候 (各类词的接续)第45课<br>雨の場合は　在下雨的时候<br>必要な場合は　在需要的时候<br>調子が悪い場合は　状态不好的时候<br>遅れた場合は　迟到了的时候<br>なければならない場合は　不得已的时候</p><h2 id="其它非动词变形语法"><a href="#其它非动词变形语法" class="headerlink" title="其它非动词变形语法"></a>其它非动词变形语法</h2><p>①〜ながら〜<br>动词ます形+ながら+动词 指两个动作在同一时间段内进行、一边……一边……(可以一边打工、一边学习)<br>吉田さんは音楽を聞きながら勉強します。（吉田先生一边听音乐一边学习）</p><p>动词ます形+ながら 指事物发展中产生了出乎意料的变化，没有达到应有的效果 虽然……但是……<br>毎日よくピアノを弾いていながら、上手にならない。（虽然每天都弹钢琴，但是也没变熟练）</p><p>名词+ながら 前接名词，经常表示事物的全部。全部……，都……<br>クラスメートながら医者になりました。（同学都成为了医生）</p><p>动词ます形+当前文法+动词，还可以有这些用法：<br>1.1 〜過ぎます・〜すぎます・过头了<br>1.2 〜やすい・容易<br>1.3 〜にくい・很难</p><p>②〜てしまいます<br>结束，或者完蛋的意思。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 日本語 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>海星来来的 2023 总结</title>
       <link href="/2024/01/09/2023-summary/"/>
       <url>/2024/01/09/2023-summary/</url>
@@ -232,11 +270,11 @@
     
     
     <entry>
-      <title>Bomb it!（Q版泡泡堂）——我在博客打游戏</title>
-      <link href="/2023/10/05/bombit4/"/>
-      <url>/2023/10/05/bombit4/</url>
+      <title>Commando2（二战前线）——我在博客打游戏</title>
+      <link href="/2023/10/05/commando2/"/>
+      <url>/2023/10/05/commando2/</url>
       
-        <content type="html"><![CDATA[<p>Q版泡泡堂第四季重磅出击！！道具升级，武器升级，新增拳击手套，弹跳器，魔力毯……有竞技，收集，对战，涂色四种游戏模式，支持双人PK！游戏画面风格简单，色彩鲜亮，音乐欢畅，可玩性极强，绝对不能错过！</p><div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; margin: 20px 0">  <iframe src="https://pengdonglai.com/ruffle-swf-player/swf-games/bombit4/" frameborder="0" scrolling="no" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"></iframe></div><p>本游戏并非本人制作，源文件为网络资料，如有侵权，请联系我，我会在收到侵权告知后24小时内删除。</p>]]></content>
+        <content type="html"><![CDATA[<p>在欧洲成功地保护了盟军后，英雄们将到亚洲去继续战斗！更多的使命、更多的敌人、更大的冒险、更猛烈的炮火。有男女两名角色可以选择，一开始可以选择携带的武器，现在快来挑战一下吧。</p><div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; margin: 20px 0">  <iframe src="https://pengdonglai.com/ruffle-swf-player/swf-games/commando2/" frameborder="0" scrolling="no" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"></iframe></div><p>本游戏并非本人制作，源文件为网络资料，如有侵权，请联系我，我会在收到侵权告知后24小时内删除。</p>]]></content>
       
       
       
@@ -251,11 +289,11 @@
     
     
     <entry>
-      <title>Commando2（二战前线）——我在博客打游戏</title>
-      <link href="/2023/10/05/commando2/"/>
-      <url>/2023/10/05/commando2/</url>
+      <title>Bomb it!（Q版泡泡堂）——我在博客打游戏</title>
+      <link href="/2023/10/05/bombit4/"/>
+      <url>/2023/10/05/bombit4/</url>
       
-        <content type="html"><![CDATA[<p>在欧洲成功地保护了盟军后，英雄们将到亚洲去继续战斗！更多的使命、更多的敌人、更大的冒险、更猛烈的炮火。有男女两名角色可以选择，一开始可以选择携带的武器，现在快来挑战一下吧。</p><div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; margin: 20px 0">  <iframe src="https://pengdonglai.com/ruffle-swf-player/swf-games/commando2/" frameborder="0" scrolling="no" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"></iframe></div><p>本游戏并非本人制作，源文件为网络资料，如有侵权，请联系我，我会在收到侵权告知后24小时内删除。</p>]]></content>
+        <content type="html"><![CDATA[<p>Q版泡泡堂第四季重磅出击！！道具升级，武器升级，新增拳击手套，弹跳器，魔力毯……有竞技，收集，对战，涂色四种游戏模式，支持双人PK！游戏画面风格简单，色彩鲜亮，音乐欢畅，可玩性极强，绝对不能错过！</p><div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; margin: 20px 0">  <iframe src="https://pengdonglai.com/ruffle-swf-player/swf-games/bombit4/" frameborder="0" scrolling="no" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"></iframe></div><p>本游戏并非本人制作，源文件为网络资料，如有侵权，请联系我，我会在收到侵权告知后24小时内删除。</p>]]></content>
       
       
       
