@@ -1515,6 +1515,22 @@ article .article-tags .chip {
     word-wrap: break-word;
 }
 
+.blue #articleContent a {
+  color: #4169E1;
+}
+
+.black #articleContent a {
+  color: rgb(215, 238, 250);
+}
+
+.purple #articleContent a {
+  color: #6A5ACD;
+}
+
+.orange #articleContent a {
+color: #FF8C00;
+}
+
 #articleContent .img-item {
     text-align: center;
 }
