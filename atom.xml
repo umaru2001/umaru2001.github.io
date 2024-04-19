@@ -3,11 +3,11 @@
   <title>海祇岛的珊瑚森林</title>
   
   <subtitle>海星来来の人云亦云</subtitle>
-  <link href="http://umaru2001.github.io/atom.xml" rel="self"/>
+  <link href="http://pengdonglai.com/atom.xml" rel="self"/>
   
-  <link href="http://umaru2001.github.io/"/>
+  <link href="http://pengdonglai.com/"/>
   <updated>2024-04-17T16:18:55.842Z</updated>
-  <id>http://umaru2001.github.io/</id>
+  <id>http://pengdonglai.com/</id>
   
   <author>
     <name>海星来来</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>二次元/三次元图片API汇总保存</title>
-    <link href="http://umaru2001.github.io/2024/04/14/anime-pictures/"/>
-    <id>http://umaru2001.github.io/2024/04/14/anime-pictures/</id>
+    <link href="http://pengdonglai.com/2024/04/14/anime-pictures/"/>
+    <id>http://pengdonglai.com/2024/04/14/anime-pictures/</id>
     <published>2024-04-14T11:28:29.000Z</published>
     <updated>2024-04-17T16:18:55.842Z</updated>
     
@@ -37,14 +37,14 @@
     
     
     
-    <category term="二次元图片" scheme="http://umaru2001.github.io/tags/%E4%BA%8C%E6%AC%A1%E5%85%83%E5%9B%BE%E7%89%87/"/>
+    <category term="二次元图片" scheme="http://pengdonglai.com/tags/%E4%BA%8C%E6%AC%A1%E5%85%83%E5%9B%BE%E7%89%87/"/>
     
   </entry>
   
   <entry>
     <title>日语动词练习——N5上</title>
-    <link href="http://umaru2001.github.io/2024/04/05/japanese-words-1/"/>
-    <id>http://umaru2001.github.io/2024/04/05/japanese-words-1/</id>
+    <link href="http://pengdonglai.com/2024/04/05/japanese-words-1/"/>
+    <id>http://pengdonglai.com/2024/04/05/japanese-words-1/</id>
     <published>2024-04-05T08:49:18.000Z</published>
     <updated>2024-04-06T09:22:50.936Z</updated>
     
@@ -60,14 +60,14 @@
     
     
     
-    <category term="日本語" scheme="http://umaru2001.github.io/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/"/>
+    <category term="日本語" scheme="http://pengdonglai.com/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/"/>
     
   </entry>
   
   <entry>
     <title>一些较为零散的日语语法点归总</title>
-    <link href="http://umaru2001.github.io/2024/02/09/japanese-grammar-1/"/>
-    <id>http://umaru2001.github.io/2024/02/09/japanese-grammar-1/</id>
+    <link href="http://pengdonglai.com/2024/02/09/japanese-grammar-1/"/>
+    <id>http://pengdonglai.com/2024/02/09/japanese-grammar-1/</id>
     <published>2024-02-09T04:18:41.000Z</published>
     <updated>2024-04-06T02:25:00.141Z</updated>
     
@@ -82,14 +82,14 @@
     
     
     
-    <category term="日本語" scheme="http://umaru2001.github.io/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/"/>
+    <category term="日本語" scheme="http://pengdonglai.com/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/"/>
     
   </entry>
   
   <entry>
     <title>海星来来的 2023 总结</title>
-    <link href="http://umaru2001.github.io/2024/01/09/2023-summary/"/>
-    <id>http://umaru2001.github.io/2024/01/09/2023-summary/</id>
+    <link href="http://pengdonglai.com/2024/01/09/2023-summary/"/>
+    <id>http://pengdonglai.com/2024/01/09/2023-summary/</id>
     <published>2024-01-09T04:28:29.000Z</published>
     <updated>2024-02-14T16:03:42.759Z</updated>
     
@@ -104,14 +104,14 @@
     
     
     
-    <category term="碎碎念" scheme="http://umaru2001.github.io/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="http://pengdonglai.com/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
   </entry>
   
   <entry>
     <title>How to create a CLI program using Node.js</title>
-    <link href="http://umaru2001.github.io/2023/11/09/create-a-cli/"/>
-    <id>http://umaru2001.github.io/2023/11/09/create-a-cli/</id>
+    <link href="http://pengdonglai.com/2023/11/09/create-a-cli/"/>
+    <id>http://pengdonglai.com/2023/11/09/create-a-cli/</id>
     <published>2023-11-09T04:44:19.000Z</published>
     <updated>2023-11-06T16:11:34.775Z</updated>
     
@@ -126,14 +126,14 @@
     
     
     
-    <category term="Node.js" scheme="http://umaru2001.github.io/tags/Node-js/"/>
+    <category term="Node.js" scheme="http://pengdonglai.com/tags/Node-js/"/>
     
   </entry>
   
   <entry>
     <title>雅思写作沉淀（1）——Task2理念篇</title>
-    <link href="http://umaru2001.github.io/2023/10/29/ielts-writing-1/"/>
-    <id>http://umaru2001.github.io/2023/10/29/ielts-writing-1/</id>
+    <link href="http://pengdonglai.com/2023/10/29/ielts-writing-1/"/>
+    <id>http://pengdonglai.com/2023/10/29/ielts-writing-1/</id>
     <published>2023-10-29T02:25:18.000Z</published>
     <updated>2024-01-09T04:27:39.888Z</updated>
     
@@ -148,14 +148,14 @@
     
     
     
-    <category term="English" scheme="http://umaru2001.github.io/tags/English/"/>
+    <category term="English" scheme="http://pengdonglai.com/tags/English/"/>
     
   </entry>
   
   <entry>
     <title>部分剑桥雅思的做题记录和沉淀（2）</title>
-    <link href="http://umaru2001.github.io/2023/10/24/ielts-reading-2/"/>
-    <id>http://umaru2001.github.io/2023/10/24/ielts-reading-2/</id>
+    <link href="http://pengdonglai.com/2023/10/24/ielts-reading-2/"/>
+    <id>http://pengdonglai.com/2023/10/24/ielts-reading-2/</id>
     <published>2023-10-23T16:15:28.000Z</published>
     <updated>2023-10-27T14:36:48.115Z</updated>
     
@@ -170,14 +170,14 @@
     
     
     
-    <category term="English" scheme="http://umaru2001.github.io/tags/English/"/>
+    <category term="English" scheme="http://pengdonglai.com/tags/English/"/>
     
   </entry>
   
   <entry>
     <title>通过一些句子增加雅思听力词汇（4）</title>
-    <link href="http://umaru2001.github.io/2023/10/21/ielts-listening-words-4/"/>
-    <id>http://umaru2001.github.io/2023/10/21/ielts-listening-words-4/</id>
+    <link href="http://pengdonglai.com/2023/10/21/ielts-listening-words-4/"/>
+    <id>http://pengdonglai.com/2023/10/21/ielts-listening-words-4/</id>
     <published>2023-10-21T04:30:21.000Z</published>
     <updated>2023-10-21T13:27:24.505Z</updated>
     
@@ -196,14 +196,14 @@
     
     
     
-    <category term="English" scheme="http://umaru2001.github.io/tags/English/"/>
+    <category term="English" scheme="http://pengdonglai.com/tags/English/"/>
     
   </entry>
   
   <entry>
     <title>部分剑桥雅思的做题记录和沉淀（1）</title>
-    <link href="http://umaru2001.github.io/2023/10/19/ielts-reading-1/"/>
-    <id>http://umaru2001.github.io/2023/10/19/ielts-reading-1/</id>
+    <link href="http://pengdonglai.com/2023/10/19/ielts-reading-1/"/>
+    <id>http://pengdonglai.com/2023/10/19/ielts-reading-1/</id>
     <published>2023-10-19T14:19:25.000Z</published>
     <updated>2024-02-10T14:09:07.175Z</updated>
     
@@ -218,14 +218,14 @@
     
     
     
-    <category term="English" scheme="http://umaru2001.github.io/tags/English/"/>
+    <category term="English" scheme="http://pengdonglai.com/tags/English/"/>
     
   </entry>
   
   <entry>
     <title>一个文字格式化工具</title>
-    <link href="http://umaru2001.github.io/2023/10/17/format-markdown-app/"/>
-    <id>http://umaru2001.github.io/2023/10/17/format-markdown-app/</id>
+    <link href="http://pengdonglai.com/2023/10/17/format-markdown-app/"/>
+    <id>http://pengdonglai.com/2023/10/17/format-markdown-app/</id>
     <published>2023-10-17T14:55:03.000Z</published>
     <updated>2023-10-18T05:48:35.650Z</updated>
     
@@ -244,14 +244,14 @@ function formatText() {
     
     
     
-    <category term="工具" scheme="http://umaru2001.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    <category term="工具" scheme="http://pengdonglai.com/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
   <entry>
     <title>通过一些句子增加雅思听力词汇（3）</title>
-    <link href="http://umaru2001.github.io/2023/10/17/ielts-listening-words-3/"/>
-    <id>http://umaru2001.github.io/2023/10/17/ielts-listening-words-3/</id>
+    <link href="http://pengdonglai.com/2023/10/17/ielts-listening-words-3/"/>
+    <id>http://pengdonglai.com/2023/10/17/ielts-listening-words-3/</id>
     <published>2023-10-17T04:29:21.000Z</published>
     <updated>2024-02-10T14:09:00.177Z</updated>
     
@@ -270,14 +270,14 @@ function formatText() {
     
     
     
-    <category term="English" scheme="http://umaru2001.github.io/tags/English/"/>
+    <category term="English" scheme="http://pengdonglai.com/tags/English/"/>
     
   </entry>
   
   <entry>
     <title>通过一些句子增加雅思听力词汇（2）</title>
-    <link href="http://umaru2001.github.io/2023/10/14/ielts-listening-words-2/"/>
-    <id>http://umaru2001.github.io/2023/10/14/ielts-listening-words-2/</id>
+    <link href="http://pengdonglai.com/2023/10/14/ielts-listening-words-2/"/>
+    <id>http://pengdonglai.com/2023/10/14/ielts-listening-words-2/</id>
     <published>2023-10-14T14:19:25.000Z</published>
     <updated>2024-02-10T14:08:45.472Z</updated>
     
@@ -296,14 +296,14 @@ function formatText() {
     
     
     
-    <category term="English" scheme="http://umaru2001.github.io/tags/English/"/>
+    <category term="English" scheme="http://pengdonglai.com/tags/English/"/>
     
   </entry>
   
   <entry>
     <title>通过一些句子增加雅思听力词汇（1）</title>
-    <link href="http://umaru2001.github.io/2023/10/10/ielts-listening-words/"/>
-    <id>http://umaru2001.github.io/2023/10/10/ielts-listening-words/</id>
+    <link href="http://pengdonglai.com/2023/10/10/ielts-listening-words/"/>
+    <id>http://pengdonglai.com/2023/10/10/ielts-listening-words/</id>
     <published>2023-10-10T13:09:10.000Z</published>
     <updated>2023-10-15T08:45:08.330Z</updated>
     
@@ -322,14 +322,14 @@ function formatText() {
     
     
     
-    <category term="English" scheme="http://umaru2001.github.io/tags/English/"/>
+    <category term="English" scheme="http://pengdonglai.com/tags/English/"/>
     
   </entry>
   
   <entry>
     <title>冒险王精灵物语——我在博客打游戏</title>
-    <link href="http://umaru2001.github.io/2023/10/09/adventurer-elf-story/"/>
-    <id>http://umaru2001.github.io/2023/10/09/adventurer-elf-story/</id>
+    <link href="http://pengdonglai.com/2023/10/09/adventurer-elf-story/"/>
+    <id>http://pengdonglai.com/2023/10/09/adventurer-elf-story/</id>
     <published>2023-10-08T17:31:03.000Z</published>
     <updated>2023-10-14T04:56:37.539Z</updated>
     
@@ -345,14 +345,14 @@ function formatText() {
     
     
     
-    <category term="游戏" scheme="http://umaru2001.github.io/tags/%E6%B8%B8%E6%88%8F/"/>
+    <category term="游戏" scheme="http://pengdonglai.com/tags/%E6%B8%B8%E6%88%8F/"/>
     
   </entry>
   
   <entry>
     <title>英语听力磨耳朵之一串数字号码</title>
-    <link href="http://umaru2001.github.io/2023/10/06/english-number-listening/"/>
-    <id>http://umaru2001.github.io/2023/10/06/english-number-listening/</id>
+    <link href="http://pengdonglai.com/2023/10/06/english-number-listening/"/>
+    <id>http://pengdonglai.com/2023/10/06/english-number-listening/</id>
     <published>2023-10-06T12:23:14.000Z</published>
     <updated>2023-10-14T16:58:54.168Z</updated>
     
@@ -368,37 +368,14 @@ function formatText() {
     
     
     
-    <category term="English" scheme="http://umaru2001.github.io/tags/English/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Commando2（二战前线）——我在博客打游戏</title>
-    <link href="http://umaru2001.github.io/2023/10/05/commando2/"/>
-    <id>http://umaru2001.github.io/2023/10/05/commando2/</id>
-    <published>2023-10-04T22:41:23.000Z</published>
-    <updated>2023-10-16T16:48:31.527Z</updated>
-    
-    <content type="html"><![CDATA[<p>在欧洲成功地保护了盟军后，英雄们将到亚洲去继续战斗！更多的使命、更多的敌人、更大的冒险、更猛烈的炮火。有男女两名角色可以选择，一开始可以选择携带的武器，现在快来挑战一下吧。</p><div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; margin: 20px 0">  <iframe src="https://pengdonglai.com/ruffle-swf-player/swf-games/commando2/" frameborder="0" scrolling="no" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"></iframe></div><p>本游戏并非本人制作，源文件为网络资料，如有侵权，请联系我，我会在收到侵权告知后24小时内删除。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;在欧洲成功地保护了盟军后，英雄们将到亚洲去继续战斗！更多的使命、更多的敌人、更大的冒险、更猛烈的炮火。有男女两名角色可以选择，一开始可以选择携带的武器，现在快来挑战一下吧。&lt;/p&gt;
-&lt;div style=&quot;position: relative; width: 100%; h</summary>
-      
-    
-    
-    
-    
-    <category term="游戏" scheme="http://umaru2001.github.io/tags/%E6%B8%B8%E6%88%8F/"/>
+    <category term="English" scheme="http://pengdonglai.com/tags/English/"/>
     
   </entry>
   
   <entry>
     <title>Bomb it!（Q版泡泡堂）——我在博客打游戏</title>
-    <link href="http://umaru2001.github.io/2023/10/05/bombit4/"/>
-    <id>http://umaru2001.github.io/2023/10/05/bombit4/</id>
+    <link href="http://pengdonglai.com/2023/10/05/bombit4/"/>
+    <id>http://pengdonglai.com/2023/10/05/bombit4/</id>
     <published>2023-10-04T22:41:23.000Z</published>
     <updated>2023-10-16T16:48:18.376Z</updated>
     
@@ -414,14 +391,37 @@ function formatText() {
     
     
     
-    <category term="游戏" scheme="http://umaru2001.github.io/tags/%E6%B8%B8%E6%88%8F/"/>
+    <category term="游戏" scheme="http://pengdonglai.com/tags/%E6%B8%B8%E6%88%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Commando2（二战前线）——我在博客打游戏</title>
+    <link href="http://pengdonglai.com/2023/10/05/commando2/"/>
+    <id>http://pengdonglai.com/2023/10/05/commando2/</id>
+    <published>2023-10-04T22:41:23.000Z</published>
+    <updated>2023-10-16T16:48:31.527Z</updated>
+    
+    <content type="html"><![CDATA[<p>在欧洲成功地保护了盟军后，英雄们将到亚洲去继续战斗！更多的使命、更多的敌人、更大的冒险、更猛烈的炮火。有男女两名角色可以选择，一开始可以选择携带的武器，现在快来挑战一下吧。</p><div style="position: relative; width: 100%; height: 0; padding-bottom: 75%; margin: 20px 0">  <iframe src="https://pengdonglai.com/ruffle-swf-player/swf-games/commando2/" frameborder="0" scrolling="no" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"></iframe></div><p>本游戏并非本人制作，源文件为网络资料，如有侵权，请联系我，我会在收到侵权告知后24小时内删除。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;在欧洲成功地保护了盟军后，英雄们将到亚洲去继续战斗！更多的使命、更多的敌人、更大的冒险、更猛烈的炮火。有男女两名角色可以选择，一开始可以选择携带的武器，现在快来挑战一下吧。&lt;/p&gt;
+&lt;div style=&quot;position: relative; width: 100%; h</summary>
+      
+    
+    
+    
+    
+    <category term="游戏" scheme="http://pengdonglai.com/tags/%E6%B8%B8%E6%88%8F/"/>
     
   </entry>
   
   <entry>
     <title>Deep Sea Patrol（深海战艇）——我在博客打游戏</title>
-    <link href="http://umaru2001.github.io/2023/10/03/deepsea-patrol/"/>
-    <id>http://umaru2001.github.io/2023/10/03/deepsea-patrol/</id>
+    <link href="http://pengdonglai.com/2023/10/03/deepsea-patrol/"/>
+    <id>http://pengdonglai.com/2023/10/03/deepsea-patrol/</id>
     <published>2023-10-02T22:41:23.000Z</published>
     <updated>2023-10-16T16:48:43.777Z</updated>
     
@@ -437,14 +437,14 @@ function formatText() {
     
     
     
-    <category term="游戏" scheme="http://umaru2001.github.io/tags/%E6%B8%B8%E6%88%8F/"/>
+    <category term="游戏" scheme="http://pengdonglai.com/tags/%E6%B8%B8%E6%88%8F/"/>
     
   </entry>
   
   <entry>
     <title>新新魔塔2——我在博客打游戏</title>
-    <link href="http://umaru2001.github.io/2023/10/01/mting/"/>
-    <id>http://umaru2001.github.io/2023/10/01/mting/</id>
+    <link href="http://pengdonglai.com/2023/10/01/mting/"/>
+    <id>http://pengdonglai.com/2023/10/01/mting/</id>
     <published>2023-10-01T02:23:35.000Z</published>
     <updated>2023-10-16T16:47:19.476Z</updated>
     
@@ -459,14 +459,14 @@ function formatText() {
     
     
     
-    <category term="游戏" scheme="http://umaru2001.github.io/tags/%E6%B8%B8%E6%88%8F/"/>
+    <category term="游戏" scheme="http://pengdonglai.com/tags/%E6%B8%B8%E6%88%8F/"/>
     
   </entry>
   
   <entry>
     <title>黄金矿工——我在博客打游戏</title>
-    <link href="http://umaru2001.github.io/2023/09/28/gold-miner/"/>
-    <id>http://umaru2001.github.io/2023/09/28/gold-miner/</id>
+    <link href="http://pengdonglai.com/2023/09/28/gold-miner/"/>
+    <id>http://pengdonglai.com/2023/09/28/gold-miner/</id>
     <published>2023-09-28T08:42:23.000Z</published>
     <updated>2023-10-16T16:48:54.608Z</updated>
     
@@ -483,7 +483,7 @@ function formatText() {
     
     
     
-    <category term="游戏" scheme="http://umaru2001.github.io/tags/%E6%B8%B8%E6%88%8F/"/>
+    <category term="游戏" scheme="http://pengdonglai.com/tags/%E6%B8%B8%E6%88%8F/"/>
     
   </entry>
   
