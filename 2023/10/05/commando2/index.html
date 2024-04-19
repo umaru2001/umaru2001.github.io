@@ -17,7 +17,7 @@
 
 
     <title>Commando2（二战前线）——我在博客打游戏 | 海祇岛的珊瑚森林</title>
-    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.png">
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.webp">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/materialize/materialize.min.css">
@@ -103,7 +103,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.png" class="logo-img" alt="LOGO">
+                    <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.webp" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">海祇岛的珊瑚森林</span>
                 </a>
@@ -185,7 +185,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.png" class="logo-img circle responsive-img">
+        <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.webp" class="logo-img circle responsive-img">
         
         <div class="logo-name">海祇岛的珊瑚森林</div>
         <div class="logo-desc">
@@ -662,7 +662,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/11.jpg" class="responsive-img" alt="Bomb it!（Q版泡泡堂）——我在博客打游戏">
+                        <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/11.webp" class="responsive-img" alt="Bomb it!（Q版泡泡堂）——我在博客打游戏">
                         
                         <span class="card-title">Bomb it!（Q版泡泡堂）——我在博客打游戏</span>
                     </div>
@@ -747,6 +747,43 @@
 
 </div>
 
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('10')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 海祇岛的珊瑚森林<br />'
+            + '文章作者: 海星来来<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
 
 
 <!-- 代码块功能依赖 -->
@@ -970,7 +1007,7 @@
 
 
 
-    <a href="mailto:2961893588@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:donglaistarfish@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -979,10 +1016,6 @@
 
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2961893588" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2961893588" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
 
 
 
