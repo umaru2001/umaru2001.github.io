@@ -103,7 +103,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.webp" class="logo-img" alt="LOGO">
+                    <img src="./loading.png" data-original="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.webp" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">海祇岛的珊瑚森林</span>
                 </a>
@@ -185,7 +185,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/avatar.webp" class="logo-img circle responsive-img">
+        <img src="./loading.png" data-original="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/avatar.webp" class="logo-img circle responsive-img">
         
         <div class="logo-name">海祇岛的珊瑚森林</div>
         <div class="logo-desc">
@@ -777,7 +777,7 @@ const replaceFullChars = (content) => {
 <p>我也不知道哪一天开始我变成了这样…</p>
 <p>最后来张二次元？(ᕑᗢᓫ∗)˒</p>
 <div align="center">
-  <img src="/2023/10/17/format-markdown-app/1.jpeg">
+  <img src="./loading.png" data-original="/2023/10/17/format-markdown-app/1.jpeg">
 </div>
                 
             </div>
@@ -895,7 +895,7 @@ const replaceFullChars = (content) => {
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/2.webp" class="responsive-img" alt="部分剑桥雅思的做题记录和沉淀（1）">
+                        <img src="./loading.png" data-original="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/2.webp" class="responsive-img" alt="部分剑桥雅思的做题记录和沉淀（1）">
                         
                         <span class="card-title">部分剑桥雅思的做题记录和沉淀（1）</span>
                     </div>
@@ -940,7 +940,7 @@ const replaceFullChars = (content) => {
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/0.webp" class="responsive-img" alt="通过一些句子增加雅思听力词汇（3）">
+                        <img src="./loading.png" data-original="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/0.webp" class="responsive-img" alt="通过一些句子增加雅思听力词汇（3）">
                         
                         <span class="card-title">通过一些句子增加雅思听力词汇（3）</span>
                     </div>
@@ -1430,6 +1430,19 @@ $(function () {
     <script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/instantpage/instantpage.js" type="module"></script>
     
 
-</body>
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(a){a.imageLazyLoadSetting.processImages=t;var i=a.imageLazyLoadSetting.isSPA,o=a.imageLazyLoadSetting.preloadRatio||1,r=c();function c(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){i&&(r=c());for(var t,e,n=0;n<r.length;n++)t=r[n],e=void 0,0<=(e=t.getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(a.innerHeight*o||document.documentElement.clientHeight*o)&&function(){var e=r[n];!function(t,e){if(t.hasAttribute("bg-lazy"))return t.removeAttribute("bg-lazy"),e&&e();var n=new Image,a=t.getAttribute("data-original");n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a)}(e,function(){r=r.filter(function(t){return e!==t}),a.imageLazyLoadSetting.onImageLoaded&&a.imageLazyLoadSetting.onImageLoaded(e)})}()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),a.addEventListener("resize",e),a.addEventListener("orientationchange",e)}(this);</script></body>
 
 </html>

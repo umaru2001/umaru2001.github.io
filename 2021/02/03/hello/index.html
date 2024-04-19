@@ -103,7 +103,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.webp" class="logo-img" alt="LOGO">
+                    <img src="./loading.png" data-original="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.webp" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">海祇岛的珊瑚森林</span>
                 </a>
@@ -185,7 +185,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/avatar.webp" class="logo-img circle responsive-img">
+        <img src="./loading.png" data-original="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/avatar.webp" class="logo-img circle responsive-img">
         
         <div class="logo-name">海祇岛的珊瑚森林</div>
         <div class="logo-desc">
@@ -593,8 +593,8 @@
 <li>二次元</li>
 </ul>
 <div align="center">
-  <img height="160" width="300" src="/2021/02/03/hello/04.gif">
-  <img height="160" width="300" src="/2021/02/03/hello/05.gif">
+  <img height="160" width="300" src="./loading.png" data-original="/2021/02/03/hello/04.gif">
+  <img height="160" width="300" src="./loading.png" data-original="/2021/02/03/hello/05.gif">
 </div>
 像这样的可爱的女孩子，快，多贴贴！
 
@@ -602,14 +602,14 @@
 <li>古典&#x2F;近现代以钢琴为中心的西方音乐</li>
 </ul>
 <div align="center">
-  <img width="120" height="180" src="/2021/02/03/hello/01.png">
-  <img src="/2021/02/03/hello/03.png">
+  <img width="120" height="180" src="./loading.png" data-original="/2021/02/03/hello/01.png">
+  <img src="./loading.png" data-original="/2021/02/03/hello/03.png">
 </div>
 近代风格，这两位是重量级。
 
 <div align="center">
-  <img src="/2021/02/03/hello/02.jpeg">
-  <img src="/2021/02/03/hello/07.jpeg">
+  <img src="./loading.png" data-original="/2021/02/03/hello/02.jpeg">
+  <img src="./loading.png" data-original="/2021/02/03/hello/07.jpeg">
 </div>
 古典风格，别有一番韵味
 
@@ -627,7 +627,7 @@
 
 <h2 id="看到这儿的朋友祝你每一天都能拥有好心情"><a href="#看到这儿的朋友祝你每一天都能拥有好心情" class="headerlink" title="看到这儿的朋友祝你每一天都能拥有好心情!"></a>看到这儿的朋友祝你每一天都能拥有好心情!</h2><p>如果说，我们众生是一对相遇在宇宙交汇点的星辰，那么路过的你就是我生命中耀眼的恒星。相逢是缘，希望你可以从这个网站发现一些对你有用的内容，或者一些乐趣，那我便可知道，创建这个博客并不仅仅是我一时兴起的举动，更是一段美妙旅程的开端。祝你每天都能拥有好心情！</p>
 <div align="center">
-  <img height="160" width="300" src="/2021/02/03/hello/09.gif">
+  <img height="160" width="300" src="./loading.png" data-original="/2021/02/03/hello/09.gif">
 </div>
 
                 
@@ -746,7 +746,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/3.webp" class="responsive-img" alt="魔塔24层——我在博客打游戏">
+                        <img src="./loading.png" data-original="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/3.webp" class="responsive-img" alt="魔塔24层——我在博客打游戏">
                         
                         <span class="card-title">魔塔24层——我在博客打游戏</span>
                     </div>
@@ -791,7 +791,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/19.webp" class="responsive-img" alt="Hello, world!">
+                        <img src="./loading.png" data-original="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/19.webp" class="responsive-img" alt="Hello, world!">
                         
                         <span class="card-title">Hello, world!</span>
                     </div>
@@ -1281,6 +1281,19 @@ $(function () {
     <script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/instantpage/instantpage.js" type="module"></script>
     
 
-</body>
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(a){a.imageLazyLoadSetting.processImages=t;var i=a.imageLazyLoadSetting.isSPA,o=a.imageLazyLoadSetting.preloadRatio||1,r=c();function c(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){i&&(r=c());for(var t,e,n=0;n<r.length;n++)t=r[n],e=void 0,0<=(e=t.getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(a.innerHeight*o||document.documentElement.clientHeight*o)&&function(){var e=r[n];!function(t,e){if(t.hasAttribute("bg-lazy"))return t.removeAttribute("bg-lazy"),e&&e();var n=new Image,a=t.getAttribute("data-original");n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a)}(e,function(){r=r.filter(function(t){return e!==t}),a.imageLazyLoadSetting.onImageLoaded&&a.imageLazyLoadSetting.onImageLoaded(e)})}()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),a.addEventListener("resize",e),a.addEventListener("orientationchange",e)}(this);</script></body>
 
 </html>

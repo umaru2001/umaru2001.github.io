@@ -103,7 +103,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.webp" class="logo-img" alt="LOGO">
+                    <img src="./loading.png" data-original="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.webp" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">海祇岛的珊瑚森林</span>
                 </a>
@@ -185,7 +185,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/avatar.webp" class="logo-img circle responsive-img">
+        <img src="./loading.png" data-original="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/avatar.webp" class="logo-img circle responsive-img">
         
         <div class="logo-name">海祇岛的珊瑚森林</div>
         <div class="logo-desc">
@@ -394,20 +394,20 @@
                 </a>
                 
                 
-                <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" title="碎碎念: 4">
+                <a href="/tags/%E4%BA%8C%E6%AC%A1%E5%85%83%E5%9B%BE%E7%89%87/" title="二次元图片: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="碎碎念" style="background-color: #F5EEF8;">碎碎念
-                        <span class="tag-length">4</span>
+                            data-tagname="二次元图片" style="background-color: #F5EEF8;">二次元图片
+                        <span class="tag-length">1</span>
                     </span>
                 </a>
                 
                 
-                <a href="/tags/%E4%BA%8C%E6%AC%A1%E5%85%83%E5%9B%BE%E7%89%87/" title="二次元图片: 1">
+                <a href="/tags/English/" title="English: 10">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="二次元图片" style="background-color: #D5F5E3;">二次元图片
-                        <span class="tag-length">1</span>
+                            data-tagname="English" style="background-color: #D5F5E3;">English
+                        <span class="tag-length">10</span>
                     </span>
                 </a>
                 
@@ -421,11 +421,11 @@
                 </a>
                 
                 
-                <a href="/tags/English/" title="English: 10">
+                <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" title="碎碎念: 4">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="English" style="background-color: #FEF9E7;">English
-                        <span class="tag-length">10</span>
+                            data-tagname="碎碎念" style="background-color: #FEF9E7;">碎碎念
+                        <span class="tag-length">4</span>
                     </span>
                 </a>
                 
@@ -471,7 +471,7 @@
 <script type="text/javascript">
     
 
-    $('#tag-wordcloud').jQCloud([{"text":"游戏","weight":7,"link":"/tags/游戏/"},{"text":"碎碎念","weight":4,"link":"/tags/碎碎念/"},{"text":"二次元图片","weight":1,"link":"/tags/二次元图片/"},{"text":"Node.js","weight":1,"link":"/tags/Node-js/"},{"text":"English","weight":10,"link":"/tags/English/"},{"text":"工具","weight":1,"link":"/tags/工具/"},{"text":"日本語","weight":2,"link":"/tags/日本語/"}], {
+    $('#tag-wordcloud').jQCloud([{"text":"游戏","weight":7,"link":"/tags/游戏/"},{"text":"二次元图片","weight":1,"link":"/tags/二次元图片/"},{"text":"English","weight":10,"link":"/tags/English/"},{"text":"Node.js","weight":1,"link":"/tags/Node-js/"},{"text":"碎碎念","weight":4,"link":"/tags/碎碎念/"},{"text":"工具","weight":1,"link":"/tags/工具/"},{"text":"日本語","weight":2,"link":"/tags/日本語/"}], {
         autoResize: true
     });
 </script>
@@ -773,6 +773,19 @@ $(function () {
     <script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/instantpage/instantpage.js" type="module"></script>
     
 
-</body>
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(a){a.imageLazyLoadSetting.processImages=t;var i=a.imageLazyLoadSetting.isSPA,o=a.imageLazyLoadSetting.preloadRatio||1,r=c();function c(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){i&&(r=c());for(var t,e,n=0;n<r.length;n++)t=r[n],e=void 0,0<=(e=t.getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(a.innerHeight*o||document.documentElement.clientHeight*o)&&function(){var e=r[n];!function(t,e){if(t.hasAttribute("bg-lazy"))return t.removeAttribute("bg-lazy"),e&&e();var n=new Image,a=t.getAttribute("data-original");n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a)}(e,function(){r=r.filter(function(t){return e!==t}),a.imageLazyLoadSetting.onImageLoaded&&a.imageLazyLoadSetting.onImageLoaded(e)})}()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),a.addEventListener("resize",e),a.addEventListener("orientationchange",e)}(this);</script></body>
 
 </html>
