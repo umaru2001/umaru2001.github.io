@@ -590,17 +590,17 @@
 <h3 id="1-2-🍿-动漫"><a href="#1-2-🍿-动漫" class="headerlink" title="1.2 🍿 动漫"></a>1.2 🍿 动漫</h3><p>2023 年总体来说动漫没有 2022 那么有惊喜感。但是 2023 年的动漫带给我的印象普遍都很深刻，对于我这样子喜欢萌系画风的老人来说，《别当欧尼酱了》可以说是为数不多的惊喜了。惊喜感最主要来自于它的画风，以及剧情。画风这个东西是一眼看上去就能看得出来是否喜欢的，《别酱》可以说是正中下怀，人物的画风很好的展现了萌点，画风也相对合理，从细节也可以看出来确实下了血本。剧情方面比较偏日常，但不太同于一般的性转番套路。也让我作为一个男性也可以理解女孩子许许多多的不便，教导了我去尊重异性，求同存异。<del>才不是因为想要一个像美波里这样的妹妹呢！</del></p>
 <p><del>顺带一提，这应该是我为数不多完整下载保存了的番剧。</del></p>
 <div align="center">
-  <img src="/2024/01/09/2023-summary/1.avif">
+  <img src="./loading2.svg" data-original="/2024/01/09/2023-summary/1.avif">
 </div>
 
 <p>不同于《别酱》，《MyGO》这部作品可以说在动漫圈获得了绝大部分好评，应该还是因为它的剧情确实值得一提，在我看来主要是它相比于一般的二次元整天架空描述美好，它确实描绘了非常真实可见的人设。和 2022 年的《孤独摇滚》相比，MyGO 是用动画的手法，展现出日常番可以达到的一种上限。一般来说，我们把套路化，一眼就能看穿的剧情，称之为「厕纸剧情」，但是 MyGO 真的需要去仔细地看，暂停，讨论，才能体会到制作组的那些各种小细节，精细的伏笔。从这个方面来看，MyGO 确实没有落入俗套。</p>
 <div align="center">
-  <img src="/2024/01/09/2023-summary/2.avif">
+  <img src="./loading2.svg" data-original="/2024/01/09/2023-summary/2.avif">
 </div>
 
 <h3 id="1-3-🎮-游戏"><a href="#1-3-🎮-游戏" class="headerlink" title="1.3 🎮 游戏"></a>1.3 🎮 游戏</h3><p>由于工作方面的原因，我没有了整块时间玩单机游戏。所以今年我选择了《崩坏·星穹铁道》作为我的年度游戏（不得不提，确实省肝）。<br>所以说什么时候可以让流萤加入我的队伍呢？</p>
 <div align="center">
-  <img src="/2024/01/09/2023-summary/3.webp">
+  <img src="./loading2.svg" data-original="/2024/01/09/2023-summary/3.webp">
 </div>
 
 <h2 id="🌞-我的足迹"><a href="#🌞-我的足迹" class="headerlink" title="🌞 我的足迹"></a>🌞 我的足迹</h2><p>不全是去玩，有些地方是去办理事情，几乎没留下照片，<del>绝对不是因为懒</del>。所以这里用 LOGO 代替图片<del>这样子也可以做到性能优化</del>。</p>
@@ -1085,7 +1085,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">45.4k</span>&nbsp;字
+                class="white-color">45.6k</span>&nbsp;字
             
             
             
@@ -1305,6 +1305,19 @@ $(function () {
     <script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/instantpage/instantpage.js" type="module"></script>
     
 
-</body>
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(a){a.imageLazyLoadSetting.processImages=t;var i=a.imageLazyLoadSetting.isSPA,o=a.imageLazyLoadSetting.preloadRatio||1,r=c();function c(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){i&&(r=c());for(var t,e,n=0;n<r.length;n++)t=r[n],e=void 0,0<=(e=t.getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(a.innerHeight*o||document.documentElement.clientHeight*o)&&function(){var e=r[n];!function(t,e){if(t.hasAttribute("bg-lazy"))return t.removeAttribute("bg-lazy"),e&&e();var n=new Image,a=t.getAttribute("data-original");n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a)}(e,function(){r=r.filter(function(t){return e!==t}),a.imageLazyLoadSetting.onImageLoaded&&a.imageLazyLoadSetting.onImageLoaded(e)})}()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),a.addEventListener("resize",e),a.addEventListener("orientationchange",e)}(this);</script></body>
 
 </html>
