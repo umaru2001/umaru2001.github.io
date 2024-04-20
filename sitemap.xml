@@ -11,16 +11,7 @@
   </url>
   
   <url>
-    <loc>https://pengdonglai.com/2023/10/01/mting/</loc>
-    
-    <lastmod>2024-04-20</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pengdonglai.com/2023/04/02/swf-game-mota24/</loc>
+    <loc>https://pengdonglai.com/2023/09/28/gold-miner/</loc>
     
     <lastmod>2024-04-20</lastmod>
     
@@ -38,15 +29,6 @@
   </url>
   
   <url>
-    <loc>https://pengdonglai.com/2023/10/05/commando2/</loc>
-    
-    <lastmod>2024-04-20</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://pengdonglai.com/2023/10/03/deepsea-patrol/</loc>
     
     <lastmod>2024-04-20</lastmod>
@@ -56,7 +38,25 @@
   </url>
   
   <url>
-    <loc>https://pengdonglai.com/2023/09/28/gold-miner/</loc>
+    <loc>https://pengdonglai.com/2023/10/05/commando2/</loc>
+    
+    <lastmod>2024-04-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pengdonglai.com/2023/10/01/mting/</loc>
+    
+    <lastmod>2024-04-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pengdonglai.com/2023/04/02/swf-game-mota24/</loc>
     
     <lastmod>2024-04-20</lastmod>
     
@@ -315,14 +315,14 @@
   </url>
   
   <url>
-    <loc>https://pengdonglai.com/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</loc>
+    <loc>https://pengdonglai.com/tags/%E4%BA%8C%E6%AC%A1%E5%85%83%E5%9B%BE%E7%89%87/</loc>
     <lastmod>2024-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://pengdonglai.com/tags/%E4%BA%8C%E6%AC%A1%E5%85%83%E5%9B%BE%E7%89%87/</loc>
+    <loc>https://pengdonglai.com/tags/Node-js/</loc>
     <lastmod>2024-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -336,7 +336,7 @@
   </url>
   
   <url>
-    <loc>https://pengdonglai.com/tags/Node-js/</loc>
+    <loc>https://pengdonglai.com/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</loc>
     <lastmod>2024-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
