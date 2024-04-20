@@ -214,25 +214,25 @@ p {
 }
 
 hr {
-  color: #222;
-  border: 0;
-  font-size: 12px;
-  padding: 1em 0;
-  position: relative;
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
 }
 
-hr::before {
-  content: '分割线';
-  position: absolute;
-  padding: 0 1ch;
-  line-height: 1px;
-  border: solid #d0d0d5;
-  border-width: 0 99vw;
-  width: fit-content;
-  /* for 不支持fit-content浏览器 */
-  white-space: nowrap;
-  left: 50%;
-  transform: translateX(-50%);
+.blue hr {
+  border-top: 1px solid #4169E1;
+}
+
+.black hr {
+  border-top: 1px solid antiquewhite;
+}
+
+.purple hr {
+  border-top: 1px solid #6A5ACD;
+}
+
+.orange hr {
+  border-top: 1px solid #FF8C00;
 }
 
 blockquote {
@@ -248,8 +248,8 @@ blockquote {
 }
 
 .black blockquote {
-  border-left: 5px solid #000000;
-  background-color: rgba(0, 0, 0, .1);
+  border-left: 5px solid #222222;
+  background-color: rgba(34, 34, 34, .1);
 }
 
 .purple blockquote {
