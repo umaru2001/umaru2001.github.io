@@ -33,6 +33,62 @@
     }
 }
 
+body,html {
+  cursor: url(../cur/normal.svg),auto!important;
+}
+
+img {
+  cursor: url(../cur/link.svg),auto!important;
+}
+
+a:hover {
+  cursor: url(../cur/link.svg),auto!important;
+}
+
+input:hover {
+  cursor: url(../cur/handwriting.svg),auto!important;
+}
+
+button:hover {
+  cursor: url(../cur/link.svg),auto!important;
+}
+
+i:hover {
+  cursor: url(../cur/link.svg),auto!important;
+}
+
+i.fas.fa-arrow-up {
+  cursor: url(../cur/goup.svg),auto!important;
+}
+
+#footer-wrap a:hover {
+  cursor: url(../cur/link.svg),auto!important;
+}
+
+#pagination .page-number:hover {
+  cursor: url(../cur/link.svg),auto!important;
+}
+
+#nav .site-page:hover {
+  cursor: url(../cur/link.svg),auto!important;
+}
+
+button#go-up {
+  cursor: url(../cur/goup.svg),auto!important;
+}
+
+textarea {
+  cursor: url(../cur/handwriting.svg),auto!important;
+}
+
+.aplayer .aplayer-list ol li {
+  cursor: url(../cur/link.svg),auto!important;
+}
+
+.aplayer-pic {
+  cursor: url(../cur/link.svg),auto!important;
+}
+
 span.heimu {
   background-color: #000000;
   transition: color 0.13s linear;
@@ -302,7 +358,7 @@ code {
     right: 25px;
     z-index: 1;
     filter: invert(50%);
-    cursor: pointer;
+    cursor: url(../cur/link.svg),auto!important;
 }
 
 .codecopy_notice {
@@ -323,7 +379,7 @@ code {
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     z-index: 1;
     filter: invert(50%);
-    cursor: pointer;
+    cursor: url(../cur/link.svg),auto!important;
 }
 
 .code-expand {
@@ -333,7 +389,7 @@ code {
     filter: invert(50%);
     padding: 7px;
     z-index: 999 !important;
-    cursor: pointer;
+    cursor: url(../cur/link.svg),auto!important;
     transition: all .3s;
     transform: rotate(0deg);
 }
@@ -1556,14 +1612,14 @@ color: #FF8C00;
 #articleContent img {
     max-width: 100%;
     height: auto;
-    cursor: pointer;
+    cursor: url(../cur/link.svg),auto!important;
 }
 
 #articleContent video {
     display: block;
     margin: 30px auto;
     box-shadow: 0 5px 35px 0 rgba(0, 0, 0, .2), 0 10px 35px -11px rgba(0, 0, 0, .6);
-    cursor: pointer;
+    cursor: url(../cur/link.svg),auto!important;
 }
 
 #articleContent ol,
@@ -1708,7 +1764,7 @@ thead {
     font-size: 1rem;
     font-weight: 500;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: url(../cur/link.svg),auto!important;
     box-shadow: 0 3px 5px rgba(0, 0, 0, .12);
     z-index: 0;
 }
@@ -2277,7 +2333,7 @@ thead {
     width: 100%;
     height: 200px;
     border-radius: 10px;
-    cursor: pointer;
+    cursor: url(../cur/link.svg),auto!important;
 }
 
 /*尾部样式*/

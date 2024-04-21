@@ -3,7 +3,7 @@
 	border-radius: 5px;
 	bottom: 66px;
 	color: #fff;
-	cursor: pointer;
+  cursor: url(../cur/link.svg),auto!important;
 	font-size: 12px;
 	left: 0;
 	margin-left: -100px;
@@ -67,14 +67,14 @@
 }
 
 #live2d {
-	cursor: grab;
+  cursor: url(../cur/normal.svg),auto!important;
 	height: 300px;
 	position: relative;
 	width: 300px;
 }
 
 #live2d:active {
-	cursor: grabbing;
+  cursor: url(../cur/normal.svg),auto!important;
 }
 
 #waifu-tool {
@@ -92,7 +92,7 @@
 
 #waifu-tool span {
 	color: #7b8c9d;
-	cursor: pointer;
+  cursor: url(../cur/link.svg),auto!important;
 	display: block;
 	line-height: 30px;
 	text-align: center;
