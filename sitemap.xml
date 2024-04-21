@@ -317,7 +317,7 @@
 
   
   <url>
-    <loc>https://pengdonglai.com/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</loc>
+    <loc>https://pengdonglai.com/tags/%E6%B8%B8%E6%88%8F/</loc>
     <lastmod>2024-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -331,7 +331,14 @@
   </url>
   
   <url>
-    <loc>https://pengdonglai.com/tags/%E6%B8%B8%E6%88%8F/</loc>
+    <loc>https://pengdonglai.com/tags/English/</loc>
+    <lastmod>2024-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pengdonglai.com/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</loc>
     <lastmod>2024-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -339,13 +346,6 @@
   
   <url>
     <loc>https://pengdonglai.com/tags/Node-js/</loc>
-    <lastmod>2024-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pengdonglai.com/tags/English/</loc>
     <lastmod>2024-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
