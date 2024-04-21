@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="标签: 碎碎念, JavaScript,Coding,Web,Blog,life,Music">
+    <meta name="keywords" content="musics, JavaScript,Coding,Web,Blog,life,Music">
     <meta name="description" content="这里是海星来来的博客，虽然他是一个程序员，但是这篇博客应该会很少更新技术相关的东西，因为这太无聊了。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>标签: 碎碎念 | 海祇岛的珊瑚森林</title>
+    <title>musics | 海祇岛的珊瑚森林</title>
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/png" href="/favicon.webp">
 
@@ -377,6 +377,7 @@
 
 </header>
 
+    
     <div class="bg-cover pd-header about-cover">
     <div class="container">
     <div class="row">
@@ -420,205 +421,97 @@
     </div>
 </div>
 
+
 <main class="content">
+  <div class="container ">
+      <div class="card">
+          <div class="card-content">
+              
+                  <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .black meting-js {
+        background-color: #222222;
+    }
+
+    .hvcenter {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        display: flex;
+        align-items: center;
+        font-size: 200%;
+    }
+
+    .hvcenter i {
+        margin-right: 10px;
+    }
+
+    .black .aplayer {
+        background-color: #222222;
+    }
+
+    .black .aplayer .aplayer-list ol li.aplayer-list-light,
+    .black .aplayer .aplayer-list ol li:hover {
+        background-color: #333333;
+    }
+
+    .black .aplayer .aplayer-lrc:after {
+        background: transparent;
+    }
+
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
 
     
-
-<div id="tags" class="container chip-container">
-    <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
-            </div>
-            <div class="tag-chips">
-                
-                
-                <a href="/tags/%E6%B8%B8%E6%88%8F/" title="游戏: 7">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="游戏" style="background-color: #F9EBEA;">游戏
-                        <span class="tag-length">7</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E4%BA%8C%E6%AC%A1%E5%85%83%E5%9B%BE%E7%89%87/" title="二次元图片: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="二次元图片" style="background-color: #F5EEF8;">二次元图片
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" title="碎碎念: 4">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            data-tagname="碎碎念" style="background-color: #D5F5E3;">碎碎念
-                        <span class="tag-length">4</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Node-js/" title="Node.js: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Node.js" style="background-color: #E8F8F5;">Node.js
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/English/" title="English: 10">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="English" style="background-color: #FEF9E7;">English
-                        <span class="tag-length">10</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E5%B7%A5%E5%85%B7/" title="工具: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="工具" style="background-color: #F8F9F9;">工具
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/" title="日本語: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="日本語" style="background-color: #82E0AA;">日本語
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-            </div>
+</style>
+<div class="music-player">
+    
+        <div class="title center-align">
+            <i class="fas fa-music"></i>&nbsp;&nbsp;听听音乐
         </div>
+        <div class="center center-align hvcenter" id="loading_music_player"><i class="fas fa-spinner fa-pulse"></i> <span>数据加载中 ...</span></div>
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="8711693967"
+                   fixed='false'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='true'
+                   volume='0.7'
+                   list-folded='false'
+        >
+        </meting-js>
     </div>
 </div>
 
-    
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
 
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="碎碎念" data-aos="fade-up">
-                <div class="card">
-                    <a href="/2024/01/09/2023-summary/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/3.webp" class="responsive-img" alt="海星来来的 2023 总结">
-                            
-                            <span class="card-title">海星来来的 2023 总结</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-09
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                海星来来
-                                
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="碎碎念" data-aos="fade-up">
-                <div class="card">
-                    <a href="/2021/02/03/hello/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/6.webp" class="responsive-img" alt="你好呀!">
-                            
-                            <span class="card-title">你好呀!</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-03
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                海星来来
-                                
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="碎碎念" data-aos="fade-up">
-                <div class="card">
-                    <a href="/2021/02/02/hello-world/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/19.webp" class="responsive-img" alt="Hello, world!">
-                            
-                            <span class="card-title">Hello, world!</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-02
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                海星来来
-                                
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="碎碎念" data-aos="fade-up">
-                <div class="card">
-                    <a href="/2021/02/02/my-confession/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/21.webp" class="responsive-img" alt="My confession 我的忏悔">
-                            
-                            <span class="card-title">My confession 我的忏悔</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-02
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                海星来来
-                                
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </article>
+              
+          </div>
+      </div>
+  </div>
+  
 </main>
 
 

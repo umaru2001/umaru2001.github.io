@@ -976,6 +976,8 @@ header .go-back i {
 .video-player {
     margin-top: 10px;
     margin-bottom: 50px;
+    min-height: 300px;
+    position: relative;
 }
 
 .music,
