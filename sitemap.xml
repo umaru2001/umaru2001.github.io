@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://pengdonglai.com/2024/04/27/picture-compress-api/</loc>
+    
+    <lastmod>2024-04-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://pengdonglai.com/manifest.json</loc>
     
     <lastmod>2024-04-21</lastmod>
@@ -310,7 +319,7 @@
 
   <url>
     <loc>https://pengdonglai.com/</loc>
-    <lastmod>2024-04-26</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -318,53 +327,88 @@
   
   <url>
     <loc>https://pengdonglai.com/tags/%E6%B8%B8%E6%88%8F/</loc>
-    <lastmod>2024-04-26</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://pengdonglai.com/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</loc>
-    <lastmod>2024-04-26</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://pengdonglai.com/tags/%E4%BA%8C%E6%AC%A1%E5%85%83%E5%9B%BE%E7%89%87/</loc>
-    <lastmod>2024-04-26</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://pengdonglai.com/tags/Node-js/</loc>
-    <lastmod>2024-04-26</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://pengdonglai.com/tags/English/</loc>
-    <lastmod>2024-04-26</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://pengdonglai.com/tags/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2024-04-26</lastmod>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://pengdonglai.com/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/</loc>
-    <lastmod>2024-04-26</lastmod>
+    <lastmod>2024-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pengdonglai.com/tags/EncryptedTag/</loc>
+    <lastmod>2024-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pengdonglai.com/tags/web/</loc>
+    <lastmod>2024-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pengdonglai.com/tags/%E5%9B%BE%E7%89%87/</loc>
+    <lastmod>2024-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://pengdonglai.com/tags/API/</loc>
+    <lastmod>2024-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
 
+  
+  <url>
+    <loc>https://pengdonglai.com/categories/%E5%BC%80%E7%AE%B1%E5%8D%B3%E7%94%A8/</loc>
+    <lastmod>2024-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
 </urlset>
