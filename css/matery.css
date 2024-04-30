@@ -1115,7 +1115,7 @@ header .go-back i {
 }
 
 .black .recommend .post-card:before {
-    background-color: rgba(63, 63, 70, .7);
+    background-color: rgba(0, 0, 0, .6);
 }
 
 .recommend .post-card {
