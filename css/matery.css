@@ -475,6 +475,10 @@ mark {
     border-radius: 8px 8px 0 0;
     /* 修改文章列表图片填充样式为 cover 以覆盖整个区域而不会被缩放 */
     object-fit: cover;
+    filter: brightness(0.9);
+}
+
+.black .card .card-image img {
     filter: brightness(0.5);
 }
 
@@ -1482,7 +1486,11 @@ article .article-tags .chip {
 
 #artDetail .post-cate {
     float: right;
-    color: #42b983;
+    color: #34495e;
+}
+
+.black #artDetail .post-cate {
+    color: antiquewhite;
 }
 
 #artDetail .post-cate a {
