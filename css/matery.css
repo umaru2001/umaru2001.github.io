@@ -146,11 +146,6 @@ img.responsive-img {
     color: antiquewhite;
 }
 
-#toc-content ol li {
-    padding-bottom: 5px;
-    padding-top: 5px;
-}
-
 /* 移动端样式 */
 @media screen and (max-width: 1129px) {
   iframe.netease-music {
@@ -1501,6 +1496,22 @@ article .article-tags .chip {
     padding-right: 5px;
     color: #42b983;
     font-weight: 500;
+}
+
+.black #artDetail .post-cate a {
+    color: antiquewhite;
+}
+
+.blue #artDetail .post-cate a {
+    color: #4169E1;
+}
+
+.purple #artDetail .post-cate a {
+    color: #624cee;
+}
+
+.orange #artDetail .post-cate a {
+    color: #FF8C00;
 }
 
 #artDetail .post-cate a:hover {
