@@ -568,6 +568,10 @@ header .side-nav {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 7px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
+.black header .side-nav {
+    background-color: #323238;
+}
+
 nav {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 7px 10px 0 rgba(0, 0, 0, 0.12);
 }
@@ -640,10 +644,18 @@ header .side-nav .menu-list a {
     color: #34495e !important;
 }
 
+.black header .side-nav .menu-list a {
+    color: antiquewhite !important;
+}
+
 .mobile-menu-list a i {
     margin-left: 8px !important;
     font-size: 1.16rem;
     color: #34495e !important;
+}
+
+.black .mobile-menu-list a i {
+  color: antiquewhite !important;
 }
 
 header .side-nav .fa-fw {
@@ -1494,24 +1506,12 @@ article .article-tags .chip {
 
 #artDetail .post-cate a {
     padding-right: 5px;
-    color: #42b983;
+    color: #34495e;
     font-weight: 500;
 }
 
 .black #artDetail .post-cate a {
     color: antiquewhite;
-}
-
-.blue #artDetail .post-cate a {
-    color: #4169E1;
-}
-
-.purple #artDetail .post-cate a {
-    color: #624cee;
-}
-
-.orange #artDetail .post-cate a {
-    color: #FF8C00;
 }
 
 #artDetail .post-cate a:hover {
