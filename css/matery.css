@@ -166,11 +166,11 @@ img.responsive-img {
 
 body {
     background:
-    radial-gradient(circle, transparent 20%, #B4EEB4 20%, #B4EEB4 80%, transparent 80%, transparent),
-    radial-gradient(circle, transparent 20%, #B4EEB4 20%, #B4EEB4 80%, transparent 80%, transparent) 50px 50px,
-    linear-gradient(#C1FFC1 8px, transparent 8px) 0 -4px,
-    linear-gradient(90deg, #C1FFC1 8px, transparent 8px) -4px 0;
-    background-color:#B4EEB4;
+    radial-gradient(circle, transparent 20%, #57dd57 20%, #57dd57 80%, transparent 80%, transparent),
+    radial-gradient(circle, transparent 20%, #57dd57 20%, #57dd57 80%, transparent 80%, transparent) 50px 50px,
+    linear-gradient(#87ff87 8px, transparent 8px) 0 -4px,
+    linear-gradient(90deg, #87ff87 8px, transparent 8px) -4px 0;
+    background-color:#57dd57;
     background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;
     margin: 0;
     color: #34495e;
