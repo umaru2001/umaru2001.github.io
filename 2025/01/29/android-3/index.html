@@ -1,0 +1,1119 @@
+<!DOCTYPE HTML><html lang="zh-CN"><head><meta charset="utf-8"><meta name="keywords" content="Android, JVM"><meta name="description" content="这里是海星来来的博客，虽然他是一个程序员，但是这篇博客应该会很少更新技术相关的东西，因为这太无聊了。"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="renderer" content="webkit|ie-stand|ie-comp"><meta name="mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#ffffff"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>安卓（3）-实用篇：UI（1） | 海祇岛的珊瑚森林</title><link rel="manifest" href="/manifest.json"><link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.webp"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/awesome/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/materialize/materialize.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/aos/aos.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/animate/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/lightGallery/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/css/matery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/css/my.css"><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/jquery/jquery.min.js"></script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="海祇岛的珊瑚森林" type="application/atom+xml"></head><body><script>// 每天切换 banner 图.  Switch banner image every day.
+      const _dayOfWeek = new Date().getDay();
+      if (_dayOfWeek === 1 || _dayOfWeek === 6) {
+        document.body.classList.add('purple');
+      } else if (_dayOfWeek >= 2 && _dayOfWeek <= 3) {
+        document.body.classList.add('orange');
+      } else if (_dayOfWeek == 4) {
+        document.body.classList.add('blue');
+      }
+      _setCookie = (name, value, days) => {
+        if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          var expires = "; expires=" + date.toGMTString()
+        } else var expires = "";
+        document.cookie = name + "https://pengdonglaicom=" + value + expires + "; path=/"
+      }
+
+      _getCookie = (name) => {
+        var nameEQ = name + "https://pengdonglaicom=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length)
+        }
+        return null
+      }
+
+      window.DarkReader = {
+        darkmode: _getCookie('targetDarkmode') === '1',
+        changeMode: function () {
+            if (this.darkmode) {
+                document.body.classList.remove('black');
+                const d = new Date().getDay();
+                if (d === 1 || d === 6) {
+                    document.body.classList.add('purple');
+                } else if (d >= 2 && d <= 3) {
+                    document.body.classList.add('orange');
+                } else if (d == 4) {
+                    document.body.classList.add('blue');
+                }
+                this.darkmode = false;
+                _setCookie('targetDarkmode', 0, 7);
+                window.changePostCalendarDarkMode && changePostCalendarDarkMode();
+            } else {
+                document.body.classList.remove('purple', 'orange', 'blue');
+                document.body.classList.add('black');
+                this.darkmode = true;
+                _setCookie('targetDarkmode', 1, 7);
+                window.changePostCalendarDarkMode && changePostCalendarDarkMode();
+            }
+        }
+      }
+      if (_getCookie('targetDarkmode') === '1') {
+          document.body.classList.remove('purple', 'orange', 'blue');
+          document.body.classList.add('black');
+      }</script><header class="navbar-fixed"><nav id="headNav" class="bg-color nav-transparent"><div id="navContainer" class="nav-wrapper container"><div class="brand-logo"><a href="/" class="waves-effect waves-light"><img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.webp" class="logo-img" alt="LOGO"> <span class="logo-span">海祇岛的珊瑚森林</span></a></div><a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a><ul class="right nav-menu"><li class="hide-on-med-and-down nav-item"><a href="/" class="waves-effect waves-light"><i class="fas fa-home" style="zoom:.6"></i> <span>首页</span></a></li><li class="hide-on-med-and-down nav-item"><a href="" class="waves-effect waves-light"><i class="fas fa-folder-plus" style="zoom:.6"></i> <span>文章</span> <i class="fas fa-chevron-down" aria-hidden="true" style="zoom:.6"></i></a><ul class="sub-nav menus_item_child"><li><a href="/tags"><i class="fas fa-tags fa-fw" style="margin-top:-20px;zoom:.6"></i> <span>标签</span></a></li><li><a href="/archives"><i class="fas fa-archive fa-fw" style="margin-top:-20px;zoom:.6"></i> <span>归档</span></a></li><li><a href="/categories"><i class="fas fa-bookmark fa-fw" style="margin-top:-20px;zoom:.6"></i> <span>分类</span></a></li><li><a target="_blank" rel="noopener" href="http://docs.starfishdl.site"><i class="fas fa-file fa-fw" style="margin-top:-20px;zoom:.6"></i> <span>文档站</span></a></li></ul></li><li class="hide-on-med-and-down nav-item"><a href="/about" class="waves-effect waves-light"><i class="fas fa-user-circle" style="zoom:.6"></i> <span>关于</span></a></li><li class="hide-on-med-and-down nav-item"><a href="" class="waves-effect waves-light"><i class="fas fa-list" style="zoom:.6"></i> <span>多媒体</span> <i class="fas fa-chevron-down" aria-hidden="true" style="zoom:.6"></i></a><ul class="sub-nav menus_item_child"><li><a href="/musics"><i class="fas fa-music fa-fw" style="margin-top:-20px;zoom:.6"></i> <span>音乐</span></a></li><li><a target="_blank" rel="noopener" href="http://pengdonglai.com/?show_drawer=true"><i class="fas fa-address-book fa-fw" style="margin-top:-20px;zoom:.6"></i> <span>收藏链接</span></a></li><li><a href="/bangumis"><i class="fas fa-film fa-fw" style="margin-top:-20px;zoom:.6"></i> <span>追番</span></a></li></ul></li><li><a href="#searchModal" class="modal-trigger waves-effect waves-light"><i id="searchIcon" class="fas fa-search" title="搜索" style="zoom:.85"></i></a></li><li><a href="javascript:DarkReader?.changeMode()" class="waves-effect waves-light"><i id="searchIcon" class="fas darkmode-icon" title="暗黑模式开关" style="zoom:.85"></i></a></li></ul><div id="mobile-nav" class="side-nav sidenav"><div class="mobile-head bg-color"><img alt="avatar" src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/avatar.webp" class="logo-img circle responsive-img"><div class="logo-name">海祇岛的珊瑚森林</div><div class="logo-desc">这里是海星来来的博客，虽然他是一个程序员，但是这篇博客应该会很少更新技术相关的东西，因为这太无聊了。</div></div><ul class="menu-list mobile-menu-list"><li class="m-nav-item"><a href="/" class="waves-effect waves-light"><i class="fa-fw fas fa-home"></i> 首页</a></li><li class="m-nav-item"><a href="javascript:;"><i class="fa-fw fas fa-folder-plus"></i> 文章 <span class="m-icon"><i class="fas fa-chevron-right"></i></span></a><ul><li><a href="/tags" style="margin-left:75px"><i class="fa fas fa-tags fa-fw" style="position:absolute;left:50px"></i> <span>标签</span></a></li><li><a href="/archives" style="margin-left:75px"><i class="fa fas fa-archive fa-fw" style="position:absolute;left:50px"></i> <span>归档</span></a></li><li><a href="/categories" style="margin-left:75px"><i class="fa fas fa-bookmark fa-fw" style="position:absolute;left:50px"></i> <span>分类</span></a></li><li><a target="_blank" rel="noopener" href="http://docs.starfishdl.site" style="margin-left:75px"><i class="fa fas fa-file fa-fw" style="position:absolute;left:50px"></i> <span>文档站</span></a></li></ul></li><li class="m-nav-item"><a href="/about" class="waves-effect waves-light"><i class="fa-fw fas fa-user-circle"></i> 关于</a></li><li class="m-nav-item"><a href="javascript:;"><i class="fa-fw fas fa-list"></i> 多媒体 <span class="m-icon"><i class="fas fa-chevron-right"></i></span></a><ul><li><a href="/musics" style="margin-left:75px"><i class="fa fas fa-music fa-fw" style="position:absolute;left:50px"></i> <span>音乐</span></a></li><li><a target="_blank" rel="noopener" href="http://pengdonglai.com/?show_drawer=true" style="margin-left:75px"><i class="fa fas fa-address-book fa-fw" style="position:absolute;left:50px"></i> <span>收藏链接</span></a></li><li><a href="/bangumis" style="margin-left:75px"><i class="fa fas fa-film fa-fw" style="position:absolute;left:50px"></i> <span>追番</span></a></li></ul></li><li><div class="divider"></div></li><li><a href="https://github.com/umaru2001" class="waves-effect waves-light" target="_blank"><i class="fab fa-github-square fa-fw"></i>来看看我呀~</a></li></ul></div></div><style>.nav-transparent .github-corner{display:none!important}.github-corner{position:absolute;z-index:10;top:0;right:0;border:0;transform:scale(1.1)}.github-corner svg{color:#000;fill:#fff;height:64px;width:64px}.github-corner:hover .octo-arm{animation:a .56s ease-in-out}.github-corner .octo-arm{animation:none}@keyframes a{0%,to{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}</style><a href="https://github.com/umaru2001" class="github-corner tooltipped hide-on-med-and-down" target="_blank" data-tooltip="来看看我呀~" data-position="left" data-delay="50"><svg viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a></nav></header><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/cryptojs/crypto-js.min.js"></script><script>(function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();</script><div class="bg-cover pd-header post-cover" style="background-image:url(https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/10.webp);background-position:50% 25%"><div class="container" style="right:0;left:0"><div class="row"><div class="col s12 m12 l12"><div class="brand"><h1 class="description center-align post-title">安卓（3）-实用篇：UI（1）</h1></div></div></div></div></div><main class="post-container content"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/tocbot/tocbot.css"><style>#articleContent h1::before,#articleContent h2::before,#articleContent h3::before,#articleContent h4::before,#articleContent h5::before,#articleContent h6::before{display:block;content:" ";height:100px;margin-top:-100px;visibility:hidden}#articleContent :focus{outline:0}.toc-fixed{position:fixed;top:64px}.toc-widget{width:345px;padding-left:20px}.toc-widget .toc-title{padding:35px 0 15px 17px;font-size:1.5rem;font-weight:700;line-height:1.5rem}.toc-widget ol{padding:0;list-style:none}#toc-content{padding-bottom:30px;overflow:scroll;max-height:75vh}#toc-content::-webkit-scrollbar{background-color:transparent}#toc-content::-webkit-scrollbar-corner{background-color:transparent}#toc-content ol{padding-left:10px}#toc-content ol li{padding-left:10px}#toc-content .toc-link:hover{color:#42b983;font-weight:700;text-decoration:underline;font-size:1.1rem;line-height:30px}.blue #toc-content .toc-link:hover{color:#4169e1}.purple #toc-content .toc-link:hover{color:#6a5acd}.orange #toc-content .toc-link:hover{color:#ff8c00}.black #toc-content .toc-link:hover{color:#faebd7}#toc-content .toc-link::before{background-color:transparent;max-height:25px;position:absolute;right:23.5vw;display:block}#toc-content .toc-list-item.is-active-li{border-left:5px solid #ccc!important;border-color:#42b983!important;visibility:visible;background-color:rgba(238,243,252,.5)}.black #toc-content .toc-list-item.is-active-li{border-color:#faebd7!important;background-color:rgb(68 68 68 / 61%)}.blue #toc-content .toc-list-item.is-active-li{border-color:#4169e1!important}.purple #toc-content .toc-list-item.is-active-li{border-color:#6a5acd!important}.orange #toc-content .toc-list-item.is-active-li{border-color:#ff8c00!important}#toc-content ol.toc-list.is-collapsible{border-left:2px solid #9fabb4;margin:0 0 0 .5em}.black #toc-content ol.toc-list.is-collapsible{border-left:2px solid #898175}#toc-content .is-active-link{color:#0f9d58}.blue #toc-content .is-active-link{color:#4169e1}.purple #toc-content .is-active-link{color:#6a5acd}.orange #toc-content .is-active-link{color:#ff8c00}.black #toc-content .is-active-link{color:#faebd7}#floating-toc-btn{position:fixed;right:15px;bottom:76px;padding-top:15px;margin-bottom:0;z-index:998}#floating-toc-btn .btn-floating{width:48px;height:48px;background:#404040}#floating-toc-btn .btn-floating i{line-height:48px;font-size:1.4rem}</style><div class="row"><div id="main-content" class="col s12 m12 l9"><div id="artDetail"><div class="card"><div class="card-content article-info"><div class="row tag-cate"><div class="col s7"><div class="article-tag"><a href="/tags/Android/"><span class="chip bg-color">Android</span> </a><a href="/tags/Kotlin/"><span class="chip bg-color">Kotlin</span> </a><a href="/tags/Jetpack-Compose/"><span class="chip bg-color">Jetpack Compose</span> </a><a href="/tags/Activity/"><span class="chip bg-color">Activity</span></a></div></div><div class="col s5 right-align"><div class="post-cate"><i class="fas fa-bookmark fa-fw icon-category"></i> <a href="/categories/Android/" class="post-category">Android </a><a href="/categories/Android/UI/" class="post-category">UI</a></div></div></div><div class="post-info"><div class="post-date info-break-policy"><i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2025-01-29</div><div class="info-break-policy"><i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 19.6k</div></div></div><hr class="clearfix"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/prism/prism.css"><div class="card-content article-card-content"><div id="articleContent"><blockquote><p>2024 年我开始逐渐介入客户端的研发，因此我开始学习客户端的知识。<br>从服务端开始，转到前端来其实完全代表着我的编码风格的转变。我喜欢 UI 编程那「所见即所得」的惊艳，也喜欢人机交互相关的内容。<br>做 C 端 App，前端技术实际上更多是一种强行「卷」过来的结果：首先，基础肯定是客户端技术 Android&#x2F;iOS，但是前端的作用越来越清晰。当然，目前的大环境下走入前端甚至客户端开发通常被认为是一种开倒车的举动。但这种东西谁又说得好呢——难道做算法调优几个版本实验指标波动，亦或者做服务端大半夜被机器人打电话就能让人兴奋了吗？<br>人总有无知的时候，在已知信息差的时候我们总有一天要为认知买单。所以就让我们为梦想，做出一次不那么受到束缚的选择吧。<br>这是安卓系列的第一期，它包含以下内容：<br><a href="/2025/01/29/android-1/">安卓（1）-语法基础：Kotlin ＆ Java ＆ TS 对比</a><br><a href="/2025/01/29/android-2/">安卓（2）-语法基础：Kotlin 常用库（1）</a><br><a href="/2025/01/29/android-3/">安卓（3）-实用篇：UI（1）</a><br>我使用了 AI 来辅助我创作了一些重复性的工作，第一期内容会以相关知识的罗列为主，所以最好的阅读方式是阅读后进行查漏补缺。<br>希望大家可以喜欢这些教程！</p></blockquote><p>本文是安卓系列的第三个内容，主要介绍了 UI 范式相关的内容，用于构建用户页面。学习了这些内容后，我们就可以使用 Kotlin 和安卓 UI 范式直接上手开发我们的 App 了。</p><h2 id="UI-范式"><a href="#UI-范式" class="headerlink" title="UI 范式"></a>UI 范式</h2><h3 id="1-1-安卓各-UI-范式简介与区别"><a href="#1-1-安卓各-UI-范式简介与区别" class="headerlink" title="1.1 安卓各 UI 范式简介与区别"></a>1.1 安卓各 UI 范式简介与区别</h3><p>XML 主要是一种用于描述布局的标记语言，是传统 Android UI 开发中用于辅助<code>View</code>体系构建布局的工具。<code>View</code>是 Android UI 的核心基础组件体系，是构建传统 Android UI 的基本单元。而 Jetpack Compose 是一种独立的 UI 构建方案，它可以在一定程度上替代传统的<code>View</code>体系和 XML 布局方式。</p><p>XML 和<code>View</code>体系一起构成了传统的 Android UI 方案，用于构建从简单到复杂的各种 UI 界面。Jetpack Compose 则是一种新的、现代化的 UI 方案，提供了不同的 UI 构建逻辑和体验，用于满足日益复杂的 Android UI 开发需求，特别是在处理动态 UI 和状态管理方面有出色的表现。</p><h3 id="1-2-XML-View-传统范式"><a href="#1-2-XML-View-传统范式" class="headerlink" title="1.2 XML + View: 传统范式"></a>1.2 XML + View: 传统范式</h3><p>我们来创建一个简单的 Android 界面，界面中有一个垂直方向的线性布局（<code>LinearLayout</code>，属于<code>ViewGroup</code>），在线性布局中包含一个按钮（<code>Button</code>，属于<code>View</code>）和一个列表视图（<code>ListView</code>，属于<code>View</code>，且依赖于<code>Adapter</code>来提供数据展示，这里简化处理）。点击按钮可以在列表中添加一条默认的文本数据。</p><ol><li>创建 XML 布局文件（activity_main.xml）</li></ol><p>在<code>layout</code>目录下创建<code>activity_main.xml</code>文件：</p><pre class="line-numbers language-XML" data-language="XML"><code class="language-XML">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android&#x3D;&quot;http:&#x2F;&#x2F;schemas.android.com&#x2F;apk&#x2F;res&#x2F;android&quot;
+    android:layout_width&#x3D;&quot;match_parent&quot;
+    android:layout_height&#x3D;&quot;match_parent&quot;
+    android:orientation&#x3D;&quot;vertical&quot;&gt;
+
+    &lt;Button
+        android:id&#x3D;&quot;@+id&#x2F;add_item_button&quot;
+        android:layout_width&#x3D;&quot;wrap_content&quot;
+        android:layout_height&#x3D;&quot;wrap_content&quot;
+        android:text&#x3D;&quot;添加列表项&quot; &#x2F;&gt;
+
+    &lt;ListView
+        android:id&#x3D;&quot;@+id&#x2F;list_view&quot;
+        android:layout_width&#x3D;&quot;match_parent&quot;
+        android:layout_height&#x3D;&quot;wrap_content&quot; &#x2F;&gt;
+
+&lt;&#x2F;LinearLayout&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>我们具体做了什么：</p><ul><li>整体定义了一个垂直方向（通过<code>android:orientation=&quot;vertical&quot;</code>指定）的线性布局（<code>LinearLayout</code>），它是一个<code>ViewGroup</code>，作为整个界面的根布局容器，用于管理其内部子视图的布局排列方式。</li><li>在线性布局内部，定义了一个按钮（<code>Button</code>）和一个列表视图（<code>ListView</code>），它们都是<code>View</code>的具体子类。按钮用于触发添加列表项的操作，列表视图用于展示数据列表。通过<code>android:id</code>属性为它们分别指定了唯一的标识符，方便在代码中通过<code>findViewById</code>方法找到对应的视图对象。</li></ul><ol><li>创建 Activity 类</li></ol><p><code>MainActivity.java</code></p><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity &#123;
+
+    private ListView listView;
+    private Button addItemButton;
+    private List&lt;String&gt; dataList &#x3D; new ArrayList&lt;&gt;();
+    private ArrayAdapter&lt;String&gt; adapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) &#123;
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        &#x2F;&#x2F; 通过findViewById方法找到XML中定义的视图对象
+        listView &#x3D; findViewById(R.id.list_view);
+        addItemButton &#x3D; findViewById(R.id.add_item_button);
+
+        adapter &#x3D; new ArrayAdapter&lt;&gt;(this, android.R.layout.simple_list_item_1, dataList);
+        listView.setAdapter(adapter);
+
+        addItemButton.setOnClickListener(new View.OnClickListener() &#123;
+            @Override
+            public void onClick(View v) &#123;
+                &#x2F;&#x2F; 点击按钮时添加一条默认文本数据到列表
+                dataList.add(&quot;新的列表项&quot;);
+                adapter.notifyDataSetChanged();
+            &#125;
+        &#125;);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个<code>Activity</code>类中：</p><ul><li>首先通过<code>setContentView(R.layout.activity_main)</code>方法加载了之前创建的<code>XML</code>布局文件，这一步使得<code>XML</code>中定义的布局结构和视图组件能够在<code>Activity</code>中生效。</li><li>然后使用<code>findViewById</code>方法根据<code>XML</code>中定义的<code>id</code>来获取对应的<code>View</code>对象，也就是获取到了按钮（<code>addItemButton</code>）和列表视图（<code>listView</code>）。这里体现了<code>XML</code>和<code>View</code>的关联，<code>XML</code>只是用于描述布局和视图的定义，而要在代码中操作这些视图，就需要通过<code>findViewById</code>来获取具体的视图实例，它们是一一对应的关系。</li><li>接着创建了一个数据列表（<code>dataList</code>）和一个<code>ArrayAdapter</code>，用于将数据适配并展示在<code>ListView</code>中。</li><li>最后为按钮设置了点击监听器，当按钮被点击时，向数据列表中添加一条新的数据，并通过<code>adapter.notifyDataSetChanged()</code>通知适配器数据发生了变化，从而使得<code>ListView</code>更新显示内容。</li></ul><p>我们可以对这种开发范式进行一个总结：</p><h3 id="1-3-Compose-新范式"><a href="#1-3-Compose-新范式" class="headerlink" title="1.3 Compose: 新范式"></a>1.3 Compose: 新范式</h3><h4 id="1-3-1-传统范式的缺陷"><a href="#1-3-1-传统范式的缺陷" class="headerlink" title="1.3.1 传统范式的缺陷"></a>1.3.1 传统范式的缺陷</h4><p>我想前端同学看到传统范式，就会联想到 html + JS 的开发范式吧~</p><p>正如大家所想，html + JS 的缺点，XML + Model 层同样存在。例如在我们刚刚的例子中：</p><ol><li>代码分离导致的理解成本增加<ul><li>在基于 XML 的传统开发方式中，布局定义（XML 文件）和逻辑代码（Java 或 Kotlin 代码）是分离的。例如，在<code>activity_main.xml</code>文件中定义了按钮和列表视图的布局结构，但它们的实际行为（如按钮的点击事件处理和列表视图的数据更新）是在<code>MainActivity</code>类中实现的。</li><li>这使得开发者需要在两个不同的地方切换思维来理解整个 UI 的构建和功能实现。对于复杂的界面，可能会有多个 XML 布局文件和大量的代码来处理视图操作，这增加了代码的整体理解成本，尤其是对于新接触项目的开发者来说，可能需要花费更多的时间来梳理布局和逻辑之间的关系。</li></ul></li><li>缺乏动态性和灵活性<ul><li>XML 布局相对来说是静态的。虽然可以通过代码来修改视图的属性，但对于动态变化较多的 UI 场景，操作起来比较繁琐。</li><li>比如在这个案例中，当需要在列表视图中添加新的项时，需要通过操作数据适配器（<code>ArrayAdapter</code>）并调用<code>notifyDataSetChanged</code>方法来更新视图。如果要根据不同的条件动态地改变布局结构，如根据数据量的多少显示或隐藏某些视图，或者改变视图的排列方式，就需要在代码中进行复杂的判断和操作，并且可能需要频繁地修改 XML 布局和对应的逻辑代码。</li></ul></li><li>编译时错误检查的局限性<ul><li>XML 布局在编译时只能检查基本的语法错误和一些属性的合法性。对于布局结构是否在运行时能够正确地与逻辑代码配合，很难在编译阶段发现问题。</li><li>例如，在 XML 中可能正确地定义了一个视图的<code>id</code>，但在代码中可能会因为拼写错误或者忘记调用<code>findViewById</code>方法而导致无法正确获取和操作视图。这种运行时才可能发现的错误增加了调试的难度和时间成本。</li></ul></li><li>布局嵌套导致的性能和维护问题<ul><li>当使用 XML 构建复杂的 UI 时，不可避免地会使用到大量的布局嵌套。例如，为了实现特定的布局效果，可能会在一个<code>LinearLayout</code>中嵌套多个<code>RelativeLayout</code>，再在这些布局中包含各种视图。</li><li>过多的布局嵌套会影响性能，因为每个布局在绘制时都有一定的开销。而且，从维护的角度来看，复杂的布局嵌套会使代码变得臃肿，当需要修改布局时，可能会牵一发而动全身，影响到其他相关的布局和逻辑部分。</li></ul></li></ol><p>除了 4，可以说 1-3 都是前端在写三件套的时候，非常感同身受的缺陷了。同样的，安卓也为我们准备了类似于前端框架（统一维护 + 组件化 + 数据驱动）的方案，这就是 Jetpack Compose：</p><p>Google 官方给出了 Compose 相比于 View 的优越性：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6981354014453547039">Jetpack Compose 使用前后对比为了包含 Jetpack Compose 1.0.0-beta05 的更新内 - 掘金</a></p><blockquote><p><strong>在使用了 Compose 后，我们发现 APK 大小缩减了 41%，方法数减少了 17%</strong><br>XML 行数大幅减少了 **76%**。再见了，布局文件，以及 styles、theme 等其他的 XML 文件。<br>考虑到 Kotlin 编译器与 Compose 编译器插件为我们所做的事情，如位置记忆化、细粒度重组等工作，构建时间能够 <strong>减少 29%。可查看：</strong><a href="https://link.juejin.cn/?target=https://zhuanlan.zhihu.com/p/267250784">link.juejin.cn</a></p></blockquote><p>Compose 同时也具备跨平台的功能，并且在多端中保持了较好的 UI 一致性。</p><h4 id="1-3-2-Compose-重写功能"><a href="#1-3-2-Compose-重写功能" class="headerlink" title="1.3.2 Compose 重写功能"></a>1.3.2 Compose 重写功能</h4><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+
+
+class MainActivity : ComponentActivity() &#123;
+    override fun onCreate(savedInstanceState: Bundle?) &#123;
+        super.onCreate(savedInstanceState)
+        setContent &#123;
+            &#x2F;&#x2F; 使用Surface作为最外层容器，应用主题
+            Surface(modifier &#x3D; Modifier.fillMaxSize(), color &#x3D; MaterialTheme.colorScheme.background) &#123;
+                MyApp()
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+@Composable
+fun MyApp() &#123;
+    &#x2F;&#x2F; 记住一个可变的字符串列表，用于存储列表项数据
+    var dataList by remember &#123; mutableStateListOf&lt;String&gt;() &#125;
+    Column &#123;
+        Button(onClick &#x3D; &#123;
+            &#x2F;&#x2F; 点击按钮时添加一条默认文本数据到列表
+            dataList.add(&quot;新的列表项&quot;)
+        &#125;) &#123;
+            Text(&quot;添加列表项&quot;)
+        &#125;
+        &#x2F;&#x2F; 遍历dataList并显示每个列表项
+        dataList.forEach &#123; item -&gt;
+            Text(text &#x3D; item)
+        &#125;
+    &#125;
+&#125;
+
+@Preview(showBackground &#x3D; true)
+@Composable
+fun DefaultPreview() &#123;
+    MyApp()
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>不难看出，新方案具备如下优势：</p><ul><li>代码简洁性和可读性<ul><li>在传统的<code>View</code>、<code>ViewGroup</code>和<code>XML</code>结合的方式中，需要维护<code>XML</code>布局文件和对应的<code>Activity</code>或<code>Fragment</code>中的代码。<code>XML</code>文件用于定义布局结构，而在代码中需要通过<code>findViewById</code>等方式获取视图并设置其行为。这使得代码逻辑分散在不同的地方，增加了代码的复杂度。</li><li>而在 Compose 中，所有的 UI 相关代码都集中在可组合函数（如<code>MyApp</code>函数）中。通过组合各种<code>Composable</code>函数（如<code>Column</code>、<code>Button</code>、<code>Text</code>）来构建 UI，并且可以直接在函数内部处理交互逻辑（如按钮的点击事件）。这种声明式的方式使得代码更加简洁和易于理解，开发者可以更直观地看到 UI 的结构和行为是如何定义的。</li></ul></li><li>状态管理的便利性<ul><li>在传统方式中，当需要更新<code>ListView</code>中的数据时，需要操作<code>Adapter</code>并调用<code>notifyDataSetChanged</code>来通知视图更新。这涉及到多个对象之间的交互，并且容易出错。</li><li>Compose 通过<code>mutableStateListOf</code>和<code>remember</code>等机制使得状态管理更加方便。<code>var dataList by remember &#123; mutableStateListOf&lt;String&gt;() &#125;</code>这行代码创建了一个可被记住的可变状态列表。当列表数据发生变化（如按钮点击添加新项）时，Compose 会自动重新执行依赖于这个状态的 UI 部分（如遍历列表显示每个列表项的<code>Text</code>函数），从而更新 UI。<strong>这种自动更新机制减少了手动管理视图更新的工作量</strong>，降低了出错的概率。</li></ul></li><li>灵活性和动态 UI 构建<ul><li>传统的<code>XML</code>布局在构建复杂的动态 UI 时可能会变得很繁琐。例如，如果要根据不同的条件动态地添加或隐藏视图，需要在代码中通过<code>View</code>的<code>visibility</code>属性进行控制，并且可能需要修改<code>XML</code>布局结构来适应新的需求。</li><li>Compose 允许更灵活地构建动态 UI。由于所有的 UI 都是通过函数构建的，可以根据任何运行时条件动态地组合<code>Composable</code>函数。例如，可以根据用户权限或数据状态，轻松地在<code>Column</code>布局中添加或删除组件，或者改变组件的显示顺序，而不需要像传统方式那样考虑复杂的视图层次结构的修改。</li></ul></li></ul><h3 id="1-4-Compose-自定义组件"><a href="#1-4-Compose-自定义组件" class="headerlink" title="1.4 Compose 自定义组件"></a>1.4 Compose 自定义组件</h3><p>我们首先用一个常见的例子，对 Compose 自定义组件有一个粗浅的了解：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+
+
+class MainActivity : ComponentActivity() &#123;
+    override fun onCreate(savedInstanceState: Bundle?) &#123;
+        super.onCreate(savedInstanceState)
+        setContent &#123;
+            &#x2F;&#x2F; 使用Surface作为最外层容器，应用主题
+            Surface(modifier &#x3D; Modifier.fillMaxSize(), color &#x3D; MaterialTheme.colorScheme.background) &#123;
+                MyApp()
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+@Composable
+fun MyApp() &#123;
+    &#x2F;&#x2F; 状态管理部分
+    var dataList by remember &#123; mutableStateListOf&lt;String&gt;() &#125;  &#x2F;&#x2F; 第32行，声明可变状态列表，用于存储列表项数据，属于状态管理部分
+
+    Column &#123;
+        &#x2F;&#x2F; 事件处理部分
+        Button(onClick &#x3D; &#123;
+            &#x2F;&#x2F; 点击按钮时添加一条默认文本数据到列表，第36行，定义按钮点击事件的处理逻辑，属于事件处理部分
+            dataList.add(&quot;新的列表项&quot;)
+        &#125;) &#123;
+            Text(&quot;添加列表项&quot;)
+        &#125;
+        &#x2F;&#x2F; 遍历dataList并显示每个列表项，这部分涉及到状态管理与UI展示的结合，当dataList状态变化时，UI自动更新
+        dataList.forEach &#123; item -&gt;
+            Text(text &#x3D; item)
+        &#125;
+    &#125;
+&#125;
+
+@Preview(showBackground &#x3D; true)
+@Composable
+fun DefaultPreview() &#123;
+    MyApp()
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="1-4-1-状态管理"><a href="#1-4-1-状态管理" class="headerlink" title="1.4.1 状态管理"></a>1.4.1 状态管理</h4><h5 id="mutableState"><a href="#mutableState" class="headerlink" title="mutableState"></a>mutableState</h5><p>在<code>MyApp</code>这个可组合函数中：</p><ul><li><code>var dataList by remember &#123; mutableStateListOf&lt;String&gt;() &#125;</code>（第 32 行）：这一行声明了一个可变的状态列表<code>dataList</code>，它使用<code>remember</code>来确保在重组过程中能够记住这个状态，并且通过<code>mutableStateListOf</code>创建了一个可以被修改的列表类型的状态。每当这个列表的内容发生变化（比如通过按钮点击添加新元素），Compose 会自动重新执行依赖于这个状态的 UI 部分，也就是下面遍历列表展示每个列表项的<code>Text</code>部分，以此来更新界面显示。这属于状态管理部分，用于管理组件内部数据状态的变化以及和 UI 更新的关联。</li></ul><p>变量通过<code>mutableStateListOf</code>或者<code>mutableStateOf</code>包装后，当值发生变化（按钮点击导致列表更新），Compose 会自动重新执行依赖于这个状态的可组合函数（包含<code>Text</code>显示计数的部分），从而更新 UI。</p><p>除了基本对象使用<code>mutableStateOf</code>，列表对象使用 <code>mutableStateListOf</code> 以外，它们也可以用于包装一个对象。假设我们有一个自定义的数据类<code>User</code>：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">data class User(val name: String, val age: Int)
+@Composable
+fun UserDisplay() &#123;
+    var user by remember &#123; mutableStateOf(User(&quot;John&quot;, 30)) &#125;
+    Button(onClick &#x3D; &#123; user &#x3D; user.copy(age &#x3D; user.age + 1) &#125;) &#123;
+        Text(&quot;User&#39;s age: $&#123;user.age&#125;&quot;)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>当按钮点击修改<code>user</code>对象的<code>age</code>属性（通过创建一个新的<code>User</code>对象副本实现），由于<code>user</code>是一个可变状态，UI 会自动更新显示新的年龄。</p><p>当然，<code>user</code> 已经不是原来的那个 <code>user</code> 了。所以类似于 React 的对象 State，必须要地址变更才会触发 UI 变更。</p><p>这其中有一个细节：<code>remember</code>函数。可以类比于前端的 <code>useMemo</code>。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun ComplexLayout() &#123;
+    val screenDensity &#x3D; LocalDensity.current
+    val layoutSize by remember(screenDensity) &#123;
+        &#x2F;&#x2F; 复杂的计算尺寸的逻辑，这里简化为返回一个固定值
+        mutableStateOf(100.dp.toPx())
+    &#125;
+    Box(
+        modifier &#x3D; Modifier
+           .size(layoutSize)
+           .background(Color.Gray)
+    )
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这里，<code>layoutSize</code>的计算结果通过<code>remember</code>进行缓存。只要<code>screenDensity</code>不变，这个计算结果就不会被重新计算，提高了性能。</p><h5 id="LaunchedEffect"><a href="#LaunchedEffect" class="headerlink" title="LaunchedEffect"></a>LaunchedEffect</h5><p>当需要从外部获取数据（如网络请求、数据库查询等）来更新 UI 时，可以使用<code>LaunchedEffect</code>。例如：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun DataFetchScreen() &#123;
+    val viewModel &#x3D; viewModel&lt;MyViewModel&gt;()
+    val data by viewModel.data.collectAsState()
+    LaunchedEffect(Unit) &#123;
+        viewModel.fetchData()
+    &#125;
+    &#x2F;&#x2F; 根据获取到的数据展示UI
+    data.forEach &#123; item -&gt;
+        Text(item)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><code>LaunchedEffect</code>在可组合函数首次组合或者其依赖的键发生变化时，触发<code>viewModel.fetchData()</code>来获取数据，当数据获取成功并更新<code>viewModel</code>中的数据状态后，由于<code>collectAsState</code>会收集这个状态变化，依赖这个状态的 UI 部分（显示数据的<code>Text</code>组件）会自动更新。</p><h5 id="MVVM-范式"><a href="#MVVM-范式" class="headerlink" title="MVVM 范式"></a>MVVM 范式</h5><p>接上个例子，我们如果想把 UI 和 Model 分离，我们可以通过观察 ViewModel 中的状态并传递给可组合函数。</p><p>在 Activity 中，通常会使用 ViewModel 来管理数据状态。例如，定义一个包含数据状态的 ViewModel：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class MyViewModel : ViewModel() &#123;
+    val data &#x3D; MutableLiveData&lt;List&lt;String&gt;&gt;()
+    fun fetchData() &#123;
+        &#x2F;&#x2F; 模拟获取数据并更新状态
+        val newData &#x3D; listOf(&quot;Data 1&quot;, &quot;Data 2&quot;)
+        data.value &#x3D; newData
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>然后在 Activity 的<code>setContent</code>方法中，将 ViewModel 中的状态传递给可组合函数：</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class MainActivity : ComponentActivity() &#123;
+    override fun onCreate(savedInstanceState: Bundle?) &#123;
+        super.onCreate(savedInstanceState)
+        val viewModel &#x3D; viewModel&lt;MyViewModel&gt;()
+        setContent &#123;
+            val data by viewModel.data.observeAsState(listOf())
+            MyComposable(data)
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>当 ViewModel 中的<code>data</code>状态发生变化时，传递给可组合函数<code>MyComposable</code>的数据也会改变，进而触发可组合函数内部的重组（如果数据被用于 UI 显示并正确处理了状态变化），从而更新 Activity 中的 UI。</li></ul><h4 id="1-4-2-参数传递"><a href="#1-4-2-参数传递" class="headerlink" title="1.4.2 参数传递"></a>1.4.2 参数传递</h4><p>我们在状态管理中，已经提及了将 ViewModel 中的状态传递给可组合函数。那么参数传递也能控制 UI 暂时吗？</p><p>参数不一定能直接控制 UI 变更：虽然参数在很多情况下会影响 UI，但并非所有参数的改变都必然导致 UI 变更。这取决于 Compose 的优化机制和函数内部的实现逻辑。例如，如果一个参数只是在函数内部用于一些计算，但不直接影响到最终绘制的 UI 元素，那么它的变化可能不会触发 UI 更改。</p><p>在我们的简单示例中，并没有明显体现外部参数传递，不过可以设想一下扩展情况。比如，如果想让按钮的文本内容可以由外部传入来定制，那么可以这样修改代码：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun MyApp(customButtonText: String &#x3D; &quot;添加列表项&quot;) &#123;  &#x2F;&#x2F; 新增参数，并有默认值，外部可传入自定义文本，此处属于参数传递部分，用于接收外部传入参数并设置默认值
+    var dataList by remember &#123; mutableStateListOf&lt;String&gt;() &#125;
+    Column &#123;
+        Button(onClick &#x3D; &#123;
+            dataList.add(&quot;新的列表项&quot;)
+        &#125;) &#123;
+            Text(customButtonText)  &#x2F;&#x2F; 使用传入的参数作为按钮文本
+        &#125;
+        dataList.forEach &#123; item -&gt;
+            Text(text &#x3D; item)
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在上述修改后的代码中，<code>MyApp</code>函数新增了<code>customButtonText</code>参数，外部调用<code>MyApp</code>函数时可以传入一个字符串来指定按钮上显示的文本，如果不传则使用默认值<code>&quot;添加列表项&quot;</code>，这展示了参数传递部分，通过接收外部参数来定制组件的部分表现形式。</p><p>当参数是基本数据类型（如 <code>Int</code>、<code>Boolean</code>、<code>String</code> 等）且在可组合函数内部被用于确定 UI 的显示内容或布局等关键方面时，参数的变化一般会导致 UI 随之变更。例如，我们刚刚的例子，String 的对象直接触发了更新。</p><p>然而，如果参数在函数内部没有被正确地关联到 UI 元素的更新逻辑上，即使参数变化了，UI 也可能不会更新。</p><p>对象参数的情况较为复杂：如果参数是一个对象，仅仅是对象内部某些属性的改变，并不一定会导致 UI 变更。Compose 主要是通过对可组合函数的输入进行比较来判断是否需要重组 UI。对于对象参数，默认情况下是基于对象的引用（地址）进行比较的。<strong>只有当对象的引用发生变化时，Compose 才会认为输入发生了实质性改变，从而可能触发 UI 重组。</strong></p><p>但如果在可组合函数内部手动实现了对对象属性变化的监测和相应的 UI 更新逻辑，那么即使对象地址不变，只要其关键属性发生改变，也可以实现 UI 的更新。例如，使用 <code>mutableStateOf</code> 包装对象或其属性，并在可组合函数中正确处理状态变化，就可以在对象内部属性改变时更新 UI。我们刚刚的 MVVM 例子，就属于此类。所以，在 Compose 中，Model 和 UI 可以充分解耦，<del>比 React 确实更先进。</del></p><h4 id="1-4-3-事件处理"><a href="#1-4-3-事件处理" class="headerlink" title="1.4.3 事件处理"></a>1.4.3 事件处理</h4><p>在按钮的定义部分：<br><code>Button(onClick = &#123; dataList.add(&quot;新的列表项&quot;) &#125;) &#123; Text(&quot;添加列表项&quot;) &#125;</code>（第 36 行左右）：这里定义了按钮组件的点击事件处理逻辑。当按钮被点击时，会执行<code>onClick</code>参数所对应的代码块，也就是向<code>dataList</code>中添加一个新的字符串元素。这个操作改变了前面提到的状态列表，进而触发 UI 的更新。这就是典型的用户交互事件处理，属于事件处理部分，用于定义组件如何响应各种用户操作行为。</p><p>以下是常用的事件处理表格：</p><table><thead><tr><th>事件名称</th><th>描述</th><th>示例代码</th></tr></thead><tbody><tr><td><code>onClick</code></td><td>用于处理点击事件，当用户点击组件时触发相应逻辑</td><td></td></tr></tbody></table><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">import androidx.compose.foundation.layout.Box
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.*
+@Composable
+fun ButtonExample() &#123;
+    var clickCount: Int by remember &#123; mutableStateOf(0) &#125;
+    Box &#123;
+        Button(
+            onClick &#x3D; &#123;
+                &#x2F;&#x2F; 这里是点击按钮后的代码块
+                clickCount++
+            &#125;
+        ) &#123;
+            &#x2F;&#x2F; 这里是按钮显示文本的代码块
+            Text(&quot;点击了 $clickCount 次&quot;)
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|<code>onLongClick</code> |处理长按事件，用户长按组件时执行特定操作 |</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun LongClickExample() &#123;
+    var longClickMessage by remember &#123; mutableStateOf(&quot;未长按&quot;) &#125;
+    Box(
+        modifier &#x3D; Modifier
+         .size(100.dp)
+         .background(Color.Gray)
+         .onLongClick &#123; longClickMessage &#x3D; &quot;长按了组件&quot; &#125;
+    ) &#123;
+        Text(longClickMessage)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|<code>onScroll</code> |当组件可滚动且发生滚动操作时触发，可获取滚动状态信息 |</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun ScrollExample() &#123;
+    val scrollState &#x3D; rememberScrollState()
+    Column(modifier &#x3D; Modifier
+     .fillMaxSize()
+     .verticalScroll(scrollState)) &#123;
+        repeat(20) &#123;
+            Text(&quot;第 $it 项&quot;)
+        &#125;
+        Text(&quot;当前滚动偏移量: $&#123;scrollState.value&#125;&quot;)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|<code>onDrag</code> |处理拖动事件，用于实现可拖动组件的交互逻辑 |</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun DragExample() &#123;
+    var dragPosition by remember &#123; mutableStateOf(Offset.Zero) &#125;
+    Box(
+        modifier &#x3D; Modifier
+          .size(50.dp)
+          .offset &#123; dragPosition &#125;
+          .background(Color.Blue)
+          .draggable(
+                orientation &#x3D; Orientation.Horizontal,
+                onDrag &#x3D; &#123; change -&gt;
+                    dragPosition +&#x3D; change
+                &#125;
+            )
+    ) &#123;
+        &#x2F;&#x2F; 这里可以添加Box的内容，如果不需要可以保留空块
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|</p><h4 id="1-4-4-组合和复用"><a href="#1-4-4-组合和复用" class="headerlink" title="1.4.4 组合和复用"></a>1.4.4 组合和复用</h4><p>在<code>MyApp</code>函数中：<br><code>Column &#123;... &#125;</code>（从第 35 行开始到结尾部分）：这里使用<code>Column</code>布局组件来组合内部的按钮和列表项显示部分。<code>Column</code>会将其内部的子组件按照垂直方向依次排列，通过这种方式将按钮和列表展示逻辑组合在一起，形成了一个相对完整的自定义组件功能。并且这个<code>MyApp</code>函数本身就可以在多个地方被复用，比如在不同的<code>Activity</code>的<code>setContent</code>方法中调用，或者在其他更复杂的可组合函数中作为一个子组件被嵌入使用，体现了组件的复用性。通过合理地组合内部组件以及设计良好的函数接口，使得整个组件可以方便地在不同场景下被重复利用，这就是组合和复用部分的体现。</p><h4 id="1-4-5-渲染控制"><a href="#1-4-5-渲染控制" class="headerlink" title="1.4.5 渲染控制"></a>1.4.5 渲染控制</h4><h5 id="条件：if"><a href="#条件：if" class="headerlink" title="条件：if"></a>条件：if</h5><p>在 Jetpack Compose 中，<code>if</code>语句可以根据条件来决定是否渲染某个组件或者组件的一部分。</p><p>基于之前的例子，假设我们想要根据列表<code>dataList</code>是否为空来显示不同的提示信息。修改后的<code>MyApp</code>函数如下：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun MyApp() &#123;
+    var dataList by remember &#123; mutableStateListOf&lt;String&gt;() &#125;
+    Column &#123;
+        Button(onClick &#x3D; &#123;
+            dataList.add(&quot;新的列表项&quot;)
+        &#125;) &#123;
+            Text(&quot;添加列表项&quot;)
+        &#125;
+        if (dataList.isEmpty()) &#123;
+            Text(&quot;列表为空&quot;)
+        &#125; else &#123;
+            dataList.forEach &#123; item -&gt;
+                Text(text &#x3D; item)
+            &#125;
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>当<code>dataList</code>为空时（<code>dataList.isEmpty()</code>为<code>true</code>），只会渲染一个显示 “列表为空” 的<code>Text</code>组件。</li><li>当<code>dataList</code>不为空时，就会遍历<code>dataList</code>并渲染每个列表项对应的<code>Text</code>组件。这种<code>if</code>语句的使用方式使得 UI 的渲染可以根据数据状态的不同而灵活变化，提供了一种简单有效的条件渲染控制。</li></ul><h5 id="遍历：forEach"><a href="#遍历：forEach" class="headerlink" title="遍历：forEach"></a>遍历：forEach</h5><p>在之前的例子中，<code>forEach</code>已经用于遍历<code>dataList</code>来渲染列表项。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">dataList.forEach &#123; item -&gt;
+    Text(text &#x3D; item)
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ul><li>在这里，<code>forEach</code>会对<code>dataList</code>中的每个元素执行一次代码块。对于每个元素，都会创建一个<code>Text</code>组件来显示该元素的内容。这种方式在处理列表、数组等集合类型的数据时非常有用，可以方便地根据集合中的元素数量和内容来动态渲染 UI 组件。</li><li>当<code>dataList</code>的内容发生变化（例如，通过按钮点击添加了新的元素），Compose 会检测到<code>dataList</code>这个状态的变化，并且重新执行依赖于这个状态的<code>forEach</code>部分，从而更新 UI，显示新的列表项。这展示了<code>forEach</code>在与状态管理结合时，如何有效地控制组件的渲染，以适应数据的动态变化。</li></ul><h4 id="1-4-6-布局组件"><a href="#1-4-6-布局组件" class="headerlink" title="1.4.6 布局组件"></a>1.4.6 布局组件</h4><table><thead><tr><th>布局组件</th><th>功能描述</th><th>示例场景</th><th>示例代码（关键部分）</th></tr></thead><tbody><tr><td>Column</td><td>子组件按垂直方向排列</td><td>用户信息展示（用户名、头像、简介垂直堆叠）</td><td></td></tr></tbody></table><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun MyColumn() &#123;
+    Column &#123;
+        Text(text &#x3D; &quot;第一行文本&quot;)
+        Text(text &#x3D; &quot;第二行文本&quot;)
+        Text(text &#x3D; &quot;第三行文本&quot;)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|Row |子组件按水平方向排列 |工具条中多个按钮排列（如搜索、设置按钮） |</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">Row &#123;
+    Button(onClick &#x3D; &#123; &#x2F;* 点击事件处理 *&#x2F; &#125;) &#123;
+        Text(&quot;按钮1&quot;)
+    &#125;
+    Button(onClick &#x3D; &#123; &#x2F;* 点击事件处理 *&#x2F; &#125;) &#123;
+        Text(&quot;按钮2&quot;)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|Box |子组件堆叠，通过<code>Modifier</code>控制位置和对齐 |加载动画覆盖在内容之上 |</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">Box(
+    modifier &#x3D; Modifier.fillMaxSize()
+) &#123;
+    Text(
+        text &#x3D; &quot;这是内容文本&quot;,
+        modifier &#x3D; Modifier.align(Alignment.Center)
+    )
+    CircularProgressIndicator(
+        modifier &#x3D; Modifier.align(Alignment.TopEnd)
+    )
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|ConstraintLayout（Compose版） |通过定义子组件间约束关系确定位置，用于复杂布局 |制作有重叠元素和复杂对齐要求的表单 |</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">ConstraintLayout(
+    modifier &#x3D; Modifier.fillMaxSize()
+) &#123;
+    val (button, text) &#x3D; createRefs()
+    Button(
+        onClick &#x3D; &#123; &#x2F;* 点击事件处理 *&#x2F; &#125;,
+        modifier &#x3D; Modifier.constrainAs(button) &#123;
+            top.linkTo(parent.top)
+            start.linkTo(parent.start)
+        &#125;
+    ) &#123;
+        Text(&quot;按钮&quot;)
+    &#125;
+    Text(
+        &quot;文本内容&quot;,
+        modifier &#x3D; Modifier.constrainAs(text) &#123;
+            top.linkTo(button.bottom)
+            start.linkTo(parent.start)
+        &#125;
+    )
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|LazyColumn&#x2F;LazyRow |懒加载，仅加载屏幕可见子组件，用于长列表或长布局 |新闻列表应用（滚动加载新闻项） |</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">LazyColumn &#123;
+    val dataList &#x3D; listOf(&quot;数据1&quot;, &quot;数据2&quot;, &quot;数据3&quot;, &quot;数据4&quot;, &quot;数据5&quot;)
+    items(dataList.size) &#123; index -&gt;
+        Text(dataList[index])
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|</p><h3 id="1-5-深入学习-Compose"><a href="#1-5-深入学习-Compose" class="headerlink" title="1.5 深入学习 Compose"></a>1.5 深入学习 Compose</h3><h4 id="1-5-1-常见概念解释"><a href="#1-5-1-常见概念解释" class="headerlink" title="1.5.1 常见概念解释"></a>1.5.1 常见概念解释</h4><h5 id="可组合函数（Composable-Functions）"><a href="#可组合函数（Composable-Functions）" class="headerlink" title="可组合函数（Composable Functions）"></a>可组合函数（Composable Functions）</h5><ul><li>定义与用途：这是 Compose 的核心概念。可组合函数是用 Kotlin 编写的函数，通过<mark style="background-color:#bbbfc4"><code>@Composable</code></mark>注解标记。它们用于描述 UI 的一部分，就像构建 UI 的积木块。例如，一个简单的显示文本的可组合函数如下：</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun MyText() &#123;
+    Text(&quot;Hello, Compose!&quot;)
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><ul><li>组合方式：可组合函数可以互相组合来构建复杂的 UI。比如，在一个垂直布局的 UI 中，可以将多个不同的可组合函数组合在一起，像这样：</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun MyComplexUI() &#123;
+    Column &#123;
+        MyText()
+        AnotherComposableFunction()
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>理解可组合函数是学习 Compose 开发的基础，因为所有的 UI 构建都是围绕它们展开的。它们使得 UI 开发更具模块化和可维护性，每个函数负责特定的 UI 部分，便于复用和更新。</p><h5 id="状态（State）和重组（Recomposition）"><a href="#状态（State）和重组（Recomposition）" class="headerlink" title="状态（State）和重组（Recomposition）"></a>状态（State）和重组（Recomposition）</h5><ul><li>状态管理：在 Compose 中，状态是驱动 UI 更新的关键。状态可以是简单的数据类型（如布尔值、整数、字符串等）或复杂的数据结构（如列表、自定义对象等）。使用<code>mutableStateOf</code>或<code>mutableStateListOf</code>等函数来创建可变状态。例如：</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun Counter() &#123;
+    var count by remember &#123; mutableStateOf(0) &#125;
+    Button(onClick &#x3D; &#123; count++ &#125;) &#123;
+        Text(&quot;Count: $count&quot;)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>重组机制：当状态发生变化时，Compose 会自动重新执行依赖于该状态的可组合函数，这就是重组。重组是高效的，Compose 会尽可能地只更新受影响的 UI 部分。例如，在上述计数器的例子中，每次点击按钮，<code>count</code>状态改变，包含<code>count</code>显示的<code>Text</code>组件所在的可组合函数会重新执行，更新 UI 显示新的计数。</li></ul><h5 id="布局（Layout）组件"><a href="#布局（Layout）组件" class="headerlink" title="布局（Layout）组件"></a>布局（Layout）组件</h5><ul><li>基本布局组件：Compose 提供了多种布局组件，如<code>Column</code>（垂直布局）、<code>Row</code>（水平布局）、<code>Box</code>（简单的堆叠布局）等。这些布局组件用于控制子组件的排列方式。例如，使用<code>Column</code>可以将多个组件垂直排列：</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun VerticalLayout() &#123;
+    Column &#123;
+        Text(&quot;Top Text&quot;)
+        Text(&quot;Bottom Text&quot;)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>嵌套布局：布局组件可以相互嵌套来实现更复杂的布局。例如，在一个<code>Row</code>布局中嵌套<code>Column</code>布局来创建一个类似表格的结构。理解布局组件的使用和嵌套规则对于构建各种复杂程度的 UI 界面至关重要。</li></ul><h5 id="材质设计（Material-Design）组件和主题（Theme）"><a href="#材质设计（Material-Design）组件和主题（Theme）" class="headerlink" title="材质设计（Material Design）组件和主题（Theme）"></a>材质设计（Material Design）组件和主题（Theme）</h5><ul><li>材质设计组件：Compose 支持 Material Design 规范，提供了许多符合该规范的组件，如<code>Button</code>、<code>TextField</code>、<code>Card</code>等。这些组件不仅具有预定义的外观，还遵循一定的交互规则，使得应用具有一致的、符合设计标准的用户体验。例如，<code>Button</code>组件在不同状态（如按下、禁用等）下有相应的视觉反馈。</li><li>主题应用：主题用于定义应用的整体颜色、字体、形状等外观属性。通过设置主题，可以确保应用中的所有组件具有统一的风格。例如，可以在主题中定义主色调、次色调，然后所有的<code>Button</code>、<code>Text</code>等组件会根据主题来应用相应的颜色。</li></ul><p>我们创建一个简单的界面，包含一个带有特定主题颜色的卡片（Card）组件，卡片中有一个标题（Text）和一个按钮（Button），按钮的颜色也根据主题来设定：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.Button
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+
+@Composable
+fun MyMaterialUI() &#123;
+    &#x2F;&#x2F; 定义一个卡片组件，使用主题中的颜色
+    Card(
+        &#x2F;&#x2F; 卡片的背景颜色使用主题中的表面颜色
+        backgroundColor &#x3D; MaterialTheme.colorScheme.surface
+    ) &#123;
+        Column &#123;
+            &#x2F;&#x2F; 标题文本，颜色使用主题中的主色调
+            Text(
+                text &#x3D; &quot;这是一个标题&quot;,
+                color &#x3D; MaterialTheme.colorScheme.primary
+            )
+            Button(
+                &#x2F;&#x2F; 按钮的背景颜色使用主题中的主色调
+                onClick &#x3D; &#123; &#x2F;* 按钮点击事件处理，这里暂为空 *&#x2F; &#125;,
+                color &#x3D; MaterialTheme.colorScheme.primary
+            ) &#123;
+                Text(&quot;点击我&quot;)
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+@Preview(showBackground &#x3D; true)
+@Composable
+fun DefaultPreview() &#123;
+    MyMaterialUI()
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，<code>MaterialTheme.colorScheme</code>用于获取主题相关的<strong>颜色方案</strong>。<code>surface</code>颜色用于设置卡片的背景色，<code>primary</code>颜色用于设置标题文本和按钮的颜色。这样，通过主题可以统一管理整个应用的颜色风格，当需要修改主题颜色时，只需要在主题定义处修改相关的颜色值，所有使用该主题颜色的组件都会自动更新。</p><p>在这个例子中，我们使用了<code>Card</code>、<code>Text</code>和<code>Button</code>这三个符合 Material Design 规范的组件。<code>Card</code>组件提供了一种带有阴影效果的容器，用于突出显示内容。<code>Text</code>组件用于显示文本，其颜色等属性可以根据主题灵活设置。<code>Button</code>组件具有默认的外观和交互行为，如按下时的视觉反馈等，符合 Material Design 的设计原则，为用户提供了一致的操作体验。</p><h5 id="副作用（Side-Effects）函数（如-LaunchedEffect、DisposableEffect）"><a href="#副作用（Side-Effects）函数（如-LaunchedEffect、DisposableEffect）" class="headerlink" title="副作用（Side Effects）函数（如 LaunchedEffect、DisposableEffect）"></a>副作用（Side Effects）函数（如 LaunchedEffect、DisposableEffect）</h5><p>用途：在 Compose 中，副作用函数用于处理一些与外部系统交互或者有额外影响的操作。例如，<code>LaunchedEffect</code>用于在可组合函数内部启动协程，以执行异步操作，如从网络获取数据、进行动画播放等。</p><p>我们创建一个界面，在界面加载时从网络获取用户信息，并在获取成功后显示用户的姓名和邮箱：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.net.URL
+
+@Composable
+fun UserInfoScreen() &#123;
+    val context &#x3D; LocalContext.current
+    val (userName, setUserName) &#x3D; remember &#123; mutableStateOf(&quot;&quot;) &#125;
+    val (userEmail, setUserEmail) &#x3D; remember &#123; mutableStateOf(&quot;&quot;) &#125;
+
+    LaunchedEffect(Unit) &#123;
+        val userInfo &#x3D; withContext(Dispatchers.IO) &#123;
+            try &#123;
+                &#x2F;&#x2F; 模拟从网络获取用户信息，这里使用一个简单的URL示例
+                val url &#x3D; URL(&quot;https:&#x2F;&#x2F;example.com&#x2F;user_info.json&quot;)
+                val connection &#x3D; url.openConnection()
+                connection.connect()
+                val inputStream &#x3D; connection.getInputStream()
+                &#x2F;&#x2F; 解析JSON数据获取用户姓名和邮箱，这里简化处理，假设数据格式简单
+                val userInfoString &#x3D; inputStream.bufferedReader().readLine()
+                val userInfoArray &#x3D; userInfoString.split(&quot;,&quot;)
+                Pair(userInfoArray[0], userInfoArray[1])
+            &#125; catch (e: Exception) &#123;
+                Pair(&quot;&quot;, &quot;&quot;)
+            &#125;
+        &#125;
+        setUserName(userInfo.first)
+        setUserEmail(userInfo.second)
+    &#125;
+
+    Column &#123;
+        Text(&quot;用户姓名: $userName&quot;)
+        Text(&quot;用户邮箱: $userEmail&quot;)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><code>LaunchedEffect</code>的作用：在<code>UserInfoScreen</code>这个可组合函数中，<code>LaunchedEffect(Unit)</code>表示这个副作用只会在函数首次组合时触发一次（因为键是<code>Unit</code>）。在<code>LaunchedEffect</code>内部，通过<code>withContext(Dispatchers.IO)</code>在协程的<code>IO</code>调度器下执行从网络获取用户信息的操作。这是因为网络操作是一个耗时的<code>IO</code>操作，不能阻塞主线程。</li><li>状态更新和 UI 更新：获取到用户信息后，通过<code>setUserName</code>和<code>setUserEmail</code>来更新对应的状态。由于这些状态被<code>Text</code>组件所依赖，当状态更新时，Compose 会自动重新执行<code>UserInfoScreen</code>函数中依赖于这些状态的部分（也就是显示用户姓名和邮箱的<code>Text</code>组件），从而更新 UI，将获取到的用户信息显示出来。这样就实现了在界面加载时获取数据并更新 UI 的功能，利用<code>LaunchedEffect</code>处理了网络获取数据这个有副作用的操作。</li></ul><h4 id="1-5-2-修饰符"><a href="#1-5-2-修饰符" class="headerlink" title="1.5.2 修饰符"></a>1.5.2 修饰符</h4><ol><li><p>Compose 修饰符的分类</p><ul><li>布局修饰符：用于控制组件的布局方式，如<code>size</code>、<code>padding</code>、<code>fillMaxSize</code>等。这些修饰符可以改变组件的大小、间距和填充等布局属性。</li><li>外观修饰符：主要影响组件的外观，像<code>background</code>、<code>border</code>、<code>alpha</code>等。它们用于设置组件的背景颜色、边框以及透明度等外观特征。</li><li>行为修饰符：用于处理组件的行为相关属性，例如<code>clickable</code>、<code>draggable</code>、<code>focusable</code>等。这些修饰符使组件能够响应点击、拖动、获取焦点等用户交互行为。</li><li>组合修饰符：用于组合其他修饰符或者创建新的修饰符逻辑，比如<code>then</code>、<code>wrapContentSize</code>等。</li></ul></li><li><p>基本使用</p></li></ol><ul><li>布局修饰符示例 - <code>size</code><ul><li>功能：用于指定组件的宽度和高度。</li></ul></li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+@Composable
+fun SizedText() &#123;
+    Text(&quot;这是一个有固定大小的文本&quot;, modifier &#x3D; size(100.dp, 50.dp))
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，<code>size(100.dp, 50.dp)</code>修饰符应用于<code>Text</code>组件，使得文本显示区域的宽度为<code>100dp</code>，高度为<code>50dp</code>。</p><ul><li>外观修饰符示例 - <code>background</code><ul><li>功能：设置组件的背景颜色。</li></ul></li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+@Composable
+def BackgroundBox() &#123;
+    Box(
+        modifier &#x3D; Modifier
+           .size(200.dp)
+           .background(Color.Green)
+    ) &#123;
+        Text(&quot;绿色背景的盒子&quot;)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>解释：这里的<code>Box</code>组件使用<code>background(Color.Green)</code>修饰符，将其背景颜色设置为绿色。<code>size</code>修饰符用于确定<code>Box</code>的大小，以便更好地展示背景颜色效果。</p><ol><li>链式调用 + 效果叠加</li></ol><ul><li>示例：组合行为和外观修饰符实现交互效果叠加<ul><li>（链式调用）同时应用多个修饰符来实现复杂的效果，如设置大小并添加背景颜色。</li><li>（效果叠加）当用户与组件交互时，同时改变外观和行为响应。</li></ul></li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+@Composable
+def ModifiersOverlayBox() &#123;
+    Box(
+        modifier &#x3D; Modifier
+           .size(120.dp)
+           .background(Color.LightGray)
+           .clickable &#123; &#x2F;* 点击事件处理 *&#x2F; &#125;
+           .border(1.dp, Color.Black)
+    ) &#123;
+        Text(&quot;可点击、有边框且有背景色的盒子&quot;)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，<code>Box</code>组件具有灰色背景、黑色边框，并且添加了点击行为。这些修饰符的效果叠加在一起，当用户看到这个组件时，它有特定的外观，当用户与之交互（点击）时，又会触发相应的行为。这种效果叠加方式使得可以通过组合多个修饰符来创建丰富的、具有交互性的组件。</p><h4 id="1-5-3-副作用"><a href="#1-5-3-副作用" class="headerlink" title="1.5.3 副作用"></a>1.5.3 副作用</h4><p>在 1.4 中，我们有提到 LaunchedEffect，它属于副作用的一种。</p><p>在安卓 Jetpack Compose 中，副作用是指在可组合函数内部执行的，会对外部环境产生影响或者依赖于外部环境的操作。由于 Compose 的可组合函数主要是用于描述 UI 的声明式函数，理想情况下应该是无副作用的纯函数。但在实际应用中，像与外部系统交互（如网络请求、读取本地文件）、修改全局状态等操作都属于副作用。</p><h5 id="LaunchedEffect-1"><a href="#LaunchedEffect-1" class="headerlink" title="LaunchedEffect"></a>LaunchedEffect</h5><p>区别与用途：<code>LaunchedEffect</code>是用于在 Compose 中执行挂起函数（通常是异步操作）的副作用函数。它会在可组合函数首次被组合或者其键（<code>keys</code>）发生改变时启动一个协程来执行相应的操作。主要用于处理一次性的异步操作，如在界面加载时从网络获取数据、初始化动画等。</p><p>示例：假设我们有一个界面需要在加载时从网络获取用户信息并显示。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.net.URL
+
+@Composable
+fun UserInfoScreen() &#123;
+    val context &#x3D; LocalContext.current
+    val (userName, setUserName) &#x3D; remember &#123; mutableStateOf(&quot;&quot;) &#125;
+    val (userEmail, setUserEmail) &#x3D; remember &#123; mutableStateOf(&quot;&quot;) &#125;
+
+    LaunchedEffect(Unit) &#123;
+        val userInfo &#x3D; withContext(Dispatchers.IO) &#123;
+            try &#123;
+                &#x2F;&#x2F; 模拟从网络获取用户信息，这里使用一个简单的URL示例
+                val url &#x3D; URL(&quot;https:&#x2F;&#x2F;example.com&#x2F;user_info.json&quot;)
+                val connection &#x3D; url.openConnection()
+                connection.connect()
+                val inputStream &#x3D; connection.getInputStream()
+                &#x2F;&#x2F; 解析JSON数据获取用户姓名和邮箱，这里简化处理，假设数据格式简单
+                val userInfoString &#x3D; inputStream.bufferedReader().readLine()
+                val userInfoArray &#x3D; userInfoString.split(&quot;,&quot;)
+                Pair(userInfoArray[0], userInfoArray[1])
+            &#125; catch (e: Exception) &#123;
+                Pair(&quot;&quot;, &quot;&quot;)
+            &#125;
+        &#125;
+        setUserName(userInfo.first)
+        setUserEmail(userInfo.second)
+    &#125;
+
+    Column &#123;
+        Text(&quot;用户姓名: $userName&quot;)
+        Text(&quot;用户邮箱: $userEmail&quot;)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，<code>LaunchedEffect(Unit)</code>表示这个副作用只会在<code>UserInfoScreen</code>可组合函数首次组合时触发一次（因为键是<code>Unit</code>）。在<code>LaunchedEffect</code>内部，通过<code>withContext(Dispatchers.IO)</code>在协程的<code>IO</code>调度器下执行从网络获取用户信息的操作。获取到用户信息后，通过<code>setUserName</code>和<code>setUserEmail</code>来更新对应的状态，从而更新 UI 显示用户信息。</p><h5 id="DisposableEffect"><a href="#DisposableEffect" class="headerlink" title="DisposableEffect"></a>DisposableEffect</h5><p>区别与用途：<code>DisposableEffect</code>主要用于在可组合函数被销毁或者其键（<code>keys</code>）发生改变时，执行清理资源的操作。这对于避免资源泄漏（如取消订阅、关闭文件流等）非常重要。</p><p>示例：假设我们在一个可组合函数中订阅了一个数据流，当可组合函数不再需要时（例如界面被关闭），需要取消订阅以避免内存泄漏。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+
+@Composable
+fun DataStreamScreen() &#123;
+    val dataList &#x3D; remember &#123; mutableStateListOf&lt;String&gt;() &#125;
+    val dataFlow: Flow&lt;String&gt; &#x3D; flow &#123;
+        &#x2F;&#x2F; 模拟一个简单的数据流，不断发送数字字符串
+        var i &#x3D; 0
+        while (true) &#123;
+            emit(&quot;Data $i&quot;)
+            i++
+        &#125;
+    &#125;
+
+    val job &#x3D; remember &#123;
+        LaunchedEffect(dataFlow) &#123;
+            val job &#x3D; kotlinx.coroutines.launch &#123;
+                dataFlow.collect &#123; value -&gt;
+                    dataList.add(value)
+                &#125;
+            &#125;
+            onDispose &#123;
+                job.cancel()
+            &#125;
+        &#125;
+    &#125;
+
+    Column &#123;
+        dataList.forEach &#123; item -&gt;
+            Text(item)
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，首先创建了一个<code>dataFlow</code>数据流，然后在<code>LaunchedEffect</code>中启动一个协程来收集这个数据流的数据并添加到<code>dataList</code>中。<code>DisposableEffect</code>通过<code>onDispose</code>块来确保在<code>LaunchedEffect</code>中的协程任务（用于收集流数据）在可组合函数不再需要时（例如，界面关闭或者<code>dataFlow</code>发生变化）被取消，从而正确地释放资源，避免内存泄漏。</p><h4 id="1-5-4-智能重组"><a href="#1-5-4-智能重组" class="headerlink" title="1.5.4 智能重组"></a>1.5.4 智能重组</h4><p>从本质上来说，Compose 依赖其 SDK 与编译器，Kotlin 依赖编译器插件的模式来进行实现。Compose 通几个注解帮助编译器进一步识别不会重组的 UI 对象。具体有如下几种：</p><h5 id="ReadOnlyComposable"><a href="#ReadOnlyComposable" class="headerlink" title="@ReadOnlyComposable"></a>@ReadOnlyComposable</h5><p><code>ReadOnlyComposable</code>注解用于标记那些不会修改任何状态的可组合函数。这些函数在被调用时，只是单纯地根据传入的参数构建 UI，不会产生副作用或者改变任何可观察的状态。</p><p>当 Compose 进行重组分析时，知道一个被标记为<code>ReadOnlyComposable</code>的函数是无状态的，就可以在某些情况下避免不必要的重新执行。例如，如果这个函数只是用于简单地格式化和显示文本内容，并且不依赖于任何可能变化的状态，那么在其他状态发生变化时，Compose 可以跳过对这个函数的重新执行，从而提高重组效率。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@ReadOnlyComposable
+@Composable
+fun FormattedText(text: String) &#123;
+    Text(text.uppercase())
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，<code>FormattedText</code>函数只是将传入的文本转换为大写并显示，不会修改任何状态。Compose 在重组过程中，如果发现只有其他无关状态发生变化，就可以不重新执行这个函数，因为它的输出只依赖于传入的<code>text</code>参数，而这个参数在没有改变的情况下，UI 显示也不会改变。</p><h5 id="Immutable"><a href="#Immutable" class="headerlink" title="@Immutable"></a>@Immutable</h5><p><code>Immutable</code>注解用于标记数据类型，表示这个数据类型是不可变的。当一个数据类型被标记为<code>Immutable</code>后，Compose 可以更有效地处理对这个数据的引用。例如，对于一个不可变的数据类，一旦创建，其内部的属性就不能被修改。</p><p>在智能重组的场景下，Compose 需要比较数据是否发生变化来决定是否重新执行相关的可组合函数。对于<code>Immutable</code>类型的数据，比较过程更加简单和高效。因为不可变数据的属性不会改变，所以 Compose 可以通过引用比较或者简单的内容比较（如果数据结构简单）来快速确定数据是否发生了变化。如果数据没有变化，依赖于这个数据的可组合函数部分就不需要重组。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Immutable
+data class UserInfo(val name: String, val age: Int)
+
+@Composable
+fun UserInfoDisplay(userInfo: UserInfo) &#123;
+    Column &#123;
+        Text(&quot;姓名: $&#123;userInfo.name&#125;&quot;)
+        Text(&quot;年龄: $&#123;userInfo.age&#125;&quot;)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，<code>UserInfo</code>数据类被标记为<code>Immutable</code>。当<code>UserInfoDisplay</code>可组合函数的<code>userInfo</code>参数发生变化时，Compose 可以通过比较<code>UserInfo</code>对象的引用或者简单的属性比较（因为属性不可变）来快速判断是否需要重新执行这个函数。如果只是其他无关状态改变，而<code>userInfo</code>没有变化，就不需要重组<code>UserInfoDisplay</code>函数部分的 UI。</p><h5 id="Stable"><a href="#Stable" class="headerlink" title="@Stable"></a>@Stable</h5><p><code>Stable</code>注解用于标记类型或者函数，表示它们在 Compose 的重组过程中是稳定的。对于一个被标记为<code>Stable</code>的对象，Compose 可以假设它的内容或者行为在没有明显变化提示的情况下是不变的。这包括对象的属性（如果是一个类）以及它所产生的副作用（如果是一个函数）。</p><p>和<code>Immutable</code>类似，<code>Stable</code>帮助 Compose 在重组分析中做出更高效的决策。如果一个可组合函数的参数是<code>Stable</code>类型，并且在没有明确的变化信号（如状态改变）时，Compose 可以减少对这个函数的重新检查和重新执行。这有助于优化重组过程，避免不必要的 UI 更新。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Stable
+class MyStableObject &#123;
+    val value: String &#x3D; &quot;稳定的值&quot;
+&#125;
+
+@Composable
+fun MyStableObjectDisplay(myObject: MyStableObject) &#123;
+    Text(myObject.value)
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，<code>MyStableObject</code>类被标记为<code>Stable</code>。<code>MyStableObjectDisplay</code>可组合函数依赖于<code>MyStableObject</code>。在重组过程中，Compose 会认为<code>MyStableObject</code>是稳定的，只要没有明确的变化提示（如通过状态管理机制通知变化），就不会轻易重新执行<code>MyStableObjectDisplay</code>函数，从而提高了智能重组的效率。</p><h5 id="区别-＆-使用场景"><a href="#区别-＆-使用场景" class="headerlink" title="区别 ＆ 使用场景"></a>区别 ＆ 使用场景</h5><table><thead><tr><th>标记类型</th><th>关注重点</th><th>定义描述</th><th>示例</th><th>使用场景</th></tr></thead><tbody><tr><td><code>ReadOnlyComposable</code></td><td>函数行为</td><td>标记可组合函数特性，该函数不会修改任何状态，从函数执行角度强调纯净性，仅根据传入参数构建 UI，无状态修改和副作用</td><td>一个将输入文本转换为大写并显示的函数，只进行数据转换和 UI 展示，不影响外部状态</td><td>1. 纯展示型函数，如格式化日期并显示在文本组件中。</td></tr><tr><td>2. 无状态的 UI 组件构建，如固定样式的图标组件</td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td><code>Immutable</code></td><td>数据类型的不可变性</td><td>用于描述数据类型，被标记的数据类型创建后内部属性不能被修改，是对数据结构本身性质的定义</td><td>一个简单数据类，属性为<code>val</code>且无修改属性方法，整个生命周期内稳定，除非重新创建</td><td>1. 配置数据传递，如应用的主题配置数据类。</td></tr><tr><td>2. 缓存数据和常量数据结构，如预定义的菜单选项列表</td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td><code>Stable</code></td><td>综合的稳定性</td><td>可用于标记类型（如类）或函数。标记类型时表示在重组过程中的稳定性，包括属性和行为；标记函数时表示副作用和返回值等方面的稳定性</td><td>1. 具有复杂内部状态但对外表现稳定的用户配置对象。</td><td></td></tr><tr><td>2. 根据系统时间和固定时间间隔决定是否显示提示信息的函数，在相关条件不变时行为稳定</td><td></td><td></td><td></td><td></td></tr><tr><td>1. 复杂但稳定的对象，如包含多个属性和内部计算逻辑的用户配置对象。</td><td></td><td></td><td></td><td></td></tr><tr><td>2. 有条件稳定的函数，如上述按特定条件决定显示提示信息的函数</td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody></table><h4 id="1-5-5-性能优化"><a href="#1-5-5-性能优化" class="headerlink" title="1.5.5 性能优化"></a>1.5.5 性能优化</h4><blockquote><p><a target="_blank" rel="noopener" href="https://developer.android.com/develop/ui/compose/performance/bestpractices?hl=zh-cn">https://developer.android.com/develop/ui/compose/performance/bestpractices?hl=zh-cn</a><br>原文档写的很清楚了，我直接 Copy</p></blockquote><h5 id="使用-remember-尽可能减少开销高昂的计算"><a href="#使用-remember-尽可能减少开销高昂的计算" class="headerlink" title="使用 remember 尽可能减少开销高昂的计算"></a>使用 <code>remember</code> 尽可能减少开销高昂的计算</h5><p>可组合函数<a target="_blank" rel="noopener" href="https://developer.android.com/develop/ui/compose/mental-model?hl=zh-cn#frequent">可能会非常频繁地运行</a>，与每个帧的运行频率一样高 动画效果因此，您应当在可组合函数的主体部分中尽可能减少计算。</p><p>使用 <a target="_blank" rel="noopener" href="https://developer.android.com/develop/ui/compose/state?hl=zh-cn#state-in-composables">存储</a>计算结果 <code>[remember](https://developer.android.com/reference/kotlin/androidx/compose/runtime/package-summary?hl=zh-cn#remember(kotlin.Function0))</code>。这样，计算只会运行一次， 结果。</p><p>例如，下面的代码显示了经过排序的名称列表，但 进行大量排序：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun ContactList(
+    contacts: List&lt;Contact&gt;,
+    comparator: Comparator&lt;Contact&gt;,
+    modifier: Modifier &#x3D; Modifier
+) &#123;
+    LazyColumn(modifier) &#123;
+        &#x2F;&#x2F; DON’T DO THIS
+        items(contacts.sortedWith(comparator)) &#123; contact -&gt;
+            &#x2F;&#x2F; ...
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong><a target="_blank" rel="noopener" href="https://github.com/android/snippets/blob/e9e2f2099c03406170d6b72a7974f6d7658ee8e3/compose/snippets/src/main/java/com/example/compose/snippets/performance/PerformanceSnippets.kt#L50-L62">PerformanceSnippets.kt</a></strong></p><p>每次重组 <code>ContactsList</code> 时，都会对整个联系人列表全部排序 即使该列表没有变化如果用户滚动列表 每当出现新行时，可组合函数都会重组。</p><p>如需解决此问题，请在 <code>LazyColumn</code> 外部对列表进行排序，并使用 <code>remember</code> 存储已排序列表：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun ContactList(
+    contacts: List&lt;Contact&gt;,
+    comparator: Comparator&lt;Contact&gt;,
+    modifier: Modifier &#x3D; Modifier
+) &#123;
+    val sortedContacts &#x3D; remember(contacts, comparator) &#123;
+        contacts.sortedWith(comparator)
+    &#125;
+
+    LazyColumn(modifier) &#123;
+        items(sortedContacts) &#123;
+            &#x2F;&#x2F; ...
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong><a target="_blank" rel="noopener" href="https://github.com/android/snippets/blob/e9e2f2099c03406170d6b72a7974f6d7658ee8e3/compose/snippets/src/main/java/com/example/compose/snippets/performance/PerformanceSnippets.kt#L68-L83">PerformanceSnippets.kt</a></strong></p><p>现在，列表只会在 <code>ContactList</code> 首次组合时执行一次排序。如果联系人或比较器发生变化，则系统会重新生成经过排序的列表。否则，可组合函数会继续使用缓存中的已排序列表。</p><p><strong>注意</strong>：请尽可能将计算代码移到可组合函数的外部。在这种情况下，您可能需要在其他位置（如在 <code>**ViewModel**</code> 中）对列表进行排序，并将已排序列表作为输入提供给可组合函数。</p><h5 id="使用延迟布局键"><a href="#使用延迟布局键" class="headerlink" title="使用延迟布局键"></a>使用延迟布局键</h5><p><a target="_blank" rel="noopener" href="https://developer.android.com/develop/ui/compose/lists?hl=zh-cn#lazy">延迟布局</a>可高效地重复使用项，只需重新生成或重组项 。不过，您可以帮助优化延迟布局 重组。</p><p>假设某项用户操作会导致项在列表中移动。例如： 假设您显示了按修改时间排序的 上面显示了最近修改过的备注</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun NotesList(notes: List&lt;Note&gt;) &#123;
+    LazyColumn &#123;
+        items(
+            items &#x3D; notes
+        ) &#123; note -&gt;
+            NoteRow(note)
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong><a target="_blank" rel="noopener" href="https://github.com/android/snippets/blob/e9e2f2099c03406170d6b72a7974f6d7658ee8e3/compose/snippets/src/main/java/com/example/compose/snippets/performance/PerformanceSnippets.kt#L89-L98">PerformanceSnippets.kt</a></strong></p><p>不过，此代码存在问题。假设底部的备注发生了变化。 它现在是最近修改过的备注，因此会移到列表顶部，而其他备注都会向下移动一个位置。</p><p>如果没有您的帮助，Compose 不会意识到未更改的项 <em>moved</em>。相反，Compose 会认为旧的“第 2 项”已被删除，且 为第 3 项、第 4 项以及最下面的一项创建了新的订单。其结果是 Compose 会重组列表中的<strong>每一项</strong>，即使其中只有一项重组 实际上都发生了变化</p><p>此处的解决方案是<strong>提供</strong>**<a target="_blank" rel="noopener" href="https://developer.android.com/develop/ui/compose/lists?hl=zh-cn#item-keys">项键</a>**。为 每一项都可让 Compose 避免不必要的重组。在本例中，Compose 可以确定现在位于位置 3 的物品与以前位于位置 2 的物品相同。 由于该项的数据没有任何变化，因此 Compose 不必 重组。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun NotesList(notes: List&lt;Note&gt;) &#123;
+    LazyColumn &#123;
+        items(
+            items &#x3D; notes,
+            key &#x3D; &#123; note -&gt;
+                &#x2F;&#x2F; Return a stable, unique key for the note
+                note.id
+            &#125;
+        ) &#123; note -&gt;
+            NoteRow(note)
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong><a target="_blank" rel="noopener" href="https://github.com/android/snippets/blob/e9e2f2099c03406170d6b72a7974f6d7658ee8e3/compose/snippets/src/main/java/com/example/compose/snippets/performance/PerformanceSnippets.kt#L104-L117">PerformanceSnippets.kt</a></strong></p><h5 id="使用-derivedStateOf-限制重组"><a href="#使用-derivedStateOf-限制重组" class="headerlink" title="使用 derivedStateOf 限制重组"></a>使用 <code>derivedStateOf</code> 限制重组</h5><p>在组合中使用状态的一个风险是，如果状态发生变化， 界面的重组次数可能会超出您的实际需求。例如： 假设您要显示一个可滚动列表。您可以检查列表的状态， 哪个项是列表中的第一个可见项：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">val listState &#x3D; rememberLazyListState()
+
+LazyColumn(state &#x3D; listState) &#123;
+    &#x2F;&#x2F; ...
+&#125;
+
+val showButton &#x3D; listState.firstVisibleItemIndex &gt; 0
+
+AnimatedVisibility(visible &#x3D; showButton) &#123;
+    ScrollToTopButton()
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong><a target="_blank" rel="noopener" href="https://github.com/android/snippets/blob/e9e2f2099c03406170d6b72a7974f6d7658ee8e3/compose/snippets/src/main/java/com/example/compose/snippets/performance/PerformanceSnippets.kt#L126-L136">PerformanceSnippets.kt</a></strong></p><p>问题在于，当用户滚动列表时，<code>listState</code> 会随着用户拖动手指而不断变化。这意味着该列表会不断重组。不过，您不需要频繁重组代码，只需 无需重组，直至新项显示在底部为止。因此，这将完成大量的额外计算，从而导致界面性能较差。</p><p>解决方案是使用<a target="_blank" rel="noopener" href="https://developer.android.com/develop/ui/compose/side-effects?hl=zh-cn#derivedstateof">派生状态</a>。借助派生状态，您可以告知 Compose 哪些状态更改实际上应触发重组。在此示例中 指明您在第一个可见项发生更改时您关心。如果<em>那</em> 状态值发生变化时，界面需要重组，但如果用户尚未重组 使新项显示在顶部，则无需重组。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">val listState &#x3D; rememberLazyListState()
+
+LazyColumn(state &#x3D; listState) &#123;
+    &#x2F;&#x2F; ...
+&#125;
+
+val showButton by remember &#123;
+    derivedStateOf &#123;
+        listState.firstVisibleItemIndex &gt; 0
+    &#125;
+&#125;
+
+AnimatedVisibility(visible &#x3D; showButton) &#123;
+    ScrollToTopButton()
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong><a target="_blank" rel="noopener" href="https://github.com/android/snippets/blob/e9e2f2099c03406170d6b72a7974f6d7658ee8e3/compose/snippets/src/main/java/com/example/compose/snippets/performance/PerformanceSnippets.kt#L145-L159">PerformanceSnippets.kt</a></strong></p><h5 id="尽可能延迟读取"><a href="#尽可能延迟读取" class="headerlink" title="尽可能延迟读取"></a>尽可能延迟读取</h5><p>发现性能问题后，延后读取状态会有所帮助。延后读取状态可以确保 Compose 在重组时重新运行尽可能少的代码。例如，如果界面的状态在可组合项树中向上提升，而您在可组合子项中读取状态，则可以将状态封装在 lambda 函数中。这种方式可以确保仅在实际需要时才会执行读取操作。有关参考，请参阅 <a target="_blank" rel="noopener" href="https://github.com/android/compose-samples/pull/778">Jetsnack 中的 示例应用</a>。Jetsnack 实现了类似于工具栏的折叠效果 显示详细信息屏幕要了解这种方法起作用的原因，请参阅这篇博文 <a target="_blank" rel="noopener" href="https://medium.com/androiddevelopers/jetpack-compose-debugging-recomposition-bfcf4a6f8d37">Jetpack Compose：调试重组</a>。</p><p>为了实现这种效果，<code>Title</code> 可组合项需要滚动偏移 以便使用 <code>Modifier</code> 自行偏移。这是 进行优化之前的 Jetsnack 代码：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun SnackDetail() &#123;
+    &#x2F;&#x2F; ...
+
+    Box(Modifier.fillMaxSize()) &#123; &#x2F;&#x2F; Recomposition Scope Start
+        val scroll &#x3D; rememberScrollState(0)
+        &#x2F;&#x2F; ...
+        Title(snack, scroll.value)
+        &#x2F;&#x2F; ...
+    &#125; &#x2F;&#x2F; Recomposition Scope End
+&#125;
+
+@Composable
+private fun Title(snack: Snack, scroll: Int) &#123;
+    &#x2F;&#x2F; ...
+    val offset &#x3D; with(LocalDensity.current) &#123; scroll.toDp() &#125;
+
+    Column(
+        modifier &#x3D; Modifier
+            .offset(y &#x3D; offset)
+    ) &#123;
+        &#x2F;&#x2F; ...
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong><a target="_blank" rel="noopener" href="https://github.com/android/snippets/blob/e9e2f2099c03406170d6b72a7974f6d7658ee8e3/compose/snippets/src/main/java/com/example/compose/snippets/performance/PerformanceSnippets.kt#L166-L189">PerformanceSnippets.kt</a></strong></p><p>当滚动状态发生变化时，Compose 会使最近的父项失效 重组作用域。在本例中，最接近的范围是 <code>SnackDetail</code> 可组合项。请注意，<code>Box</code> 是内联函数，因此不是重组 范围。因此 Compose 会重组 <code>SnackDetail</code> 以及其中的所有可组合项 <code>SnackDetail</code>。如果您将代码更改为仅读取 使用它，那么您可以减少需要重组的元素数量。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun SnackDetail() &#123;
+    &#x2F;&#x2F; ...
+
+    Box(Modifier.fillMaxSize()) &#123; &#x2F;&#x2F; Recomposition Scope Start
+        val scroll &#x3D; rememberScrollState(0)
+        &#x2F;&#x2F; ...
+        Title(snack) &#123; scroll.value &#125;
+        &#x2F;&#x2F; ...
+    &#125; &#x2F;&#x2F; Recomposition Scope End
+&#125;
+
+@Composable
+private fun Title(snack: Snack, scrollProvider: () -&gt; Int) &#123;
+    &#x2F;&#x2F; ...
+    val offset &#x3D; with(LocalDensity.current) &#123; scrollProvider().toDp() &#125;
+    Column(
+        modifier &#x3D; Modifier
+            .offset(y &#x3D; offset)
+    ) &#123;
+        &#x2F;&#x2F; ...
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong><a target="_blank" rel="noopener" href="https://github.com/android/snippets/blob/e9e2f2099c03406170d6b72a7974f6d7658ee8e3/compose/snippets/src/main/java/com/example/compose/snippets/performance/PerformanceSnippets.kt#L195-L217">PerformanceSnippets.kt</a></strong></p><p>滚动参数现在是一个 lambda。这意味着 <code>Title</code> 仍然可以引用提升的状态，但该值仅在 <code>Title</code> 内部读取，这也是实际需要的。因此，当滚动值发生更改时，最近的重组范围现在是 <code>Title</code> 可组合项 - Compose 不再需要重组整个 <code>Box</code>。</p><p>这是一项非常重大的改进，但是您还可以做得更好！<strong>如果您触发重组只是为了重新布局或重新绘制可组合项，那么您肯定会充满了疑惑。</strong>在本例中，您只是更改了 <code>Title</code> 可组合项的偏移量，而此操作可以在布局阶段完成。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+private fun Title(snack: Snack, scrollProvider: () -&gt; Int) &#123;
+    &#x2F;&#x2F; ...
+    Column(
+        modifier &#x3D; Modifier
+            .offset &#123; IntOffset(x &#x3D; 0, y &#x3D; scrollProvider()) &#125;
+    ) &#123;
+        &#x2F;&#x2F; ...
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong><a target="_blank" rel="noopener" href="https://github.com/android/snippets/blob/e9e2f2099c03406170d6b72a7974f6d7658ee8e3/compose/snippets/src/main/java/com/example/compose/snippets/performance/PerformanceSnippets.kt#L222-L231">PerformanceSnippets.kt</a></strong></p><p>以前，该代码使用 <code>[Modifier.offset(x: Dp, y: Dp)](https://developer.android.com/reference/kotlin/androidx/compose/foundation/layout/package-summary?hl=zh-cn#(androidx.compose.ui.Modifier).offset(androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp))</code>，它接受 以参数形式指定偏移量通过切换到 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/layout/package-summary?hl=zh-cn#(androidx.compose.ui.Modifier).offset(kotlin.Function1)">lambda 版本的修饰符</a>， 您可以确保该函数在布局阶段读取滚动状态。因此，当滚动状态发生变化时，Compose 可以完全跳过组合阶段，而直接进入布局阶段。<strong>当您将频繁更改的状态变量传递到修饰符中时，应当尽可能使用其 lambda 版本。</strong></p><p>下面给出了此方法的另一个示例。此代码尚未优化：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">&#x2F;&#x2F; Here, assume animateColorBetween() is a function that swaps between
+&#x2F;&#x2F; two colors
+val color by animateColorBetween(Color.Cyan, Color.Magenta)
+
+Box(
+    Modifier
+        .fillMaxSize()
+        .background(color)
+)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong><a target="_blank" rel="noopener" href="https://github.com/android/snippets/blob/e9e2f2099c03406170d6b72a7974f6d7658ee8e3/compose/snippets/src/main/java/com/example/compose/snippets/performance/PerformanceSnippets.kt#L237-L245">PerformanceSnippets.kt</a></strong></p><p>在此代码中，Box 的背景颜色会在两种颜色之间快速切换。因此，其状态也会非常频繁地变化。随后，可组合项会在后台修饰符中读取此状态。因此，该 Box 在每一帧上都需要重组，因为其颜色在每一帧中都会发生变化。</p><p>如需改进这一点，请使用基于 lambda 的修饰符，在本例中为 <code>[drawBehind](https://developer.android.com/reference/kotlin/androidx/compose/ui/draw/package-summary?hl=zh-cn#(androidx.compose.ui.Modifier).drawBehind(kotlin.Function1))</code>。 这将仅在绘制阶段读取颜色状态。因此 Compose 可以完全跳过组合和布局阶段 - Compose 会直接进入绘制阶段。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">val color by animateColorBetween(Color.Cyan, Color.Magenta)
+Box(
+    Modifier
+        .fillMaxSize()
+        .drawBehind &#123;
+            drawRect(color)
+        &#125;
+)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong><a target="_blank" rel="noopener" href="https://github.com/android/snippets/blob/e9e2f2099c03406170d6b72a7974f6d7658ee8e3/compose/snippets/src/main/java/com/example/compose/snippets/performance/PerformanceSnippets.kt#L252-L259">PerformanceSnippets.kt</a></strong></p><h5 id="避免向后写入"><a href="#避免向后写入" class="headerlink" title="避免向后写入"></a>避免向后写入</h5><p>Compose 有一项核心假设，即您<strong>永远不会向已被读取的状态写入数据</strong>。此操作被称为向后写入，它可能会导致无限次地在每一帧上进行重组。</p><p>以下可组合项展示了此类错误的示例。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Composable
+fun BadComposable() &#123;
+    var count by remember &#123; mutableStateOf(0) &#125;
+
+    &#x2F;&#x2F; Causes recomposition on click
+    Button(onClick &#x3D; &#123; count++ &#125;, Modifier.wrapContentSize()) &#123;
+        Text(&quot;Recompose&quot;)
+    &#125;
+
+    Text(&quot;$count&quot;)
+    count++ &#x2F;&#x2F; Backwards write, writing to state after it has been read&lt;&#x2F;b&gt;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong><a target="_blank" rel="noopener" href="https://github.com/android/snippets/blob/e9e2f2099c03406170d6b72a7974f6d7658ee8e3/compose/snippets/src/main/java/com/example/compose/snippets/performance/PerformanceSnippets.kt#L265-L276">PerformanceSnippets.kt</a></strong></p><p>此代码会在可组合项的 前一行。如果运行此代码，您会看到按钮，这会导致重组，则计数器会快速增加， 无限循环，因为 Compose 重组此可组合项，看到状态读取 已过期，所以我们安排了另一次重组。</p><p><strong>您完全可以避免向后写入数据，只需避免在组合中写入状态即可。</strong>请尽可能在响应事件时写入状态，并采用 lambda 的形式，如上文中的 <code>onClick</code> 示例所示。</p><ul><li>**<a target="_blank" rel="noopener" href="https://developer.android.com/topic/performance/overview?hl=zh-cn">应用性能指南</a>**：探索最佳应用 提升应用性能的方法、库和工具。</li><li>**<a target="_blank" rel="noopener" href="https://developer.android.com/topic/performance/inspecting-overview?hl=zh-cn">检查性能</a>**： 检查应用性能。</li><li>**<a target="_blank" rel="noopener" href="https://developer.android.com/topic/performance/benchmarking/benchmarking-overview?hl=zh-cn">基准化分析</a>**： 对应用性能进行基准测试。</li><li>**<a target="_blank" rel="noopener" href="https://developer.android.com/topic/performance/appstartup/analysis-optimization?hl=zh-cn">应用启动</a>**： 优化应用启动。</li><li>**<a target="_blank" rel="noopener" href="https://developer.android.com/baseline-profiles?hl=zh-cn">基准配置文件</a>**：了解基准配置文件。</li></ul><p>其他参考资料：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7263341982407868472">Compose:从重组谈谈页面性能优化思路，狠狠优化一笔许多刚入手Compose的使用者遇到卡顿的时候，可能是不恰当的访 - 掘金</a></p><h2 id="Activity-和-Fragment"><a href="#Activity-和-Fragment" class="headerlink" title="Activity 和 Fragment"></a>Activity 和 Fragment</h2><h3 id="2-1-基本概念"><a href="#2-1-基本概念" class="headerlink" title="2.1 基本概念"></a>2.1 基本概念</h3><table><thead><tr><th>组件</th><th>使用场景</th><th>优势</th></tr></thead><tbody><tr><td>Activity</td><td>作为应用里最关键的界面展示单元，用于打造完整且独立的用户界面屏幕。像应用的启动界面、主要功能模块展示界面等均通过它实现。</td><td>具备完整生命周期，利于资源管理以及与系统交互；能便捷处理用户操作（如按键按下、屏幕触摸等），也能方便地与其他组件（如服务、广播接收器等）进行交互；Android 系统拥有出色的任务栈管理等针对 Activity 的管理机制，方便应用实现导航和多任务处理。</td></tr><tr><td>Fragment</td><td>在构建可复用的 UI 模块时十分适用，尤其在大屏幕设备（如平板电脑）或复杂多屏应用中表现突出。例如新闻应用里，新闻列表 Fragment 能在不同布局（单栏、双栏布局）中复用，也可在多个相关 Activity 中共享。</td><td>极大提升了 UI 的复用性与灵活性，可依据不同设备配置和屏幕尺寸，灵活组合与替换以达成不同布局效果；Fragment 拥有独立逻辑和视图，便于团队开发与代码维护，不同开发人员可分别负责不同 Fragment 的开发工作 。</td></tr><tr><td>Compose</td><td>适合快速搭建现代化、动态的 UI 界面，对于需要频繁更新 UI 或处理复杂状态管理的应用部分效果显著。比如在实时数据更新（如股票行情应用）或复杂交互（如手势操作驱动 UI 变化）的应用场景中能发挥优势。</td><td>代码更为简洁直观，采用声明式方式构建 UI，降低了传统视图体系中视图操作和状态管理的复杂程度；自动重组机制极大简化 UI 更新流程，提高开发效率；提供丰富的布局和组件库，助力开发者快速实现各类 UI 设计。</td></tr></tbody></table><h3 id="2-2-生命周期"><a href="#2-2-生命周期" class="headerlink" title="2.2 生命周期"></a>2.2 生命周期</h3><table><thead><tr><th>生命周期方法</th><th>调用时机</th><th></th></tr></thead><tbody><tr><td><code>onCreate()</code></td><td>在Activity第一次被创建时调用。通常用于进行初始化操作，如设置布局（通过<code>setContentView</code>或<code>setContent</code>）、初始化视图组件、绑定数据等。</td><td></td></tr><tr><td><code>onStart()</code></td><td>在Activity即将对用户可见时调用。此时Activity已经可见，但还没有获取焦点，用户还不能与之交互。</td><td></td></tr><tr><td><code>onResume()</code></td><td>在Activity获取焦点，用户可以开始与之交互时调用。此时Activity处于活动状态，位于前台。</td><td></td></tr><tr><td><code>onPause()</code></td><td>当系统准备启动或恢复另一个 Activity 时调用。此时当前 Activity 失去焦点，但仍然部分可见。例如，当一个透明或者半透明的 Activity 启动时，原 Activity 就会进入<code>onPause</code>状态。这是一个比较关键的回调，通常用于暂停一些资源消耗大的操作，如暂停动画、停止视频播放等，并且可以保存一些关键数据，防止用户离开该页面后数据丢失或资源浪费。</td><td></td></tr></tbody></table><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class MainActivity : AppCompatActivity() &#123;
+    override fun onPause() &#123;
+        super.onPause()
+        &#x2F;&#x2F; 暂停视频播放
+        videoPlayer.pause()
+        &#x2F;&#x2F; 保存当前页面的编辑状态
+        val editTextContent &#x3D; editText.text.toString()
+        savedState.editTextContent &#x3D; editTextContent
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|<code>onStop()</code> |当 Activity 完全不可见时调用。比如用户打开了一个新的 Activity，并且这个新 Activity 完全覆盖了当前 Activity，或者用户按下了 “Home” 键将应用退到后台，当前 Activity 就会进入<code>onStop</code>状态。这个回调可以用于释放一些只有在 Activity 可见时才需要的资源，如停止传感器的监听等。 |</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class SensorActivity : AppCompatActivity() &#123;
+    private val sensorManager: SensorManager by lazy &#123;
+        getSystemService(Context.SENSOR_SERVICE) as SensorManager
+    &#125;
+    private val accelerometer: Sensor by lazy &#123;
+        sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+    &#125;
+    private val sensorEventListener &#x3D; object : SensorEventListener &#123;
+        &#x2F;&#x2F; 处理传感器事件的方法
+    &#125;
+    override fun onStart() &#123;
+        super.onStart()
+        sensorManager.registerListener(sensorEventListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
+    &#125;
+    override fun onStop() &#123;
+        super.onStop()
+        sensorManager.unregisterListener(sensorEventListener)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|<code>onDestroy()</code> |在Activity被销毁之前调用。用于释放所有占用的资源，如关闭数据库连接、停止服务、注销广播接收器等。 | |<br>|<code>onRestart()</code> |在Activity被停止后，再次启动时调用。它会在<code>onStart()</code>之前被触发，通常用于在Activity重新启动时恢复之前保存的状态。 | |</p><p>Activty 仅关注于自身，如果需要全局的生命周期监听，可能需要使用 ProcessLifecycleOwner。它对于简单地判断应用整体是处于前台还是后台的场景非常方便。例如，在一些需要根据应用前后台状态来调整服务行为的应用中，像应用进入后台时暂停数据同步服务，进入前台时恢复数据同步服务，使用<code>ProcessLifecycleOwner</code>可以快速实现。</p><p>当应用架构基于现代的 Jetpack 组件（如 ViewModel、LiveData 等），并且已经在使用<code>lifecycle - runtime - ktx</code>库来管理组件生命周期时，<code>ProcessLifecycleOwner</code>能够很好地集成到现有的架构中，以一种简洁的方式提供应用生命周期感知。</p><p>首先我们需要先注册（在未注册 <code>lifecycle - runtime - ktx</code> 的情况下）：</p><pre class="line-numbers language-Groovy" data-language="Groovy"><code class="language-Groovy">dependencies &#123;
+    implementation &#39;androidx.lifecycle:lifecycle-runtime-ktx:2.6.0&#39;&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>我们对比两者的生命周期：</p><table><thead><tr><th>对比维度</th><th>Activity 生命周期</th><th>ProcessLifecycleOwner 生命周期</th></tr></thead><tbody><tr><td>关注对象</td><td>单个Activity从创建到销毁过程中的不同状态变化，比如是否可见、是否可交互等。</td><td>整个应用进程处于前台还是后台的宏观状态。</td></tr><tr><td>关键状态及回调</td><td><code>onCreate</code>：首次创建时调用，用于初始化操作。<code>onStart</code>：即将对用户可见时调用。<code>onResume</code>：获取焦点，可与用户交互时调用。<code>onPause</code>：失去焦点但可能部分可见时调用。<code>onStop</code>：完全不可见时调用。<code>onDestroy</code>：被销毁前调用，用于释放资源。<code>onRestart</code>：停止后再次启动时调用。</td><td><code>ON_START</code>：当应用中有一个Activity进入<code>onStart</code>状态，意味着应用进入前台，触发此事件。<code>ON_STOP</code>：当应用中的最后一个Activity进入<code>onStop</code>状态，意味着应用进入后台，触发此事件。</td></tr><tr><td>触发条件</td><td>由Activity自身在屏幕上的可见性、交互性变化等因素触发，例如启动、切换、按“Home”键等操作导致相应状态改变时触发对应回调。</td><td>通过监测应用内所有Activity的整体状态来触发，关注是否还有Activity处于可见状态（<code>ON_START</code>）或者所有Activity都不可见了（<code>ON_STOP</code>）。</td></tr><tr><td>使用场景</td><td>用于管理单个Activity内的资源初始化、释放，处理Activity自身相关的UI更新、交互逻辑等。例如在<code>onPause</code>暂停视频播放，在<code>onResume</code>恢复播放。</td><td>用于处理应用整体进入前台或后台时的通用逻辑，比如应用进入后台暂停数据同步、传感器监听等服务，进入前台时恢复这些操作。</td></tr><tr><td>代码示例（Kotlin） - 简单示意</td><td></td><td></td></tr></tbody></table><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class MyActivity : AppCompatActivity() &#123;
+    override fun onCreate(savedInstanceState: Bundle?) &#123;
+        super.onCreate(savedInstanceState)
+        &#x2F;&#x2F; 初始化布局等操作
+    &#125;
+    override fun onStart() &#123;
+        super.onStart()
+        &#x2F;&#x2F; 准备显示相关操作
+    &#125;
+    override fun onResume() &#123;
+        super.onResume()
+        &#x2F;&#x2F; 获取焦点，可交互操作
+    &#125;
+    override fun onPause() &#123;
+        super.onPause()
+        &#x2F;&#x2F; 失去焦点，暂停相关操作
+    &#125;
+    override fun onStop() &#123;
+        super.onStop()
+        &#x2F;&#x2F; 完全不可见，释放部分资源
+    &#125;
+    override fun onDestroy() &#123;
+        super.onDestroy()
+        &#x2F;&#x2F; 释放所有资源
+    &#125;
+    override fun onRestart() &#123;
+        super.onRestart()
+        &#x2F;&#x2F; 重新启动相关操作
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ProcessLifecycleOwner
+class MyActivity : AppCompatActivity() &#123;
+    override fun onCreate(savedInstanceState: Bundle?) &#123;
+        super.onCreate(savedInstanceState)
+        &#x2F;&#x2F; 使用代码块形式添加生命周期观察者
+        ProcessLifecycleOwner.get().lifecycle.addObserver(object : DefaultLifecycleObserver &#123;
+            override fun onStop(owner: LifecycleOwner) &#123;
+                super.onStop(owner)
+                Log.d(&quot;MyApp&quot;, &quot;App moved to background&quot;)
+            &#125;
+            override fun onStart(owner: LifecycleOwner) &#123;
+                super.onStart(owner)
+                Log.d(&quot;MyApp&quot;, &quot;App moved to foreground&quot;)
+            &#125;
+        &#125;)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|</p><h3 id="2-3-路由与路由数据传递"><a href="#2-3-路由与路由数据传递" class="headerlink" title="2.3 路由与路由数据传递"></a>2.3 路由与路由数据传递</h3><h4 id="2-3-1-Intent-机制与数据传递"><a href="#2-3-1-Intent-机制与数据传递" class="headerlink" title="2.3.1 Intent 机制与数据传递"></a>2.3.1 Intent 机制与数据传递</h4><p><code>Parcel</code> 是 Android 中用于序列化和反序列化对象的一种机制，在传递对象（如通过 <code>Intent</code> 传递）时，对象需要被拆解成可以存储和传输的形式（序列化），<strong>在接收端再重新组装成对象（反序列化）。</strong></p><p>我们创建一个表示用户信息的 <code>User</code> 数据类，并让它实现 <code>Parcelable</code> 接口，以便可以通过 <code>Intent</code> 传递。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">import android.os.Parcel
+import android.os.Parcelable
+
+data class User(
+    val id: String,
+    val name: String,
+    val age: Int
+) : Parcelable &#123;
+    &#x2F;&#x2F; 这个构造函数就是在接收端从 Parcel 中读取数据来重新创建 User 对象。
+    constructor(parcel: Parcel) : this(
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readInt()
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) &#123;
+        parcel.writeString(id)
+        parcel.writeString(name)
+        parcel.writeInt(age)
+    &#125;
+
+    override fun describeContents(): Int &#123;
+        return 0
+    &#125;
+
+    companion object CREATOR : Parcelable.Creator&lt;User&gt; &#123;
+        override fun createFromParcel(parcel: Parcel): User &#123;
+            return User(parcel)
+        &#125;
+
+        override fun newArray(size: Int): Array&lt;User?&gt; &#123;
+            return arrayOfNulls(size)
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><code>writeToParcel</code> 方法：<ul><li><code>override fun writeToParcel(parcel: Parcel, flags: Int)</code> 负责将 <code>User</code> 对象的各个属性写入到 <code>Parcel</code> 中，以便进行传递。在这个方法里，按照顺序分别调用了 <code>parcel.writeString(id)</code>、<code>parcel.writeString(name)</code> 和 <code>parcel.writeInt(age)</code>，也就是把 <code>id</code>、<code>name</code> 和 <code>age</code> 这三个属性的值依次写入 <code>Parcel</code>，确保在接收端能够按照同样的顺序正确读取并恢复对象。</li></ul></li><li><code>CREATOR</code> 伴生对象及相关方法：<ul><li><code>companion object CREATOR : Parcelable.Creator&lt;User&gt;</code> 是 <code>Parcelable</code> 接口要求实现的一个伴生对象，用于创建 <code>User</code> 类的实例。其中包含两个方法：<ul><li><code>override fun createFromParcel(parcel: Parcel): User</code> 方法会在反序列化时被调用，它的任务就是利用前面提到的从 <code>Parcel</code> 中读取数据的构造函数（<code>constructor(parcel: Parcel)</code>）来创建一个新的 <code>User</code> 对象，也就是返回 <code>User(parcel)</code>。</li><li><code>override fun newArray(size: Int): Array&lt;User?&gt;</code> 方法用于创建一个指定大小的 <code>User</code> 数组，在一些涉及到数组形式的 <code>Parcelable</code> 对象传递场景下会用到，这里简单地返回了一个包含 <code>null</code> 值的指定大小的数组，即 <code>arrayOfNulls(size)</code>。</li></ul></li></ul></li></ul><p>定义两个 Activity，一个是主页面，另一个是用户详情页。主页面包含一个按钮，点击按钮后通过路由导航到用户详情页面，并传递用户数据。</p><p>主页面 Activity 使用 Compose 来构建 UI。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class MainActivity : androidx.activity.ComponentActivity() &#123;
+
+    override fun onCreate(savedInstanceState: Bundle?) &#123;
+        super.onCreate(savedInstanceState)
+        setContent &#123;
+            MyApplicationTheme &#123;
+                Surface(
+                    &#x2F;&#x2F; 省略
+                ) &#123;
+&lt;mark style&#x3D;&quot;background-color: #FFE928&quot;&gt;                    &#x2F;&#x2F; 创建路由 Controller&lt;&#x2F;mark&gt;&lt;mark style&#x3D;&quot;background-color: #FFE928&quot;&gt;                    val navController &#x3D; rememberNavController()&lt;&#x2F;mark&gt;&lt;mark style&#x3D;&quot;background-color: #FFE928&quot;&gt;                    &#x2F;&#x2F; 创建 User 对象，在 MainScreen 中跳转时传入 Navigator&lt;&#x2F;mark&gt;&lt;mark style&#x3D;&quot;background-color: #FFE928&quot;&gt;                    val user &#x3D; User(&quot;1&quot;, &quot;John Doe&quot;, 30)&lt;&#x2F;mark&gt;&lt;mark style&#x3D;&quot;background-color: #FFE928&quot;&gt;                    MainScreen(navController, user)&lt;&#x2F;mark&gt;&lt;mark style&#x3D;&quot;background-color: #FFE928&quot;&gt;                    SetupNavigation(navController)&lt;&#x2F;mark&gt;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+@Composable
+fun MainScreen(navController: NavController, user: User) &#123;
+    Column &#123;
+        Text(text &#x3D; &quot;主页面&quot;)
+        Button(onClick &#x3D; &#123;
+&lt;mark style&#x3D;&quot;background-color: #FFE928&quot;&gt;            &#x2F;&#x2F; 跳转其它页面&lt;&#x2F;mark&gt;&lt;mark style&#x3D;&quot;background-color: #FFE928&quot;&gt;            navController.navigate(&quot;user_detail&#x2F;$user&quot;)&lt;&#x2F;mark&gt;
+        &#125;) &#123;
+            Text(text &#x3D; &quot;查看用户详情&quot;)
+        &#125;
+    &#125;
+&#125;
+
+@Composable
+fun SetupNavigation(navController: NavController) &#123;
+    NavHost(
+        navController &#x3D; navController,
+        startDestination &#x3D; &quot;main&quot;
+    ) &#123;
+        composable(&quot;main&quot;) &#123;
+            val navBackStackEntry &#x3D; it.currentBackStackEntryAsState().value
+            val context &#x3D; LocalContext.current
+            val user &#x3D; navBackStackEntry?.arguments?.getParcelable&lt;User&gt;(&quot;user&quot;)
+            MainScreen(navController, user?: User(&quot;default&quot;, &quot;Default User&quot;, 0))
+        &#125;
+        composable(
+            route &#x3D; &quot;user_detail&#x2F;&#123;user&#125;&quot;,
+            arguments &#x3D; listOf(navArgument(&quot;user&quot;) &#123; type &#x3D; NavType.ParcelableType(User::class.java) &#125;)
+        ) &#123; backStackEntry -&gt;
+            val receivedUser &#x3D; backStackEntry.arguments?.getParcelable&lt;User&gt;(&quot;user&quot;)
+            UserDetailScreen(receivedUser)
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在 <code>MainActivity</code> 的 <code>SetupNavigation</code> 这个可组合函数中，通过 <code>NavHost</code> 来定义整个应用的导航结构。</p><ul><li><code>NavHost</code> 函数接受 <code>navController</code>（用于控制导航操作）和 <code>startDestination</code>（指定起始的导航页面）作为参数。这里起始页面设置为 <code>&quot;main&quot;</code>。</li><li>在 <code>NavHost</code> 内部，通过 <code>composable</code> 函数来定义各个具体的可导航页面。<ul><li>对于 <code>&quot;main&quot;</code> 页面：<ul><li>首先通过 <code>it.currentBackStackEntryAsState().value</code> 获取当前导航栈的状态信息，进而可以获取传递过来的参数（在这个例子中可能是 <code>User</code> 对象）。</li><li>然后将获取到的 <code>User</code> 对象（或者默认的用户对象，如果没有传递过来有效的对象）传递给 <code>MainScreen</code> 可组合函数来展示主页面的 UI 内容。</li></ul></li><li>对于 <code>&quot;user_detail/&#123;user&#125;&quot;</code> 页面：<ul><li>定义了路由参数 <code>&quot;user&quot;</code>，并且指定其类型为 <code>NavType.ParcelableType(User::class.java)</code>，这样就能接收通过路由传递过来的 <code>User</code> 类型的对象。</li><li>在页面的可组合函数内（通过 <code>backStackEntry</code> 获取参数），将接收到的 <code>User</code> 对象传递给 <code>UserDetailScreen</code> 可组合函数来展示用户详情页面的 UI 内容。</li></ul></li></ul></li></ul><p>之后我们再定义一个用户详情 Activity，同样使用 Compose 构建 UI，用于展示接收到的用户信息，并在页面重建（如屏幕旋转等情况）时恢复数据展示。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class UserDetailActivity : androidx.activity.ComponentActivity() &#123;
+
+    override fun onCreate(savedInstanceState: Bundle?) &#123;
+        super.onCreate(savedInstanceState)
+        setContent &#123;
+            MyApplicationTheme &#123;
+                Surface(
+                    &#x2F;&#x2F; 省略
+                ) &#123;
+&lt;mark style&#x3D;&quot;background-color: #FAF390&quot;&gt;                    &#x2F;&#x2F; 从 savedInstanceState  或者 Intent 中获取 User，并加载 UI&lt;&#x2F;mark&gt;&lt;mark style&#x3D;&quot;background-color: #FAF390&quot;&gt;                    val user &#x3D; if (savedInstanceState &#x3D;&#x3D; null) &#123;&lt;&#x2F;mark&gt;&lt;mark style&#x3D;&quot;background-color: #FAF390&quot;&gt;                        intent.getParcelableExtra(&quot;user&quot;)&lt;&#x2F;mark&gt;&lt;mark style&#x3D;&quot;background-color: #FAF390&quot;&gt;                    &#125; else &#123;&lt;&#x2F;mark&gt;&lt;mark style&#x3D;&quot;background-color: #FAF390&quot;&gt;                        savedInstanceState.getParcelable(&quot;user&quot;)&lt;&#x2F;mark&gt;&lt;mark style&#x3D;&quot;background-color: #FAF390&quot;&gt;                    &#125;&lt;&#x2F;mark&gt;&lt;mark style&#x3D;&quot;background-color: #FAF390&quot;&gt;                    UserDetailScreen(user)&lt;&#x2F;mark&gt;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+
+    &#x2F;&#x2F; 使用 onSaveInstanceState 进行数据恢复
+    override fun onSaveInstanceState(outState: Bundle) &#123;
+        super.onSaveInstanceState(outState)
+        val user &#x3D; intent.getParcelableExtra(&quot;user&quot;)
+        outState.putParcelable(&quot;user&quot;, user)
+    &#125;
+&#125;
+
+@Composable
+fun UserDetailScreen(user: User?) &#123;
+    var currentUser by remember &#123; mutableStateOf(user) &#125;
+    LaunchedEffect(key1 &#x3D; user) &#123;
+        currentUser &#x3D; user
+    &#125;
+    Column &#123;
+        Text(text &#x3D; &quot;用户详情页面&quot;)
+        currentUser?.let &#123;
+            Text(text &#x3D; &quot;姓名: $&#123;it.name&#125;&quot;)
+            Text(text &#x3D; &quot;年龄: $&#123;it.age&#125;&quot;)
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>给到的例子中充分体现了「数据传递」和「数据恢复」两大功能：</p><ul><li>数据传递：从主页面传递 <code>User</code> 对象到用户详情页面时，在 <code>MainScreen</code> 中通过 <code>navController.navigate</code> 把对象放在路由路径里传递，在 <code>SetupNavigation</code> 中针对 <code>&quot;user_detail/&#123;user&#125;&quot;</code> 路由定义的地方，正确地解析并获取传递过来的 <code>User</code> 对象，然后传递给 <code>UserDetailScreen</code> 用于展示。</li><li>数据恢复：在 <code>UserDetailActivity</code> 的 <code>onSaveInstanceState</code> 方法中，依然将接收到的 <code>User</code> 对象保存到 <code>outState</code> 中，以便在页面重建（如屏幕旋转等情况）时能恢复数据。在 <code>UserDetailScreen</code> 可组合函数里，使用 <code>LaunchedEffect</code> 和 <code>remember</code> 等 Compose 特性来处理数据变化，确保当接收到新的用户数据（比如页面重建后恢复的数据）时能正确更新 UI 展示，以此提供良好的用户体验。</li></ul><h4 id="2-3-2-XML、Compose-Navigation-DSL-管理路由"><a href="#2-3-2-XML、Compose-Navigation-DSL-管理路由" class="headerlink" title="2.3.2 XML、Compose Navigation DSL 管理路由"></a>2.3.2 XML、Compose Navigation DSL 管理路由</h4><p>部分老旧项目中仍然使用 XML 管理路由。例如上个 case 就可以像这样使用路由：</p><pre class="line-numbers language-XML" data-language="XML"><code class="language-XML">&lt;navigation xmlns:android&#x3D;&quot;http:&#x2F;&#x2F;schemas.android.com&#x2F;apk&#x2F;res&#x2F;android&quot;
+    xmlns:app&#x3D;&quot;http:&#x2F;&#x2F;schemas.android.com&#x2F;apk&#x2F;res&#x2F;app&quot;
+    xmlns:tools&#x3D;&quot;http:&#x2F;&#x2F;schemas.android.com&#x2F;apk&#x2F;res&#x2F;tools&quot;
+    app:startDestination&#x3D;&quot;main&quot;&gt;
+
+    &lt;composable
+        android:id&#x3D;&quot;main&quot;
+        android:name&#x3D;&quot;com.example.myapplication.MainScreen&quot;
+        app:route&#x3D;&quot;main&quot;&gt;
+    &lt;&#x2F;composable&gt;
+
+    &lt;composable
+        android:id&#x3D;&quot;user_detail&quot;
+        android:name&#x3D;&quot;com.example.myapplication.UserDetailScreen&quot;
+        app:route&#x3D;&quot;user_detail&#x2F;&#123;user&#125;&quot;
+        app:arguments&#x3D;&quot;@array&#x2F;user_detail_arguments&quot;&gt;
+    &lt;&#x2F;composable&gt;
+
+    &lt;action
+        android:id&#x3D;&quot;action_main_to_user_detail&quot;
+        app:destination&#x3D;&quot;@id&#x2F;user_detail&quot;
+        app:popUpTo&#x3D;&quot;@id&#x2F;main&quot;
+        app:popUpToInclusive&#x3D;&quot;false&quot;&gt;
+    &lt;&#x2F;action&gt;
+    &lt;!-- 其他相关配置 --&gt;
+&lt;&#x2F;navigation&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><strong>传统项目和大型团队协作场景</strong>：在一些已经存在的大型Android项目中，XML路由管理仍然被广泛使用。这些项目可能有较长的开发周期和复杂的团队协作结构。XML提供了一种清晰、易于理解的方式来定义整个应用的导航架构，不同的开发人员可以通过查看XML文件快速了解页面之间的跳转关系。例如，一个拥有多个模块和众多Activity的金融类应用，使用XML来定义路由可以使得模块之间的导航逻辑一目了然。</li><li><strong>与 Android 原生组件集成场景</strong>：当应用需要深度集成Android原生的组件（如通知栏跳转、系统快捷方式跳转等）时，XML路由管理可以更好地与系统原生的Intent机制相结合。例如，通过在XML中定义好的路由路径，当用户点击通知栏中的消息时，系统可以根据XML中的配置准确地跳转到应用内对应的页面。</li></ul><p><strong>Compose Navigation DSL 是逐渐兴起的替代方案或补充方式。</strong></p><ul><li><strong>代码驱动的路由管理（如Compose Navigation DSL）</strong>：在使用Jetpack Compose构建UI的项目中，Compose Navigation DSL提供了一种代码驱动的路由管理方式。开发者可以通过编写Kotlin代码来定义导航图，这种方式更加灵活，并且与Compose的编程风格紧密结合。例如，在一个完全基于Compose构建的小型工具类应用中，通过代码定义路由可以使导航逻辑与UI组件的构建更加紧密地集成在一起。</li><li><strong>动态路由管理（基于运行时条件）</strong>：有些应用需要根据用户权限、设备状态或者业务逻辑动态地生成路由路径。在这种情况下，代码中动态构建路由的方式就显得更加合适。比如，一个具有用户角色权限系统的企业级应用，不同角色的用户登录后，根据其权限动态生成不同的导航菜单和路由路径，这种情况下通过代码动态控制路由比固定的XML路由更加灵活。</li></ul></div><hr><div class="reprint" id="reprint-statement"><div class="reprint__author"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-user">文章作者: </i></span><span class="reprint-info"><a href="/about" rel="external nofollow noreferrer">海星来来</a></span></div><div class="reprint__type"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-link">文章链接: </i></span><span class="reprint-info"><a href="https://blog.pengdonglai.com/2025/01/29/android-3/">https://blog.pengdonglai.com/2025/01/29/android-3/</a></span></div><div class="reprint__notice"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-copyright">版权声明: </i></span><span class="reprint-info">本博客所有文章除特別声明外，均采用 <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a> 许可协议。转载请注明来源 <a href="/about" target="_blank">海星来来</a> !</span></div></div><script async defer>document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }</script><div class="tag_share" style="display:block"><div class="post-meta__tag-list" style="display:inline-block"><div class="article-tag"><a href="/tags/Android/"><span class="chip bg-color">Android</span> </a><a href="/tags/Kotlin/"><span class="chip bg-color">Kotlin</span> </a><a href="/tags/Jetpack-Compose/"><span class="chip bg-color">Jetpack Compose</span> </a><a href="/tags/Activity/"><span class="chip bg-color">Activity</span></a></div></div><div class="post_share" style="zoom:80%;width:fit-content;display:inline-block;float:right;margin:-.15rem 0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/share/css/share.min.css"><div id="article-share"><div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/share/js/social-share.min.js"></script></div></div></div></div></div><article id="prenext-posts" class="prev-next articles"><div class="row article-row"><div class="article col s12 m6" data-aos="fade-up"><div class="article-badge left-badge text-color"><i class="fas fa-chevron-left"></i>&nbsp;上一篇</div><div class="card"><a href="/2025/01/30/2024-summary/"><div class="card-image"><img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/20.webp" class="responsive-img" alt="海星来来的 2024 总结"> <span class="card-title">海星来来的 2024 总结</span></div></a><div class="card-content article-content"><div class="summary block-with-text">年度总结是一种随大流的举动。</div><div class="publish-info"><span class="publish-date"><i class="far fa-clock fa-fw icon-date"></i>2025-01-30 </span><span class="publish-author"><i class="fas fa-bookmark fa-fw icon-category"></i> <a href="/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" class="post-category">碎碎念</a></span></div></div><div class="card-action article-tags"><a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"><span class="chip bg-color">碎碎念</span></a></div></div></div><div class="article col s12 m6" data-aos="fade-up"><div class="article-badge right-badge text-color">下一篇&nbsp;<i class="fas fa-chevron-right"></i></div><div class="card"><a href="/2025/01/29/android-1/"><div class="card-image"><img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/8.webp" class="responsive-img" alt="安卓（1）-语法基础：Kotlin ＆ Java ＆ TS 对比"> <span class="card-title">安卓（1）-语法基础：Kotlin ＆ Java ＆ TS 对比</span></div></a><div class="card-content article-content"><div class="summary block-with-text">安卓小白，在线性感发牌</div><div class="publish-info"><span class="publish-date"><i class="far fa-clock fa-fw icon-date"></i>2025-01-29 </span><span class="publish-author"><i class="fas fa-bookmark fa-fw icon-category"></i> <a href="/categories/Android/" class="post-category">Android </a><a href="/categories/Android/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-category">基础语法</a></span></div></div><div class="card-action article-tags"><a href="/tags/Android/"><span class="chip bg-color">Android</span> </a><a href="/tags/Kotlin/"><span class="chip bg-color">Kotlin</span> </a><a href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"><span class="chip bg-color">基础语法</span></a></div></div></div></div></article></div><script>$("#articleContent").on("copy",function(e){var n,t,o,i;void 0!==window.getSelection&&((""+(n=window.getSelection())).length<Number.parseInt("80")||(t=document.getElementsByTagName("body")[0],(o=document.createElement("div")).style.position="absolute",o.style.left="-99999px",t.appendChild(o),o.appendChild(n.getRangeAt(0).cloneContents()),"PRE"===n.getRangeAt(0).commonAncestorContainer.nodeName&&(o.innerHTML="<pre>"+o.innerHTML+"</pre>"),i=document.location.href,o.innerHTML+='<br />来源: 海祇岛的珊瑚森林<br />文章作者: 海星来来<br />文章链接: <a href="'+i+'">'+i+"</a><br />本文章著作权归作者所有，任何形式的转载都请注明出处。",n.selectAllChildren(o),window.setTimeout(function(){t.removeChild(o)},200)))})</script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/codeBlock/codeBlockFuction.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/codeBlock/codeLang.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/codeBlock/codeCopy.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/codeBlock/codeShrink.js"></script></div><div id="toc-aside" class="expanded col l3 hide-on-med-and-down"><div class="toc-widget card"><div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div><div id="toc-content"></div></div></div></div><div id="floating-toc-btn" class="hide-on-med-and-down"><a class="btn-floating btn-large bg-color"><i class="fas fa-list-ul"></i></a></div><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/tocbot/tocbot.min.js"></script><script>$(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });</script></main><footer class="page-footer bg-color"><div class="container row center-align" style="margin-bottom:0!important"><div class="col s12 m8 l8 copy-right">Copyright&nbsp;&copy; <span id="year">2019-2025</span> <span id="year">2019</span> <a href="/about" target="_blank">海星来来</a> |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a><br>&nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">149.4k</span>&nbsp;字 <span id="busuanzi_container_site_pv">|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv" class="white-color"></span>&nbsp;次 </span><span id="busuanzi_container_site_uv">|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv" class="white-color"></span>&nbsp;人</span><br><br></div><div class="col s12 m4 l4 social-link social-statis"><a href="https://github.com/umaru2001" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50"><i class="fab fa-github"></i> </a><a href="mailto:donglaistarfish@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50"><i class="fas fa-envelope-open"></i> </a><a href="https://www.zhihu.com/people/hao-ba-50-81-68" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/hao-ba-50-81-68" data-position="top" data-delay="50"><i class="fab fa-zhihu1">知</i> </a><a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50"><i class="fas fa-rss"></i></a></div></div></footer><div class="progress-bar"></div><div id="searchModal" class="modal"><div class="modal-content"><div class="search-header"><span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span> <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input"></div><div id="searchResult"></div></div></div><script>$(function(){!function(t,s,i){"use strict";$.ajax({url:t,dataType:"xml",success:function(t){var e=$("entry",t).map(function(){return{title:$("title",this).text(),content:$("content",this).text(),url:$("url",this).text()}}).get(),n=document.getElementById(s),r=document.getElementById(i);n.addEventListener("input",function(){var f='<ul class="search-result-list">',m=this.value.trim().toLowerCase().split(/[\s\-]+/);r.innerHTML="",this.value.trim().length<=0||(e.forEach(function(t){var n,e,r,s,i,l=!0,a=t.title.trim().toLowerCase(),c=t.content.trim().replace(/<[^>]+>/g,"").toLowerCase(),u=0===(u=t.url).indexOf("/")?t.url:"/"+u,o=-1,h=-1;""!==a&&""!==c&&m.forEach(function(t,e){n=a.indexOf(t),o=c.indexOf(t),n<0&&o<0?l=!1:(o<0&&(o=0),0===e&&(h=o))}),l&&(f+="<li><a href='"+u+"' class='search-result-title'>"+a+"</a>",e=t.content.trim().replace(/<[^>]+>/g,""),0<=h&&(s=h+80,(r=h-20)<0&&(r=0),0===r&&(s=100),s>e.length&&(s=e.length),i=e.substr(r,s),m.forEach(function(t){var e=new RegExp(t,"gi");i=i.replace(e,'<em class="search-keyword">'+t+"</em>")}),f+='<p class="search-result">'+i+"...</p>"),f+="</li>")}),f+="</ul>",r.innerHTML=f)})}})}("/search.xml","searchInput","searchResult")})</script><div id="backTop" class="top-scroll"><a class="btn-floating btn-large waves-effect waves-light" href="#!"><i class="fas fa-arrow-up"></i></a></div><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/materialize/materialize.min.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/masonry/masonry.pkgd.min.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/aos/aos.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/scrollprogress/scrollProgress.min.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/js/matery.js"></script><script src="/live2d-widget/autoload.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/others/clicklove.js" async></script><script async src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/others/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/js/tw_cn.js"></script><script>var defaultEncoding=2,translateDelay=0,cookieDomain="https://blog.pengdonglai.com",msgToTraditionalChinese="繁",msgToSimplifiedChinese="简",translateButtonId="translateLink";translateInitilization()</script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/instantpage/instantpage.js" type="module"></script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 3,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,d=o();function o(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=o());for(var e,i=0;i<d.length;i++)0<=(e=(e=d[i]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,a,n,o=d[i];e=function(){d=d.filter(function(t){return o!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(o)},(t=o).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,n=t.getAttribute("data-original"),a.onload=function(){t.src=n,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=n},t.src!==n&&(a.src=n)))}()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)}(this);</script></body></html>

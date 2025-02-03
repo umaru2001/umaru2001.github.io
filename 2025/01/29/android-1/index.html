@@ -1,0 +1,1069 @@
+<!DOCTYPE HTML><html lang="zh-CN"><head><meta charset="utf-8"><meta name="keywords" content="Android, JVM"><meta name="description" content="这里是海星来来的博客，虽然他是一个程序员，但是这篇博客应该会很少更新技术相关的东西，因为这太无聊了。"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="renderer" content="webkit|ie-stand|ie-comp"><meta name="mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#ffffff"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>安卓（1）-语法基础：Kotlin ＆ Java ＆ TS 对比 | 海祇岛的珊瑚森林</title><link rel="manifest" href="/manifest.json"><link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.webp"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/awesome/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/materialize/materialize.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/aos/aos.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/animate/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/lightGallery/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/css/matery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/css/my.css"><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/jquery/jquery.min.js"></script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="海祇岛的珊瑚森林" type="application/atom+xml"></head><body><script>// 每天切换 banner 图.  Switch banner image every day.
+      const _dayOfWeek = new Date().getDay();
+      if (_dayOfWeek === 1 || _dayOfWeek === 6) {
+        document.body.classList.add('purple');
+      } else if (_dayOfWeek >= 2 && _dayOfWeek <= 3) {
+        document.body.classList.add('orange');
+      } else if (_dayOfWeek == 4) {
+        document.body.classList.add('blue');
+      }
+      _setCookie = (name, value, days) => {
+        if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          var expires = "; expires=" + date.toGMTString()
+        } else var expires = "";
+        document.cookie = name + "https://pengdonglaicom=" + value + expires + "; path=/"
+      }
+
+      _getCookie = (name) => {
+        var nameEQ = name + "https://pengdonglaicom=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length)
+        }
+        return null
+      }
+
+      window.DarkReader = {
+        darkmode: _getCookie('targetDarkmode') === '1',
+        changeMode: function () {
+            if (this.darkmode) {
+                document.body.classList.remove('black');
+                const d = new Date().getDay();
+                if (d === 1 || d === 6) {
+                    document.body.classList.add('purple');
+                } else if (d >= 2 && d <= 3) {
+                    document.body.classList.add('orange');
+                } else if (d == 4) {
+                    document.body.classList.add('blue');
+                }
+                this.darkmode = false;
+                _setCookie('targetDarkmode', 0, 7);
+                window.changePostCalendarDarkMode && changePostCalendarDarkMode();
+            } else {
+                document.body.classList.remove('purple', 'orange', 'blue');
+                document.body.classList.add('black');
+                this.darkmode = true;
+                _setCookie('targetDarkmode', 1, 7);
+                window.changePostCalendarDarkMode && changePostCalendarDarkMode();
+            }
+        }
+      }
+      if (_getCookie('targetDarkmode') === '1') {
+          document.body.classList.remove('purple', 'orange', 'blue');
+          document.body.classList.add('black');
+      }</script><header class="navbar-fixed"><nav id="headNav" class="bg-color nav-transparent"><div id="navContainer" class="nav-wrapper container"><div class="brand-logo"><a href="/" class="waves-effect waves-light"><img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/favicon.webp" class="logo-img" alt="LOGO"> <span class="logo-span">海祇岛的珊瑚森林</span></a></div><a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a><ul class="right nav-menu"><li class="hide-on-med-and-down nav-item"><a href="/" class="waves-effect waves-light"><i class="fas fa-home" style="zoom:.6"></i> <span>首页</span></a></li><li class="hide-on-med-and-down nav-item"><a href="" class="waves-effect waves-light"><i class="fas fa-folder-plus" style="zoom:.6"></i> <span>文章</span> <i class="fas fa-chevron-down" aria-hidden="true" style="zoom:.6"></i></a><ul class="sub-nav menus_item_child"><li><a href="/tags"><i class="fas fa-tags fa-fw" style="margin-top:-20px;zoom:.6"></i> <span>标签</span></a></li><li><a href="/archives"><i class="fas fa-archive fa-fw" style="margin-top:-20px;zoom:.6"></i> <span>归档</span></a></li><li><a href="/categories"><i class="fas fa-bookmark fa-fw" style="margin-top:-20px;zoom:.6"></i> <span>分类</span></a></li><li><a target="_blank" rel="noopener" href="http://docs.starfishdl.site"><i class="fas fa-file fa-fw" style="margin-top:-20px;zoom:.6"></i> <span>文档站</span></a></li></ul></li><li class="hide-on-med-and-down nav-item"><a href="/about" class="waves-effect waves-light"><i class="fas fa-user-circle" style="zoom:.6"></i> <span>关于</span></a></li><li class="hide-on-med-and-down nav-item"><a href="" class="waves-effect waves-light"><i class="fas fa-list" style="zoom:.6"></i> <span>多媒体</span> <i class="fas fa-chevron-down" aria-hidden="true" style="zoom:.6"></i></a><ul class="sub-nav menus_item_child"><li><a href="/musics"><i class="fas fa-music fa-fw" style="margin-top:-20px;zoom:.6"></i> <span>音乐</span></a></li><li><a target="_blank" rel="noopener" href="http://pengdonglai.com/?show_drawer=true"><i class="fas fa-address-book fa-fw" style="margin-top:-20px;zoom:.6"></i> <span>收藏链接</span></a></li><li><a href="/bangumis"><i class="fas fa-film fa-fw" style="margin-top:-20px;zoom:.6"></i> <span>追番</span></a></li></ul></li><li><a href="#searchModal" class="modal-trigger waves-effect waves-light"><i id="searchIcon" class="fas fa-search" title="搜索" style="zoom:.85"></i></a></li><li><a href="javascript:DarkReader?.changeMode()" class="waves-effect waves-light"><i id="searchIcon" class="fas darkmode-icon" title="暗黑模式开关" style="zoom:.85"></i></a></li></ul><div id="mobile-nav" class="side-nav sidenav"><div class="mobile-head bg-color"><img alt="avatar" src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/avatar.webp" class="logo-img circle responsive-img"><div class="logo-name">海祇岛的珊瑚森林</div><div class="logo-desc">这里是海星来来的博客，虽然他是一个程序员，但是这篇博客应该会很少更新技术相关的东西，因为这太无聊了。</div></div><ul class="menu-list mobile-menu-list"><li class="m-nav-item"><a href="/" class="waves-effect waves-light"><i class="fa-fw fas fa-home"></i> 首页</a></li><li class="m-nav-item"><a href="javascript:;"><i class="fa-fw fas fa-folder-plus"></i> 文章 <span class="m-icon"><i class="fas fa-chevron-right"></i></span></a><ul><li><a href="/tags" style="margin-left:75px"><i class="fa fas fa-tags fa-fw" style="position:absolute;left:50px"></i> <span>标签</span></a></li><li><a href="/archives" style="margin-left:75px"><i class="fa fas fa-archive fa-fw" style="position:absolute;left:50px"></i> <span>归档</span></a></li><li><a href="/categories" style="margin-left:75px"><i class="fa fas fa-bookmark fa-fw" style="position:absolute;left:50px"></i> <span>分类</span></a></li><li><a target="_blank" rel="noopener" href="http://docs.starfishdl.site" style="margin-left:75px"><i class="fa fas fa-file fa-fw" style="position:absolute;left:50px"></i> <span>文档站</span></a></li></ul></li><li class="m-nav-item"><a href="/about" class="waves-effect waves-light"><i class="fa-fw fas fa-user-circle"></i> 关于</a></li><li class="m-nav-item"><a href="javascript:;"><i class="fa-fw fas fa-list"></i> 多媒体 <span class="m-icon"><i class="fas fa-chevron-right"></i></span></a><ul><li><a href="/musics" style="margin-left:75px"><i class="fa fas fa-music fa-fw" style="position:absolute;left:50px"></i> <span>音乐</span></a></li><li><a target="_blank" rel="noopener" href="http://pengdonglai.com/?show_drawer=true" style="margin-left:75px"><i class="fa fas fa-address-book fa-fw" style="position:absolute;left:50px"></i> <span>收藏链接</span></a></li><li><a href="/bangumis" style="margin-left:75px"><i class="fa fas fa-film fa-fw" style="position:absolute;left:50px"></i> <span>追番</span></a></li></ul></li><li><div class="divider"></div></li><li><a href="https://github.com/umaru2001" class="waves-effect waves-light" target="_blank"><i class="fab fa-github-square fa-fw"></i>来看看我呀~</a></li></ul></div></div><style>.nav-transparent .github-corner{display:none!important}.github-corner{position:absolute;z-index:10;top:0;right:0;border:0;transform:scale(1.1)}.github-corner svg{color:#000;fill:#fff;height:64px;width:64px}.github-corner:hover .octo-arm{animation:a .56s ease-in-out}.github-corner .octo-arm{animation:none}@keyframes a{0%,to{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}</style><a href="https://github.com/umaru2001" class="github-corner tooltipped hide-on-med-and-down" target="_blank" data-tooltip="来看看我呀~" data-position="left" data-delay="50"><svg viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a></nav></header><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/cryptojs/crypto-js.min.js"></script><script>(function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();</script><div class="bg-cover pd-header post-cover" style="background-image:url(https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/8.webp);background-position:50% 25%"><div class="container" style="right:0;left:0"><div class="row"><div class="col s12 m12 l12"><div class="brand"><h1 class="description center-align post-title">安卓（1）-语法基础：Kotlin ＆ Java ＆ TS 对比</h1></div></div></div></div></div><main class="post-container content"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/tocbot/tocbot.css"><style>#articleContent h1::before,#articleContent h2::before,#articleContent h3::before,#articleContent h4::before,#articleContent h5::before,#articleContent h6::before{display:block;content:" ";height:100px;margin-top:-100px;visibility:hidden}#articleContent :focus{outline:0}.toc-fixed{position:fixed;top:64px}.toc-widget{width:345px;padding-left:20px}.toc-widget .toc-title{padding:35px 0 15px 17px;font-size:1.5rem;font-weight:700;line-height:1.5rem}.toc-widget ol{padding:0;list-style:none}#toc-content{padding-bottom:30px;overflow:scroll;max-height:75vh}#toc-content::-webkit-scrollbar{background-color:transparent}#toc-content::-webkit-scrollbar-corner{background-color:transparent}#toc-content ol{padding-left:10px}#toc-content ol li{padding-left:10px}#toc-content .toc-link:hover{color:#42b983;font-weight:700;text-decoration:underline;font-size:1.1rem;line-height:30px}.blue #toc-content .toc-link:hover{color:#4169e1}.purple #toc-content .toc-link:hover{color:#6a5acd}.orange #toc-content .toc-link:hover{color:#ff8c00}.black #toc-content .toc-link:hover{color:#faebd7}#toc-content .toc-link::before{background-color:transparent;max-height:25px;position:absolute;right:23.5vw;display:block}#toc-content .toc-list-item.is-active-li{border-left:5px solid #ccc!important;border-color:#42b983!important;visibility:visible;background-color:rgba(238,243,252,.5)}.black #toc-content .toc-list-item.is-active-li{border-color:#faebd7!important;background-color:rgb(68 68 68 / 61%)}.blue #toc-content .toc-list-item.is-active-li{border-color:#4169e1!important}.purple #toc-content .toc-list-item.is-active-li{border-color:#6a5acd!important}.orange #toc-content .toc-list-item.is-active-li{border-color:#ff8c00!important}#toc-content ol.toc-list.is-collapsible{border-left:2px solid #9fabb4;margin:0 0 0 .5em}.black #toc-content ol.toc-list.is-collapsible{border-left:2px solid #898175}#toc-content .is-active-link{color:#0f9d58}.blue #toc-content .is-active-link{color:#4169e1}.purple #toc-content .is-active-link{color:#6a5acd}.orange #toc-content .is-active-link{color:#ff8c00}.black #toc-content .is-active-link{color:#faebd7}#floating-toc-btn{position:fixed;right:15px;bottom:76px;padding-top:15px;margin-bottom:0;z-index:998}#floating-toc-btn .btn-floating{width:48px;height:48px;background:#404040}#floating-toc-btn .btn-floating i{line-height:48px;font-size:1.4rem}</style><div class="row"><div id="main-content" class="col s12 m12 l9"><div id="artDetail"><div class="card"><div class="card-content article-info"><div class="row tag-cate"><div class="col s7"><div class="article-tag"><a href="/tags/Android/"><span class="chip bg-color">Android</span> </a><a href="/tags/Kotlin/"><span class="chip bg-color">Kotlin</span> </a><a href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"><span class="chip bg-color">基础语法</span></a></div></div><div class="col s5 right-align"><div class="post-cate"><i class="fas fa-bookmark fa-fw icon-category"></i> <a href="/categories/Android/" class="post-category">Android </a><a href="/categories/Android/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-category">基础语法</a></div></div></div><div class="post-info"><div class="post-date info-break-policy"><i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2025-01-29</div><div class="info-break-policy"><i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 12.4k</div></div></div><hr class="clearfix"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/prism/prism.css"><div class="card-content article-card-content"><div id="articleContent"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><blockquote><p>2024 年我开始逐渐介入客户端的研发，因此我开始学习客户端的知识。<br>从服务端开始，转到前端来其实完全代表着我的编码风格的转变。我喜欢 UI 编程那「所见即所得」的惊艳，也喜欢人机交互相关的内容。<br>做 C 端 App，前端技术实际上更多是一种强行「卷」过来的结果：首先，基础肯定是客户端技术 Android&#x2F;iOS，但是前端的作用越来越清晰。当然，目前的大环境下走入前端甚至客户端开发通常被认为是一种开倒车的举动。但这种东西谁又说得好呢——难道做算法调优几个版本实验指标波动，亦或者做服务端大半夜被机器人打电话就能让人兴奋了吗？<br>人总有无知的时候，在已知信息差的时候我们总有一天要为认知买单。所以就让我们为梦想，做出一次不那么受到束缚的选择吧。<br>这是安卓系列的第一期，它包含以下内容：<br><a href="/2025/01/29/android-1/">安卓（1）-语法基础：Kotlin ＆ Java ＆ TS 对比</a><br><a href="/2025/01/29/android-2/">安卓（2）-语法基础：Kotlin 常用库（1）</a><br><a href="/2025/01/29/android-3/">安卓（3）-实用篇：UI（1）</a><br>我使用了 AI 来辅助我创作了一些重复性的工作，第一期内容会以相关知识的罗列为主，所以最好的阅读方式是阅读后进行查漏补缺。<br>希望大家可以喜欢这些教程！</p></blockquote><p>前端研发学习客户端开发很有必要，主要体现在以下几方面：</p><ul><li>拓宽技术栈，增强竞争力：当前技术就业市场青睐全栈开发能力，掌握客户端开发知识，能让前端开发者从专注浏览器端用户界面，拓展到移动、桌面等多种客户端平台的开发，满足更多类型项目的需求。在求职和职业发展中更具优势，尤其对于追求低成本、高效率的企业，一专多能的开发者更受欢迎。</li><li>提升用户体验理解：用户期望不同设备间体验一致，学习客户端开发能让前端开发者参与跨平台应用开发，实现网页端和客户端体验的无缝过渡。同时，客户端开发涉及更多硬件资源利用和性能优化技巧，有助于前端开发者将这些理念应用到前端开发中，提升整体用户体验。</li><li>更好地进行团队协作：在包含多种角色的开发团队里，了解客户端开发能使前端开发者与客户端开发人员沟通更顺畅，减少因技术认知差异产生的沟通障碍，提高协作效率。在项目规划阶段，还能结合前端和客户端的特点，提出更合理的技术方案，避免后期出现平台开发不协调的问题。</li></ul><p>目标：</p><ul><li>语言能力：for 前端同学，能看懂 Java 代码，能上手写 Kotlin 代码。</li></ul><h3 id="Kotlin-＆-Java"><a href="#Kotlin-＆-Java" class="headerlink" title="Kotlin ＆ Java"></a>Kotlin ＆ Java</h3><p><strong>Kotlin</strong>是一种在 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Java%E8%99%9B%E6%93%AC%E6%A9%9F">Java 虚拟机</a>上执行的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B">静态类型</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80">编程语言</a>，它也可以被编译成为 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JavaScript">JavaScript</a> 源代码。它主要是由 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JetBrains">JetBrains</a> 在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%BF%84%E7%BE%85%E6%96%AF">俄罗斯</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%81%96%E5%BD%BC%E5%BE%97%E5%A0%A1">圣彼得堡</a>的开发团队所发展出来的编程语言，其名称来自于圣彼得堡附近的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%A7%91%E7%89%B9%E6%9E%97%E5%B3%B6">科特林岛</a>。</p><h3 id="Kotlin-的优势（对比-Java）"><a href="#Kotlin-的优势（对比-Java）" class="headerlink" title="Kotlin 的优势（对比 Java）"></a>Kotlin 的优势（对比 Java）</h3><p><strong>富有表现力且简洁</strong> 您可以使用更少的代码实现更多的功能。表达自己的想法，少编写样板代码。在使用 Kotlin 的专业开发者中，有 67% 的人反映其工作效率有所提高。</p><p><strong>更安全的代码</strong> Kotlin 有许多语言功能，可帮助您避免 null 指针异常等常见编程错误。包含 Kotlin 代码的 Android 应用发生崩溃的可能性降低了 20%。</p><p><strong>可互操作</strong> 您可以在 Kotlin 代码中调用 Java 代码，或者在 Java 代码中调用 Kotlin 代码。Kotlin 可完全与 Java 编程语言互操作，因此您可以根据需要在项目中添加任意数量的 Kotlin 代码。</p><p><strong>结构化并发</strong> Kotlin 协程让异步代码像阻塞代码一样易于使用。协程可大幅简化后台任务管理，例如网络调用、本地数据访问等任务的管理。</p><h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><h4 id="1-1-变量、常量声明"><a href="#1-1-变量、常量声明" class="headerlink" title="1.1 变量、常量声明"></a>1.1 变量、常量声明</h4><p>在 Kotlin 中，可以使用 val 或 var 关键字声明变量。var 声明的变量可以在程序执行期间重新赋值，而 val 声明的变量则不能重新赋值，使用方式跟 TypeScript 类似。</p><ul><li><p>TypeScript</p></li><li><p><strong>常量</strong>：使用 <code>const</code> 声明。</p></li><li><p><strong>变量</strong>：使用 <code>let</code> 或 <code>var</code> 声明。</p></li></ul><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">class</span> <span class="token class-name">Example</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 常量</span>
+    <span class="token keyword">static</span> <span class="token keyword">readonly</span> <span class="token constant">CONSTANT_VALUE</span><span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    <span class="token comment">// 变量</span>
+    variableValue<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>variableValue <span class="token operator">=</span> value<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><p>Java</p></li><li><p><strong>常量</strong>：使用 <code>final</code> 关键字声明。</p></li><li><p><strong>变量</strong>：可使用 <code>int</code>、<code>String</code> 等基本类型或对象类型声明。</p></li></ul><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Example</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 常量</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token constant">CONSTANT_VALUE</span> <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    <span class="token comment">// 变量</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> variableValue<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token class-name">Example</span><span class="token punctuation">(</span><span class="token keyword">int</span> value<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>variableValue <span class="token operator">=</span> value<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><p>Kotlin</p></li><li><p><strong>常量</strong>：使用 <code>val</code> 声明（不可变），使用 <code>const val</code> 声明编译时常量。</p></li><li><p><strong>变量</strong>：使用 <code>var</code> 声明（可变）。</p></li></ul><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">class</span> <span class="token function">Example</span><span class="token punctuation">(</span>value<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 常量</span>
+    <span class="token keyword">companion</span> <span class="token keyword">object</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> <span class="token keyword">val</span> CONSTANT_VALUE <span class="token operator">=</span> <span class="token number">10</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 变量</span>
+    <span class="token keyword">var</span> variableValue<span class="token operator">:</span> Int <span class="token operator">=</span> value
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="1-2-变量类型"><a href="#1-2-变量类型" class="headerlink" title="1.2 变量类型"></a>1.2 变量类型</h4><h5 id="1-2-1-基本类型"><a href="#1-2-1-基本类型" class="headerlink" title="1.2.1 基本类型"></a>1.2.1 基本类型</h5><ol><li>TypeScript</li></ol><ul><li><strong>基本类型</strong>包括 <code>number</code>, <code>boolean</code>, <code>string</code>, <code>bigint</code>, <code>symbol</code>, <code>null</code>, <code>undefined</code>。</li><li>可以使用 <code>null</code> 和 <code>undefined</code>，类型可以声明为可选的。</li></ul><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">let</span> num<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment">// 基本类型</span>
+<span class="token keyword">let</span> nullableNum<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token keyword">null</span> <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span> <span class="token comment">// 可为 null</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><ol start="2"><li>Java</li></ol><ul><li><strong>基本类型</strong>有 <code>int</code>, <code>boolean</code>, <code>char</code>, <code>byte</code>, <code>short</code>, <code>long</code>, <code>float</code>, <code>double</code>。</li><li>使用包装类来处理 <code>null</code> 值，例如 <code>Integer</code>。</li></ul><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment">// 基本类型</span>
+<span class="token class-name">Integer</span> nullableNum <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span> <span class="token comment">// 包装类</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><ol start="3"><li>Kotlin</li></ol><ul><li><strong>基本类型</strong>使用 <code>Int</code>, <code>Boolean</code>, <code>Char</code>, <code>Byte</code>, <code>Short</code>, <code>Long</code>, <code>Float</code>, <code>Double</code>。</li><li>默认不可为 <code>null</code>，使用 <code>?</code> 表示可为 <code>null</code>。</li></ul><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> num<span class="token operator">:</span> Int <span class="token operator">=</span> <span class="token number">42</span> <span class="token comment">// 基本类型</span>
+<span class="token keyword">val</span> nullableNum<span class="token operator">:</span> Int<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span> <span class="token comment">// 可为 null</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h4 id="1-2-2-包装类型"><a href="#1-2-2-包装类型" class="headerlink" title="1.2.2 包装类型"></a>1.2.2 包装类型</h4><p>包装类是用于将基本数据类型（如整数、布尔值等）封装成对象类型的类。包装类的主要作用是允许基本类型与对象进行交互，提供了更多的方法和功能。</p><p>在 TypeScript 中，基本类型没有单独的包装类，但可以使用对象类型。例如，<code>number</code> 和 <code>string</code> 是基本类型，但可以与对象交互。</p><ul><li><strong>特点</strong>：<ul><li><code>null</code> 和 <code>undefined</code> 可以被作为类型。</li><li>可以使用对象类型（如 <code>Number</code> 和 <code>String</code>）来模拟包装类的功能。</li></ul></li></ul><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">let</span> wrappedInt<span class="token operator">:</span> Number <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Number</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 使用 Number 对象</span>
+<span class="token keyword">let</span> primitiveInt<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">=</span> wrappedInt<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取基本类型</span>
+<span class="token keyword">let</span> nullableInt<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token keyword">null</span> <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span> <span class="token comment">// 可为 null</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>wrappedInt <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出 15</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>nullableInt<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出 null</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在 Java 中，包装类是与基本类型相对应的类。每种基本类型都有一个对应的包装类：</p><ul><li><p><code>int</code> -&gt; <code>Integer</code></p></li><li><p><code>boolean</code> -&gt; <code>Boolean</code></p></li><li><p><code>char</code> -&gt; <code>Character</code></p></li><li><p><code>byte</code> -&gt; <code>Byte</code></p></li><li><p><code>short</code> -&gt; <code>Short</code></p></li><li><p><code>long</code> -&gt; <code>Long</code></p></li><li><p><code>float</code> -&gt; <code>Float</code></p></li><li><p><code>double</code> -&gt; <code>Double</code></p></li><li><p><strong>特点</strong>：</p><ul><li>包装类可以为 <code>null</code>，而基本类型不能。</li><li>提供了一些方法，比如转换、比较等。</li></ul></li></ul><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 使用包装类</span>
+        <span class="token class-name">Integer</span> wrappedInt <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 将 int 转换为 Integer</span>
+        <span class="token keyword">int</span> primitiveInt <span class="token operator">=</span> wrappedInt<span class="token punctuation">.</span><span class="token function">intValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 将 Integer 转换为 int</span>
+        <span class="token comment">// 可以为 null</span>
+        <span class="token class-name">Integer</span> nullableInt <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>wrappedInt <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出 15</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>nullableInt<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出 null</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在 Kotlin 中，基本类型和对象类型有更紧密的结合。Kotlin 不再使用单独的包装类，而是直接使用对象类型（如 <code>Int</code>、<code>Boolean</code>）。Kotlin 的基本类型会在 JVM 中优化为原始类型。</p><ul><li><strong>特点</strong>：<ul><li>默认不可为 <code>null</code>，使用 <code>?</code> 表示可为 <code>null</code>。</li><li>不需要显式的转换方法，Kotlin 会自动进行转换。</li></ul></li></ul><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 使用基本类型</span>
+    <span class="token keyword">val</span> wrappedInt<span class="token operator">:</span> Int <span class="token operator">=</span> <span class="token number">5</span> <span class="token comment">// 直接使用 Int 类型</span>
+    <span class="token keyword">val</span> nullableInt<span class="token operator">:</span> Int<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span> <span class="token comment">// 可为 null</span>
+    <span class="token comment">// 可以直接进行运算</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>wrappedInt <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token comment">// 输出 15</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>nullableInt<span class="token punctuation">)</span> <span class="token comment">// 输出 null</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="1-2-3-模板字符串"><a href="#1-2-3-模板字符串" class="headerlink" title="1.2.3 模板字符串"></a>1.2.3 模板字符串</h4><p>在 TypeScript 中，使用反引号（&#96;&#96;&#96;）来定义模板字符串，支持多行字符串和插值。可以使用 <code>$&#123;&#125;</code> 语法插入变量或表达式。</p><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">const</span> name<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"Alice"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> age<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> greeting<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Hello, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>name<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">. You are </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>age<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> years old.</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>greeting<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出: Hello, Alice. You are 30 years old.</span>
+
+<span class="token comment">// 多行字符串</span>
+<span class="token keyword">const</span> multiLine <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">This is line one.
+This is line two.</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>multiLine<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在 Java 中，虽然没有直接的模板字符串语法，但可以使用字符串连接运算符（<code>+</code>）或 <code>String.format()</code> 方法来实现字符串插值。</p><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> name <span class="token operator">=</span> <span class="token string">"Alice"</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> age <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> greeting <span class="token operator">=</span> <span class="token class-name">String</span><span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"Hello, %s. You are %d years old."</span><span class="token punctuation">,</span> name<span class="token punctuation">,</span> age<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>greeting<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出: Hello, Alice. You are 30 years old.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p>Kotlin 支持使用 <code>$</code> 符号进行字符串插值，语法更加简洁。可以直接在字符串中使用变量，也可以使用花括号 <code>&#123;&#125;</code> 来插入表达式。</p><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> name <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Alice"</span></span>
+<span class="token keyword">val</span> age <span class="token operator">=</span> <span class="token number">30</span>
+<span class="token keyword">val</span> greeting <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Hello, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">name</span></span><span class="token string">. You are </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">age</span></span><span class="token string"> years old."</span></span>
+<span class="token function">println</span><span class="token punctuation">(</span>greeting<span class="token punctuation">)</span> <span class="token comment">// 输出: Hello, Alice. You are 30 years old.</span>
+
+<span class="token comment">// 使用表达式</span>
+<span class="token keyword">val</span> greetingWithExpression <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Hello, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">name<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">. You are </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">age</span></span><span class="token string"> years old."</span></span>
+<span class="token function">println</span><span class="token punctuation">(</span>greetingWithExpression<span class="token punctuation">)</span> <span class="token comment">// 输出: Hello, ALICE. You are 30 years old.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="1-2-4-枚举"><a href="#1-2-4-枚举" class="headerlink" title="1.2.4 枚举"></a>1.2.4 枚举</h4><p><strong>Java、Kotlin:</strong> 枚举是类，可以有构造函数和方法，支持字段和行为。</p><p><strong>TypeScript</strong>: 提供数字和字符串枚举，语法简单，主要用于定义常量集合。</p><p>在 TypeScript 中，枚举可以是数字枚举或字符串枚举。</p><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">enum</span> Color <span class="token punctuation">&#123;</span>
+    Red <span class="token operator">=</span> <span class="token string">"RED"</span><span class="token punctuation">,</span>
+    Green <span class="token operator">=</span> <span class="token string">"GREEN"</span><span class="token punctuation">,</span>
+    Blue <span class="token operator">=</span> <span class="token string">"BLUE"</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 使用枚举</span>
+<span class="token keyword">let</span> color<span class="token operator">:</span> Color <span class="token operator">=</span> Color<span class="token punctuation">.</span>Red<span class="token punctuation">;</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出: "RED"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在 Java 中，枚举是一个特殊的类，可以具有字段、方法和构造函数。</p><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">Color</span> <span class="token punctuation">&#123;</span>
+    <span class="token constant">RED</span><span class="token punctuation">,</span> <span class="token constant">GREEN</span><span class="token punctuation">,</span> <span class="token constant">BLUE</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 可以添加字段和方法</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> hex<span class="token punctuation">;</span>
+
+    <span class="token class-name">Color</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>hex <span class="token operator">=</span> <span class="token string">"#"</span> <span class="token operator">+</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">toHexString</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">ordinal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getHex</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> hex<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 使用枚举</span>
+<span class="token class-name">Color</span> color <span class="token operator">=</span> <span class="token class-name">Color</span><span class="token punctuation">.</span><span class="token constant">RED</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>color<span class="token punctuation">.</span><span class="token function">getHex</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在 Kotlin 中，枚举类是一个特殊的类，支持属性和方法。</p><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">enum</span> <span class="token keyword">class</span> <span class="token function">Color</span><span class="token punctuation">(</span><span class="token keyword">val</span> hex<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">RED</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"#FF0000"</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">GREEN</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"#00FF00"</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">BLUE</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"#0000FF"</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">fun</span> <span class="token function">describe</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Color: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">name</span></span><span class="token string">, Hex: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">hex</span></span><span class="token string">"</span></span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 使用枚举</span>
+<span class="token keyword">val</span> color <span class="token operator">=</span> Color<span class="token punctuation">.</span>RED
+<span class="token function">println</span><span class="token punctuation">(</span>color<span class="token punctuation">.</span><span class="token function">describe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 输出: Color: RED, Hex: #FF0000</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="1-3-类型检查和类型转换"><a href="#1-3-类型检查和类型转换" class="headerlink" title="1.3 类型检查和类型转换"></a>1.3 类型检查和类型转换</h4><p><strong>类型推断</strong>：</p><ul><li>Java 需要显式声明类型。</li><li>Kotlin 和 TypeScript 支持隐式推断，可以省略类型声明。</li></ul><p><strong>类型转换</strong>：</p><ul><li>Java 使用强制转换语法，Kotlin 使用转换方法，TypeScript 使用 <code>as</code> 进行转换。</li></ul><p><strong>强制类型转换</strong>：</p><ul><li>Java 和 TypeScript 使用直接的强制转换语法，Kotlin 提供了安全转换的方式。</li></ul><p>在 TypeScript 中，支持类型推导，可以省略类型声明，编译器会根据初始值推断类型。</p><ul><li><strong>隐式推断</strong>：TypeScript 也支持类型推断，可以省略类型声明，编译器会根据初始值推断类型。</li><li><strong>类型转换</strong>：可以使用 <code>as</code> 进行类型转换，也可以使用类型断言。</li><li><strong>强制类型转换</strong>：使用 <code>as</code> 进行类型断言。</li></ul><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// 类型推导</span>
+<span class="token keyword">let</span> num <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment">// 隐式推断为 number</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">"Hello"</span><span class="token punctuation">;</span> <span class="token comment">// 隐式推断为 string</span>
+
+<span class="token comment">// 类型转换</span>
+<span class="token keyword">let</span> d<span class="token operator">:</span> <span class="token builtin">any</span> <span class="token operator">=</span> <span class="token number">9.78</span><span class="token punctuation">;</span> 
+<span class="token keyword">let</span> num<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">=</span> d <span class="token keyword">as</span> <span class="token builtin">number</span><span class="token punctuation">;</span> <span class="token comment">// 使用 as 进行类型转换</span>
+
+<span class="token comment">// 强制类型转换</span>
+<span class="token keyword">let</span> obj<span class="token operator">:</span> <span class="token builtin">any</span> <span class="token operator">=</span> <span class="token string">"Hello"</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> str<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> obj <span class="token keyword">as</span> <span class="token builtin">string</span><span class="token punctuation">;</span> <span class="token comment">// 强制转换</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在 Java 中，必须显式声明变量的类型。</p><ul><li><strong>显式声明</strong>：Java 不支持类型推断，必须显式声明变量的类型。</li><li><strong>类型转换</strong>：需要使用强制转换语法。</li><li><strong>强制类型转换</strong>：需要使用强制转换语法。</li></ul><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 类型推导</span>
+<span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment">// 显式声明类型</span>
+
+<span class="token comment">// 类型转换</span>
+<span class="token keyword">double</span> d <span class="token operator">=</span> <span class="token number">9.78</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> d<span class="token punctuation">;</span> <span class="token comment">// 显式强制转换，从 double 转为 int</span>
+
+<span class="token comment">// 强制类型转换</span>
+<span class="token class-name">Object</span> obj <span class="token operator">=</span> <span class="token string">"Hello"</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> str <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> obj<span class="token punctuation">;</span> <span class="token comment">// 强制转换</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在 Kotlin 中，支持类型推断，可以省略类型声明，编译器会根据初始值推断类型。</p><ul><li><strong>隐式推断</strong>：Kotlin 支持类型推断，可以省略类型声明，编译器会根据初始值推断类型。</li><li><strong>类型转换</strong>：Kotlin 提供了转换方法，如 <code>toInt()</code>。</li><li><strong>强制类型转换</strong>：使用 <code>as</code> 关键字进行强制转换，支持安全转换（<code>as?</code>）。</li></ul><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token comment">// 类型推导</span>
+<span class="token keyword">val</span> num <span class="token operator">=</span> <span class="token number">42</span> <span class="token comment">// 隐式推断为 Int </span>
+<span class="token keyword">val</span> str <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Hello"</span></span> <span class="token comment">// 隐式推断为 String</span>
+
+<span class="token comment">// 类型转换</span>
+<span class="token keyword">val</span> d <span class="token operator">=</span> <span class="token number">9.78</span> 
+<span class="token keyword">val</span> num <span class="token operator">=</span> d<span class="token punctuation">.</span><span class="token function">toInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 使用转换方法</span>
+
+<span class="token comment">// 强制类型转换</span>
+<span class="token keyword">val</span> obj<span class="token operator">:</span> Any <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Hello"</span></span>
+<span class="token keyword">val</span> str<span class="token operator">:</span> String <span class="token operator">=</span> obj <span class="token keyword">as</span> String <span class="token comment">// 强制转换</span>
+<span class="token keyword">val</span> safeStr<span class="token operator">:</span> String<span class="token operator">?</span> <span class="token operator">=</span> obj <span class="token keyword">as</span><span class="token operator">?</span> String <span class="token comment">// 安全转换，若失败返回 null</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="1-4-类型判断"><a href="#1-4-类型判断" class="headerlink" title="1.4 类型判断"></a>1.4 类型判断</h4><ul><li><strong>Java</strong>：使用 <code>instanceof</code> 进行类型判断，需手动强制转换。</li><li><strong>Kotlin</strong>：使用 <code>is</code> 进行类型判断，支持自动和安全转换，简化了语法。</li><li><strong>TypeScript</strong>：使用 <code>typeof</code> 和 <code>instanceof</code>，适用于基本数据类型和对象类型。</li></ul><p>在 TypeScript 中，使用 <code>typeof</code> 和 <code>instanceof</code> 进行类型判断。</p><ul><li>**使用 <code>typeof</code>**：主要用于基本数据类型。</li><li>**使用 <code>instanceof</code>**：用于对象和类的类型判断。</li></ul><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">function</span> <span class="token function">typeCheck</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> value <span class="token operator">===</span> <span class="token string">"string"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"是一个字符串: "</span> <span class="token operator">+</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token keyword">instanceof</span> <span class="token class-name"><span class="token builtin">Array</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"是一个数组"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"不是一个字符串或数组"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token function">typeCheck</span><span class="token punctuation">(</span><span class="token string">"Hello, World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出: 是一个字符串: Hello, World!</span>
+<span class="token function">typeCheck</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出: 是一个数组</span>
+<span class="token function">typeCheck</span><span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出: 不是一个字符串或数组</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在 Java 中，使用 <code>instanceof</code> 关键字进行类型判断。</p><p>在 Java 中，基本数据类型没有对象的特性，因此通常通过 <code>instanceof</code> 来判断对象类型。如果使用包装类（如 <code>Integer</code>、<code>Double</code> 等），可以使用 <code>instanceof</code> 进行判断。</p><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Object</span> obj <span class="token operator">=</span> <span class="token string">"Hello, World!"</span><span class="token punctuation">;</span>
+      
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>obj <span class="token keyword">instanceof</span> <span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">String</span> str <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> obj<span class="token punctuation">;</span> <span class="token comment">// 强制转换</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"是一个字符串: "</span> <span class="token operator">+</span> str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"不是一个字符串"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 基本类型判断</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Object</span> obj <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment">// 基本类型的包装类</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>obj <span class="token keyword">instanceof</span> <span class="token class-name">Integer</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"是一个 Integer 类型"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>obj <span class="token keyword">instanceof</span> <span class="token class-name">Double</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"是一个 Double 类型"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"不是 Integer 或 Double 类型"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在 Kotlin 中，使用 <code>is</code> 关键字进行类型判断，使用 <code>as</code> 进行强制转换，支持安全转换。</p><p>在 Kotlin 中，基本数据类型和对象类型更紧密结合，使用 <code>is</code> 关键字进行判断。Kotlin 允许直接判断基本类型。</p><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">val</span> obj<span class="token operator">:</span> Any <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Hello, World!"</span></span>
+  
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>obj <span class="token keyword">is</span> String<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 不需要强制转换</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"是一个字符串: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">obj</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"不是一个字符串"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+  
+    <span class="token comment">// 使用安全转换</span>
+    <span class="token keyword">val</span> str<span class="token operator">:</span> String<span class="token operator">?</span> <span class="token operator">=</span> obj <span class="token keyword">as</span><span class="token operator">?</span> String <span class="token comment">// 如果不是 String，则返回 null</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"安全转换: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">str</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 基本类型判断</span>
+<span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">val</span> obj<span class="token operator">:</span> Any <span class="token operator">=</span> <span class="token number">42</span> <span class="token comment">// 基本类型</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>obj <span class="token keyword">is</span> Int<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"是一个 Int 类型"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>obj <span class="token keyword">is</span> Double<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"是一个 Double 类型"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"不是 Int 或 Double 类型"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><table><thead><tr><th>运算符</th><th>异同点</th></tr></thead><tbody><tr><td><strong>算术运算符</strong>（如 <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>）</td><td>完全一致</td></tr><tr><td><strong>比较运算符</strong>（如 <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>）</td><td>除 &#x3D;&#x3D; 外基本一致</td></tr><tr><td><strong>逻辑运算符</strong>（如 <code>&amp;&amp;</code>, &#96;</td><td></td></tr><tr><td><strong>位运算符</strong>（如 <code>&amp;</code>, &#96;</td><td><code>,</code>^<code>,</code>&lt;&lt;<code>,</code>&gt;&gt;&#96;）</td></tr></tbody></table><h4 id="相等运算符异同点"><a href="#相等运算符异同点" class="headerlink" title="相等运算符异同点"></a>相等运算符异同点</h4><p><strong>TypeScript</strong> 的 <code>==</code> 进行类型转换，<code>===</code> 不进行转换。</p><p><strong>Kotlin</strong> 的 <code>==</code> 进行内容比较，<code>===</code> 比较引用。</p><p><strong>Java</strong> 的 <code>==</code> 在基本类型上比较值，在对象上比较引用，没有严格相等运算符。</p><p>在 TypeScript 中，<code>==</code>（相等运算符）进行类型转换后比较值。</p><ul><li>例如，<code>0 == &#39;0&#39;</code> 为 <code>true</code>，因为字符串 <code>&#39;0&#39;</code> 被转换为数字。</li></ul><p><code>===</code>（严格相等运算符）不进行类型转换，只有在类型和值都相等时才返回 <code>true</code>。</p><ul><li>例如，<code>0 === &#39;0&#39;</code> 为 <code>false</code>，因为类型不同。</li></ul><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">let</span> a<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> b<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a <span class="token operator">==</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// true, 因为进行类型转换</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a <span class="token operator">===</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// false, 因为类型不同</span>
+
+<span class="token keyword">let</span> obj1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span> name<span class="token operator">:</span> <span class="token string">'Alice'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> obj2 <span class="token operator">=</span> <span class="token punctuation">&#123;</span> name<span class="token operator">:</span> <span class="token string">'Alice'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> obj3 <span class="token operator">=</span> obj1<span class="token punctuation">;</span>
+
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj1 <span class="token operator">==</span> obj2<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// false, 不同的引用</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj1 <span class="token operator">===</span> obj2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// false, 不同的引用</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj1 <span class="token operator">===</span> obj3<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true, 同一引用</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在 Java 中，<code>==</code>用于基本数据类型时比较值（如 <code>int</code>, <code>char</code>），用于对象时比较引用。</p><ul><li>例如，<code>int a = 5; int b = 5; a == b</code> 为 <code>true</code>，但对于对象，<code>String a = &quot;Hello&quot;; String b = new String(&quot;Hello&quot;); a == b</code> 为 <code>false</code>，因为它们是不同的对象。</li></ul><p>**没有 <code>===</code>**：Java 只有一种相等运算符 <code>==</code>，因此无法直接进行严格相等检查。对象的内容比较通常使用 <code>.equals()</code> 方法。</p><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> y <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> str1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> str2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> str3 <span class="token operator">=</span> str1<span class="token punctuation">;</span>
+
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>x <span class="token operator">==</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true, 基本类型比较值</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>str1 <span class="token operator">==</span> str2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// false, 不同的引用</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>str1<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>str2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true, 内容相等</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>str1 <span class="token operator">==</span> str3<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true, 同一引用</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在 Kotlin 中，<code>==</code>表示结构相等（相当于 Java 中的 <code>equals()</code> 方法）。</p><ul><li>例如，<code>val a = &quot;Hello&quot;; val b = &quot;Hello&quot;; a == b</code> 为 <code>true</code>，因为它们的内容相等。</li></ul><p><code>===</code>表示引用相等，检查两个引用是否指向同一个对象。</p><ul><li>例如，<code>val a = &quot;Hello&quot;; val b = a; a === b</code> 为 <code>true</code>，但 <code>val c = &quot;Hello&quot;; a === c</code> 可能为 <code>false</code>（如果 <code>c</code> 是不同的对象）。</li></ul><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">val</span> a <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Hello"</span></span>
+    <span class="token keyword">val</span> b <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Hello"</span></span>
+    <span class="token keyword">val</span> c <span class="token operator">=</span> <span class="token function">String</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Hello"</span></span><span class="token punctuation">)</span>
+
+    <span class="token function">println</span><span class="token punctuation">(</span>a <span class="token operator">==</span> b<span class="token punctuation">)</span>  <span class="token comment">// true, 结构相等</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>a <span class="token operator">===</span> b<span class="token punctuation">)</span> <span class="token comment">// true, 引用相等（在字符串常量池中）</span>
+
+    <span class="token function">println</span><span class="token punctuation">(</span>a <span class="token operator">==</span> c<span class="token punctuation">)</span>  <span class="token comment">// true, 结构相等</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>a <span class="token operator">===</span> c<span class="token punctuation">)</span> <span class="token comment">// false, 不同的引用</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h3><h4 id="if-语句"><a href="#if-语句" class="headerlink" title="if 语句"></a><code>if</code> 语句</h4><p><strong>描述</strong>: 条件判断<br><strong>异同点</strong>: 完全一致<br><strong>代码示例</strong>:</p><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">if (condition) &#123; 
+    &#x2F;&#x2F; 执行代码 
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h4 id="for-循环"><a href="#for-循环" class="headerlink" title="for 循环"></a><code>for</code> 循环</h4><p><strong>描述</strong>: 循环<br><strong>异同点</strong>: 基本 <code>for</code> 循环，除 Kotlin 外，Java 和 TypeScript 一致。区别主要在于增强型 <code>for</code> 循环上：</p><ul><li><strong>TypeScript</strong>: 使用 <code>for...of</code> 遍历可迭代对象。</li><li><strong>Java</strong>: 使用增强型 <code>for</code> 循环（<code>for (type var : collection)</code>）遍历数组和集合。</li><li><strong>Kotlin</strong>: 使用 <code>for (item in collection)</code> 语法遍历数组和集合。<br><strong>代码示例</strong>:</li></ul><ul><li>一般语法</li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">for (let i &#x3D; 0; i &lt; 5; i++) &#123;
+    &#x2F;&#x2F; 执行代码 
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ul><li>TypeScript</li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">&#x2F;&#x2F; for of 循环
+const array &#x3D; [1, 2, 3, 4, 5];
+for (const value of array) &#123;
+    console.log(value); &#x2F;&#x2F; 输出 1, 2, 3, 4, 5
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>Java</li></ul><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">&#x2F;&#x2F; for each 循环
+int[] array &#x3D; &#123;1, 2, 3, 4, 5&#125;;
+for (int value : array) &#123;
+    System.out.println(value); &#x2F;&#x2F; 输出 1, 2, 3, 4, 5
+&#125;
+
+&#x2F;&#x2F; 对于集合
+List&lt;Integer&gt; list &#x3D; Arrays.asList(1, 2, 3, 4, 5);
+for (int value : list) &#123;
+    System.out.println(value); &#x2F;&#x2F; 输出 1, 2, 3, 4, 5
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>Kotlin</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">&#x2F;&#x2F; 带索引遍历
+for ((index, item) in arrayListOf(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;).withIndex()) &#123;
+    println(&quot;$index - $item&quot;)&#x2F;&#x2F; 0-a  1-b 2-c 
+&#125;
+
+&#x2F;&#x2F; 包左包右
+for (i in 1..10) &#123;
+    println(i) &#x2F;&#x2F; 12345678910
+&#125;
+
+&#x2F;&#x2F; 包左不包右
+for (i in 1 until 10) &#123;
+    println(i) &#x2F;&#x2F; 123456789
+&#125;
+
+&#x2F;&#x2F; 降序-包左包右
+for (i in 10 downTo 1) &#123;
+    println(i) &#x2F;&#x2F; 10987654321
+&#125;
+
+&#x2F;&#x2F; 跳步-包左包右
+for (i in 1..10 step 2) &#123;
+    println(i) &#x2F;&#x2F; 13579
+&#125;
+
+&#x2F;&#x2F; 包左不包右
+repeat(10) &#123;
+    print(it) &#x2F;&#x2F; 0123456789
+&#125;
+
+&#x2F;&#x2F; for in 循环
+val array &#x3D; arrayOf(1, 2, 3, 4, 5)
+for (value in array) &#123;
+    println(value) &#x2F;&#x2F; 输出 1, 2, 3, 4, 5
+&#125;
+
+&#x2F;&#x2F; 对于集合
+val list &#x3D; listOf(1, 2, 3, 4, 5)
+for (value in list) &#123;
+    println(value) &#x2F;&#x2F; 输出 1, 2, 3, 4, 5
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a><code>while</code> 循环</h4><p><strong>描述</strong>: 循环<br><strong>异同点</strong>: 完全一致<br><strong>代码示例</strong>:</p><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">while (condition) &#123;
+    &#x2F;&#x2F; 执行代码 
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h4 id="do-while-循环"><a href="#do-while-循环" class="headerlink" title="do...while 循环"></a><code>do...while</code> 循环</h4><p><strong>描述</strong>: 循环<br><strong>异同点</strong>: 完全一致<br><strong>代码示例</strong>:</p><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">do &#123; 
+    &#x2F;&#x2F; 执行代码 
+&#125; while (condition);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h4 id="switch-语句"><a href="#switch-语句" class="headerlink" title="switch 语句"></a><code>switch</code> 语句</h4><p><strong>描述</strong>: 多情况判断<br><strong>异同点</strong>: 除开 Kotlin 以外，长的一样。在 Kotlin 中，这被称之为 <code>when</code> 语句。<br><strong>代码示例</strong>:</p><ul><li>一般性语法</li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">switch (value) &#123; 
+    case value1: 
+        &#x2F;&#x2F; 执行代码 
+        break; 
+    case value2: 
+        &#x2F;&#x2F; 执行代码 
+        break; 
+    default: 
+        &#x2F;&#x2F; 执行代码 
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>Kotlin 语法</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">val day &#x3D; 2
+
+when (day) &#123;
+    1 -&gt; &#123;
+        println(&quot;Monday&quot;)
+        &#x2F;&#x2F; 其他操作
+        println(&quot;It&#39;s the start of the week.&quot;)
+    &#125;
+    2 -&gt; &#123;
+        println(&quot;Tuesday&quot;)
+        &#x2F;&#x2F; 其他操作
+        println(&quot;Keep going!&quot;)
+    &#125;
+    3 -&gt; &#123;
+        println(&quot;Wednesday&quot;)
+        &#x2F;&#x2F; 其他操作
+        println(&quot;Halfway through the week!&quot;)
+    &#125;
+    else -&gt; &#123;
+        println(&quot;Other day&quot;)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="try-catch-语句"><a href="#try-catch-语句" class="headerlink" title="try...catch 语句"></a><code>try...catch</code> 语句</h4><p><strong>描述</strong>: 异常处理<br><strong>异同点</strong>: 除了 Java 在错误类型声明有写法上的差异，其余完全一致<br><strong>代码示例</strong>:</p><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">try &#123; 
+    &#x2F;&#x2F; 执行可能抛出异常的代码 
+&#125; catch (error) &#123;
+    &#x2F;&#x2F; 处理异常 
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="4-1-函数声明与调用"><a href="#4-1-函数声明与调用" class="headerlink" title="4.1 函数声明与调用"></a>4.1 函数声明与调用</h4><ul><li><strong>Java</strong>:</li></ul><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public int add(int a, int b) &#123;
+    return a + b;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ul><li><strong>TypeScript</strong>:</li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">function add(a: number, b: number): number &#123;
+    return a + b;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ul><li><strong>Kotlin</strong>:</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">fun add(a: Int, b: Int): Int &#123;
+    return a + b
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h4 id="4-2-可选参数和默认参数"><a href="#4-2-可选参数和默认参数" class="headerlink" title="4.2 可选参数和默认参数"></a>4.2 可选参数和默认参数</h4><ul><li><strong>Java</strong>: Java 不支持可选参数，可以通过方法重载实现类似效果。</li></ul><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public int add(int a, int b) &#123;
+    return a + b;
+&#125;
+
+public int add(int a) &#123;
+    return a + 10; &#x2F;&#x2F; 默认值
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><strong>TypeScript</strong>: 支持可选参数和默认参数。</li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">function add(a: number, b: number &#x3D; 10): number &#123;
+    return a + b;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ul><li><strong>Kotlin</strong>: 也支持默认参数。</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">fun add(a: Int, b: Int &#x3D; 10): Int &#123;
+    return a + b
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h4 id="4-3-rest-参数"><a href="#4-3-rest-参数" class="headerlink" title="4.3 rest 参数"></a>4.3 rest 参数</h4><ul><li><strong>Java</strong>: 使用数组来实现。</li></ul><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public int sum(int... numbers) &#123;
+    int total &#x3D; 0;
+    for (int number : numbers) &#123;
+        total +&#x3D; number;
+    &#125;
+    return total;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><strong>TypeScript</strong>: 使用 <code>...</code> 表示 rest 参数。</li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">function sum(...numbers: number[]): number &#123;
+    return numbers.reduce((total, n) &#x3D;&gt; total + n, 0);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ul><li><strong>Kotlin</strong>: 使用 <code>vararg</code> 来实现。</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">fun sum(vararg numbers: Int): Int &#123;
+    return numbers.sum()
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h4 id="4-4-函数类型"><a href="#4-4-函数类型" class="headerlink" title="4.4 函数类型"></a>4.4 函数类型</h4><ul><li><strong>Java</strong>: 使用接口或 lambda 表达式。</li></ul><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">interface IntOperation &#123;
+    int operate(int a, int b);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ul><li><strong>TypeScript</strong>: 可以直接定义函数类型。</li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">type IntOperation &#x3D; (a: number, b: number) &#x3D;&gt; number;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ul><li><strong>Kotlin</strong>: 直接使用函数类型。不过它的返回值是单箭头 <code>-&gt;</code> 而非 ts 的等号箭头 <code>=&gt;</code></li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">fun operate(a: Int, b: Int, operation: (Int, Int) -&gt; Int): Int &#123;
+    return operation(a, b)
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h4 id="4-5-匿名函数"><a href="#4-5-匿名函数" class="headerlink" title="4.5 匿名函数"></a>4.5 匿名函数</h4><ul><li><strong>Java</strong>: 使用 lambda 表达式。</li></ul><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">IntOperation add &#x3D; (a, b) -&gt; a + b;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ul><li><strong>TypeScript</strong>: 使用箭头函数。</li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">const add: IntOperation &#x3D; (a, b) &#x3D;&gt; a + b;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ul><li><strong>Kotlin</strong>: 使用 lambda 表达式。</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">val add: (Int, Int) -&gt; Int &#x3D; &#123; a, b -&gt; a + b &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="4-6-函数重载"><a href="#4-6-函数重载" class="headerlink" title="4.6 函数重载"></a>4.6 函数重载</h4><p>三者均支持函数重载，语法上略有差别：</p><ul><li>Java</li></ul><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public int add(int a, int b) &#123; return a + b; &#125;
+public double add(double a, double b) &#123; return a + b; &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><ul><li>TypeScript</li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">function add(a: number, b: number): number;
+function add(a: string, b: string): string;
+function add(a: any, b: any): any &#123;
+    return a + b;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>Kotlin</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">fun add(a: Int, b: Int): Int &#123; return a + b &#125;
+fun add(a: Double, b: Double): Double &#123; return a + b &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>Kotlin 可以通过 关键字 <code>&lt;span style=&quot;color: #FBBFBC&quot;&gt;@JvmOverloads</code> 修饰 <code>&lt;span style=&quot;color: #FBBFBC&quot;&gt;constructor</code>生成多个构造。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class MyFrameLayout @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? &#x3D; null,
+    defStyleAttr: Int &#x3D; 0,
+    defStyleRes: Int &#x3D; 0
+) : FrameLayout(context, attrs, defStyleAttr, defStyleRes) &#123;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@JvmOverloads fun f(a: String, b: Int&#x3D;0, c:String&#x3D;&quot;abc&quot;)&#123; &#125;
+
+&#x2F;&#x2F; 下面3个Java方法等价上面1个kotlin方法
+void f(String a)
+void f(String a, int b)
+void f(String a, int b, String c)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="OOP-相关（施工中-🚧）"><a href="#OOP-相关（施工中-🚧）" class="headerlink" title="OOP 相关（施工中 🚧）"></a>OOP 相关（施工中 🚧）</h3><h4 id="5-1-对象"><a href="#5-1-对象" class="headerlink" title="5.1 对象"></a>5.1 对象</h4><h5 id="字面量对象"><a href="#字面量对象" class="headerlink" title="字面量对象"></a>字面量对象</h5><p><strong>Java</strong>: 使用匿名内部类来创建字面量对象。</p><p><strong>TypeScript</strong>: 使用对象字面量语法，直接定义具有属性和方法的对象。</p><p><strong>Kotlin</strong>: 使用对象表达式，定义具有属性和方法的匿名对象。</p><ul><li><strong>Java</strong></li></ul><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public class Example &#123;
+    public static void main(String[] args) &#123;
+        &#x2F;&#x2F; 使用匿名内部类
+        Object obj &#x3D; new Object() &#123;
+            @Override
+            public String toString() &#123;
+                return &quot;This is a literal object&quot;;
+            &#125;
+        &#125;;
+        System.out.println(obj);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><strong>TypeScript</strong></li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">const obj &#x3D; &#123;
+    name: &quot;Example&quot;,
+    value: 42,
+    describe() &#123;
+        return &#96;$&#123;this.name&#125;: $&#123;this.value&#125;&#96;;
+    &#125;
+&#125;;
+
+console.log(obj.describe()); &#x2F;&#x2F; 输出: Example: 42<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><strong>Kotlin</strong></li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">fun main() &#123;
+    val obj &#x3D; object &#123;
+        val name &#x3D; &quot;Example&quot;
+        val value &#x3D; 42
+        fun describe() &#x3D; &quot;$name: $value&quot;
+    &#125;
+
+    println(obj.describe()) &#x2F;&#x2F; 输出: Example: 42
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h5 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h5><p>Java 没有解构赋值，Kotlin 和 TypeScript 使用不同的方法实现解构赋值。</p><p><strong>数据类</strong>：数据类自动支持解构赋值。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">data class Person(val name: String, val age: Int)
+fun main() &#123;
+    val person &#x3D; Person(&quot;Alice&quot;, 30)
+    val (name, age) &#x3D; person
+    println(&quot;Name: $name, Age: $age&quot;) &#x2F;&#x2F; 输出: Name: Alice, Age: 30
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>Pair 和 Triple</strong>：这两个类也支持解构赋值。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">fun main() &#123;
+    val pair &#x3D; Pair(&quot;Kotlin&quot;, 2023)
+    val (language, year) &#x3D; pair
+    println(&quot;Language: $language, Year: $year&quot;) &#x2F;&#x2F; 输出: Language: Kotlin, Year: 2023
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>自定义解构声明</strong>：可以在任意类中定义 <code>componentN()</code> 函数，使其支持解构赋值。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class Coordinates(val x: Int, val y: Int) &#123;
+    operator fun component1() &#x3D; x
+    operator fun component2() &#x3D; y
+&#125;
+
+fun main() &#123;
+    val point &#x3D; Coordinates(10, 20)
+    val (x, y) &#x3D; point
+    println(&quot;X: $x, Y: $y&quot;) &#x2F;&#x2F; 输出: X: 10, Y: 20
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="5-2-类"><a href="#5-2-类" class="headerlink" title="5.2 类"></a>5.2 类</h4><h5 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h5><table><thead><tr><th>语言</th><th>说明</th><th>举例</th></tr></thead><tbody><tr><td>TypeScript</td><td>*<strong>public</strong>: 默认可见，所有类可见。</td><td></td></tr></tbody></table><ul><li><strong>private</strong>: 仅对同一类可见。</li><li><strong>protected</strong>: 对同一类和子类可见。</li><li><strong>readonly</strong>: 用于只读属性。<br>|</li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">class Example &#123;
+    public publicField: number;       &#x2F;&#x2F; 所有类可见
+    protected protectedField: number;   &#x2F;&#x2F; 对同一类和子类可见
+    private privateField: number;       &#x2F;&#x2F; 仅对本类可见
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|Java |* <strong>public</strong>: 对所有类可见。</p><ul><li><strong>protected</strong>: 对同一包内的类和所有子类可见。</li><li><strong>private</strong>: 仅对同一类可见。</li><li><strong>默认（包私有，no modifier）</strong>: 仅对同一包内的类可见。</li></ul><p>|</p><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public class Example &#123;
+    public int publicField;       &#x2F;&#x2F; 对所有类可见
+    protected int protectedField;  &#x2F;&#x2F; 对同一包和子类可见
+    private int privateField;      &#x2F;&#x2F; 仅对本类可见
+    int packagePrivateField;       &#x2F;&#x2F; 对同一包内可见
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|Kotlin |* <strong>public</strong>: 默认可见，所有类可见。</p><ul><li><strong>private</strong>: 仅对同一文件或类可见。</li><li><strong>protected</strong>: 对同一类和子类可见。</li><li><strong>internal</strong>: 仅对同一模块内可见。<br>|</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class Example &#123;
+    var publicField: Int &#x3D; 0         &#x2F;&#x2F; 所有类可见
+    protected var protectedField: Int &#x3D; 0  &#x2F;&#x2F; 对同一类和子类可见
+    private var privateField: Int &#x3D; 0      &#x2F;&#x2F; 仅对本类可见
+    internal var internalField: Int &#x3D; 0     &#x2F;&#x2F; 对同一模块内可见
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|</p><h4 id="5-3-接口"><a href="#5-3-接口" class="headerlink" title="5.3 接口"></a>5.3 接口</h4><table><thead><tr><th>语言</th><th>说明</th><th>举例</th></tr></thead><tbody><tr><td>TypeScript</td><td><strong>TypeScript</strong> 使用 <code>interface</code> 关键字定义接口，支持属性和方法的定义，且可以通过 <code>extends</code> 进行继承。</td><td>*<strong>定义接口</strong></td></tr></tbody></table><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">interface Person &#123;
+    name: string;
+    age: number;
+&#125;
+
+const john: Person &#x3D; &#123;
+    name: &quot;John&quot;,
+    age: 30
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><strong>接口继承</strong>：</li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">interface Employee extends Person &#123;
+    employeeId: number;
+&#125;
+
+const jane: Employee &#x3D; &#123;
+    name: &quot;Jane&quot;,
+    age: 28,
+    employeeId: 1234
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|Java |<strong>Java</strong> 使用 <code>interface</code> 关键字定义接口，方法通过 getter 访问，且通过 <code>implements</code> 关键字实现接口。 |* <strong>定义接口</strong>：</p><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public interface Person &#123;
+    String getName();
+    int getAge();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><ul><li><strong>接口继承</strong>：</li></ul><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public interface Employee extends Person &#123;
+    int getEmployeeId();
+&#125;
+
+
+public class Employee implements Person &#123;
+    private String name;
+    private int age;
+    public Employee(String name, int age) &#123;
+        this.name &#x3D; name;
+        this.age &#x3D; age;
+    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public int getAge() &#123;
+        return age;
+    &#125;
+&#125;
+
+public class Manager implements Employee &#123;
+    private String name;
+    private int age;
+    private int employeeId;
+    public Manager(String name, int age, int employeeId) &#123;
+        this.name &#x3D; name;
+        this.age &#x3D; age;
+        this.employeeId &#x3D; employeeId;
+    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public int getAge() &#123;
+        return age;
+    &#125;
+
+    public int getEmployeeId() &#123;
+        return employeeId;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|Kotlin |<strong>Kotlin</strong> 使用 <code>interface</code> 关键字定义接口，属性使用 <code>val</code> 或 <code>var</code> 声明，且通过冒号 <code>:</code> 来实现接口。 |* <strong>定义接口</strong>：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">interface Person &#123;
+    val name: String
+    val age: Int
+&#125;
+
+class Employee(override val name: String, override val age: Int) : Person<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><strong>接口继承</strong>：</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">interface Employee : Person &#123;
+    val employeeId: Int
+&#125;
+
+class Manager(override val name: String, override val age: Int, override val employeeId: Int) : Employee<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|</p><h3 id="空安全"><a href="#空安全" class="headerlink" title="空安全"></a>空安全</h3><h4 id="6-1-非空断言"><a href="#6-1-非空断言" class="headerlink" title="6.1 非空断言"></a>6.1 非空断言</h4><table><thead><tr><th>语言</th><th>说明</th><th>举例</th></tr></thead><tbody><tr><td>TypeScript</td><td>使用 <code>!</code> 运算符，可以告诉 TypeScript 编译器某个值不会是 <code>null</code> 或 <code>undefined</code>。</td><td></td></tr></tbody></table><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">const value: string | null &#x3D; getValue();
+const nonNullValue: string &#x3D; value!; &#x2F;&#x2F; 非空断言<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>|<br>|Java |<strong>Java 没有内置的非空断言运算符，但可以使用</strong> <code>**Optional**</code><strong>类来处理可能为 null 的值。</strong> |</p><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">Optional&lt;String&gt; optionalValue &#x3D; Optional.ofNullable(getValue());
+String nonNullValue &#x3D; optionalValue.orElse(&quot;default&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>|<br>|Kotlin |<strong>使用</strong> <code>**!!**</code><strong>运算符，可以将一个可空类型转换为非空类型，如果为 null 则抛出异常。</strong> |</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">val value: String? &#x3D; getValue()
+val nonNullValue: String &#x3D; value!! &#x2F;&#x2F; 如果 value 为 null，会抛出异常<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>|</p><h4 id="6-2-空值合并"><a href="#6-2-空值合并" class="headerlink" title="6.2 空值合并"></a>6.2 空值合并</h4><table><thead><tr><th>语言</th><th>说明</th><th>举例</th></tr></thead><tbody><tr><td>TypeScript</td><td>使用 <code>??</code> 运算符，当左侧值为 <code>null</code> 或 <code>undefined</code> 时，返回右侧的值。</td><td></td></tr></tbody></table><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">const value &#x3D; null;
+const result &#x3D; value ?? &#39;default&#39;; &#x2F;&#x2F; result 为 &#39;default&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>|<br>|Java |<strong>Java 没有类似于</strong> <code>**??**</code><strong>的运算符，但可以通过</strong> <code>**Optional**</code><strong>的</strong> <code>**orElse**</code><strong>方法实现类似功能。</strong> |</p><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">String value &#x3D; null;
+String result &#x3D; Optional.ofNullable(value).orElse(&quot;default&quot;); &#x2F;&#x2F; result 为 &#39;default&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>|<br>|Kotlin |<strong>使用</strong> <code>**?:**</code><strong>运算符，当左侧值为 null 时，返回右侧的值。</strong> |</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">val value: String? &#x3D; null
+val result &#x3D; value ?: &quot;default&quot; &#x2F;&#x2F; result 为 &#39;default&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>|</p><h4 id="6-3-可选链"><a href="#6-3-可选链" class="headerlink" title="6.3 可选链"></a>6.3 可选链</h4><p>可选链运算符只会在属性访问链中遇到第一个 <code>undefined</code> 或 <code>null</code> 值时停止，并返回 <code>undefined</code>。如果后续的属性访问链中还有其他的 <code>undefined</code> 或 <code>null</code> 值，不会继续进行访问。</p><p>Kotlin 没有 <code>undefined</code> 值。</p><p>Java 可以通过<strong>通过</strong> <code>**Optional**</code><strong>的 map 来达到类似于可选链的效果。</strong></p><table><thead><tr><th>语言</th><th>说明</th><th>举例</th></tr></thead><tbody><tr><td>TypeScript</td><td>使用 <code>?.</code> 运算符，可以安全地访问对象的属性或调用方法，如果路径中的某个值为 <code>null</code> 或 <code>undefined</code>，则返回 <code>undefined</code></td><td></td></tr></tbody></table><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">const obj &#x3D; null;
+const result &#x3D; obj?.property; &#x2F;&#x2F; result 为 undefined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>|<br>|Java |<strong>Java 没有可选链运算符，但可以通过</strong> <code>**Optional**</code><strong>来避免</strong> <code>**NullPointerException**</code><strong>。</strong> |</p><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">class Address &#123;
+    String street;
+&#125;
+
+class User &#123;
+    Address address;
+&#125;
+
+User user &#x3D; null;
+String street &#x3D; Optional.ofNullable(user) &#x2F;&#x2F; 如果 user 为 null，链式调用会停止
+                        .map(User::getAddress)
+                        .map(Address::getStreet)
+                        .orElse(&quot;default street&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|Kotlin |和 TypeScript 比较类似。使用 <code>?.</code> 运算符，可以安全地访问对象的属性或调用方法。 |</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">val obj: MyClass? &#x3D; null
+val result &#x3D; obj?.property &#x2F;&#x2F; result 为 null<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>|</p><h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><h4 id="7-1-一般性写法"><a href="#7-1-一般性写法" class="headerlink" title="7.1 一般性写法"></a>7.1 一般性写法</h4><p><strong>泛型写法</strong> 在三种语言中都比较相似，但语法略有不同。这里以函数举例：</p><ul><li><strong>TypeScript</strong></li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">function identity&lt;T&gt;(arg: T): T &#123;
+    return arg;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ul><li><strong>Kotlin</strong></li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">fun &lt;T&gt; identity(arg: T): T &#123;
+    return arg
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ul><li><strong>Java</strong></li></ul><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public &lt;T&gt; T identity(T arg) &#123;
+    return arg;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h4 id="7-2-泛型约束"><a href="#7-2-泛型约束" class="headerlink" title="7.2 泛型约束"></a>7.2 泛型约束</h4><p><strong>泛型上界约束</strong> 的语法在 TS 和 Java 中使用 <code>extends</code>，而 Kotlin 使用冒号和 <code>where</code>。</p><ul><li><strong>TypeScript：</strong>使用 <code>extends</code> 关键字来约束泛型类型：</li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">interface Lengthwise &#123;
+    length: number;
+&#125;
+
+function loggingIdentity&lt;T extends Lengthwise&gt;(arg: T): T &#123;
+    console.log(arg.length);
+    return arg;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><strong>Kotlin：</strong>使用 <code>:</code> 、<code>where</code> 关键字来约束泛型类型：</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">&#x2F;&#x2F; 使用 where 来约束泛型类型
+fun &lt;T&gt; loggingIdentity(arg: T) where T : CharSequence &#123;
+    println(arg.length)
+&#125;
+
+&#x2F;&#x2F; 使用 : 来约束泛型类型
+fun &lt;T : Number&gt; sum(a: T, b: T): Double &#123;
+    return a.toDouble() + b.toDouble()
+&#125;
+
+&#x2F;&#x2F; 使用 where 进行多重约束
+fun &lt;T&gt; process(value: T) where T : Comparable&lt;T&gt;, T : CharSequence &#123;
+    &#x2F;&#x2F; ...
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><strong>Java</strong> 使用 <code>extends</code> 关键字来约束泛型类型：</li></ul><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">public &lt;T extends CharSequence&gt; void loggingIdentity(T arg) &#123;
+    System.out.println(arg.length());
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p><strong>泛型下界约束</strong> 的语法在 Java 中使用 <code>super</code>，而 Kotlin 使用冒号和 <code>in</code>。<strong>TypeScript 不支持下界约束。</strong></p><ul><li><strong>Kotlin</strong> 使用 <code>in</code> 关键字定义下界约束，限制泛型类型必须是某个类或接口的超类。</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">fun addNumbers(list: MutableList&lt;in Int&gt;) &#123;
+    list.add(1) &#x2F;&#x2F; 可以添加 Int 类型
+&#125;
+
+fun main() &#123;
+    val numbers: MutableList&lt;Number&gt; &#x3D; mutableListOf()
+    addNumbers(numbers)
+    println(numbers)
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><strong>Java</strong> 使用 <code>super</code> 关键字来定义下界约束，限制泛型类型必须是某个类或接口的超类。</li></ul><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">import java.util.ArrayList;
+import java.util.List;
+class NumberList &#123;
+    public static void addNumbers(List&lt;? super Integer&gt; list) &#123;
+        list.add(1); &#x2F;&#x2F; 可以添加 Integer 类型
+    &#125;
+
+    public static void main(String[] args) &#123;
+        List&lt;Number&gt; numbers &#x3D; new ArrayList&lt;&gt;();
+        addNumbers(numbers);
+        System.out.println(numbers);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="7-3-泛型默认值"><a href="#7-3-泛型默认值" class="headerlink" title="7.3 泛型默认值"></a>7.3 泛型默认值</h4><p><strong>泛型默认值</strong> 仅在 TypeScript 中支持，Kotlin 和 Java 不支持这一特性。</p><ul><li><strong>TypeScript：</strong>TypeScript 支持泛型的默认值：</li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">function identity&lt;T &#x3D; string&gt;(arg: T): T &#123;
+    return arg;
+&#125;
+
+const result &#x3D; identity(123); &#x2F;&#x2F; result 的类型为 number<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="7-4-Kotlin-泛型进阶"><a href="#7-4-Kotlin-泛型进阶" class="headerlink" title="7.4 Kotlin 泛型进阶"></a>7.4 Kotlin 泛型进阶</h4><h5 id="7-4-1-reified"><a href="#7-4-1-reified" class="headerlink" title="7.4.1 reified"></a>7.4.1 <code>reified</code></h5><p>在 Kotlin 中，<code>reified</code> 是一个关键字。使用 <code>reified</code> 关键字，可以在 inline 函数中保留类型信息，从而在运行时使用该类型。</p><p>通过 <code>reified</code> 获取参数类型：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">inline fun &lt;reified T&gt; printType(value: T) &#123;
+    println(&quot;The type of value is: $&#123;T::class.simpleName&#125;&quot;) &#x2F;&#x2F; 使用 reified 获取类型信息
+&#125;
+
+fun main() &#123;
+    printType(42)          &#x2F;&#x2F; 输出: The type of value is: Int
+    printType(&quot;Hello&quot;)     &#x2F;&#x2F; 输出: The type of value is: String
+    printType(3.14)        &#x2F;&#x2F; 输出: The type of value is: Double
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个示例中，<code>printType</code> 函数是一个 inline 函数，使用了 <code>reified</code> 关键字。通过 <code>T::class.simpleName</code> 可以获取泛型参数的类型信息。</p><p>用于类型检查&#x2F;过滤：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">inline fun &lt;reified T&gt; List&lt;*&gt;.filterIsInstance(): List&lt;T&gt; &#123;
+    return this.filterIsInstance&lt;T&gt;() &#x2F;&#x2F; 使用 reified 进行类型过滤
+&#125;
+
+fun main() &#123;
+    val mixedList: List&lt;Any&gt; &#x3D; listOf(1, &quot;two&quot;, 3.0, 4)
+    val intList: List&lt;Int&gt; &#x3D; mixedList.filterIsInstance&lt;Int&gt;()
+  
+    println(intList) &#x2F;&#x2F; 输出: [1, 4]
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在此示例中，<code>filterIsInstance</code> 函数使用 <code>reified</code> 关键字来过滤给定列表中的元素，返回指定类型的子集。</p><p>使用类型安全的反射：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">inline fun &lt;reified T&gt; createInstance(): T &#123;
+    return T::class.constructors.first().call() &#x2F;&#x2F; 使用 reified 创建实例
+&#125;
+
+data class Person(val name: String &#x3D; &quot;John Doe&quot;)
+
+fun main() &#123;
+    val person: Person &#x3D; createInstance() &#x2F;&#x2F; 创建 Person 实例
+    println(person) &#x2F;&#x2F; 输出: Person(name&#x3D;John Doe)
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个示例中，<code>createInstance</code> 函数通过 <code>reified</code> 关键字和反射机制创建了指定类型的实例。</p><h5 id="7-4-2-out、in、Invariant"><a href="#7-4-2-out、in、Invariant" class="headerlink" title="7.4.2 out、in、Invariant"></a>7.4.2 <strong>out、in、Invariant</strong></h5><p>在 Kotlin 中，<code>out</code>、<code>in</code> 和不带任何修饰符（也称为 <strong>Invariant</strong>）是用于定义泛型类型参数的三种方式。它们分别表示不同的协变和逆变的概念，影响泛型类型的可用性和类型安全性。</p><ol><li>Out（协变）</li></ol><p>使用 <code>out</code> 修饰符的泛型类型参数表示协变。协变允许我们可以将泛型类型作为输出类型（返回值）。这意味着可以将子类型的对象赋值给父类型的变量。</p><p><strong>示例</strong>：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">interface Producer&lt;out T&gt; &#123;
+    fun produce(): T
+&#125;
+
+class StringProducer : Producer&lt;String&gt; &#123;
+    override fun produce(): String &#123;
+        return &quot;Hello, Kotlin!&quot;
+    &#125;
+&#125;
+
+fun main() &#123;
+    val producer: Producer&lt;Any&gt; &#x3D; StringProducer() &#x2F;&#x2F; 可以将 Producer&lt;String&gt; 赋值给 Producer&lt;Any&gt;
+    println(producer.produce()) &#x2F;&#x2F; 输出: Hello, Kotlin!
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，<code>Producer</code> 接口的类型参数 <code>T</code> 被标记为 <code>out</code>，这允许我们将 <code>Producer&lt;String&gt;</code> 赋值给 <code>Producer&lt;Any&gt;</code>。</p><ol><li>In（逆变）</li></ol><p>使用 <code>in</code> 修饰符的泛型类型参数表示逆变。逆变允许我们可以将泛型类型作为输入类型（参数）。这意味着可以将父类型的对象赋值给子类型的变量。</p><p><strong>示例</strong>：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">interface Consumer&lt;in T&gt; &#123;
+    fun consume(item: T)
+&#125;
+
+class StringConsumer : Consumer&lt;String&gt; &#123;
+    override fun consume(item: String) &#123;
+        println(&quot;Consuming: $item&quot;)
+    &#125;
+&#125;
+
+fun main() &#123;
+    val consumer: Consumer&lt;Any&gt; &#x3D; StringConsumer() &#x2F;&#x2F; 可以将 Consumer&lt;String&gt; 赋值给 Consumer&lt;Any&gt;
+    consumer.consume(&quot;Hello, Kotlin!&quot;) &#x2F;&#x2F; 输出: Consuming: Hello, Kotlin!
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，<code>Consumer</code> 接口的类型参数 <code>T</code> 被标记为 <code>in</code>，这允许我们将 <code>Consumer&lt;String&gt;</code> 赋值给 <code>Consumer&lt;Any&gt;</code>。</p><ol><li>Invariant（不变）</li></ol><p>不带任何修饰符的泛型类型参数表示不变。这意味着泛型类型参数既不能被视为协变也不能被视为逆变。我们只能使用完全相同的类型。</p><p><strong>示例</strong>：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class Box&lt;T&gt;(val value: T)
+fun main() &#123;
+    val stringBox: Box&lt;String&gt; &#x3D; Box(&quot;Hello&quot;)
+    &#x2F;&#x2F; val anyBox: Box&lt;Any&gt; &#x3D; stringBox &#x2F;&#x2F; 这是不允许的，会导致编译错误
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，<code>Box&lt;T&gt;</code> 是不变的。不能将 <code>Box&lt;String&gt;</code> 赋值给 <code>Box&lt;Any&gt;</code>，因为它们是不同的类型。</p><h3 id="模块化语法"><a href="#模块化语法" class="headerlink" title="模块化语法"></a>模块化语法</h3><table><thead><tr><th>语言</th><th>说明</th><th>举例</th></tr></thead><tbody><tr><td>TypeScript</td><td><strong>TypeScript</strong> 使用 <code>import</code> 和 <code>export</code> 关键字来显式导入和导出模块。</td><td></td></tr></tbody></table><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">&#x2F;&#x2F; 导入
+import &#123; ModuleName &#125; from &#39;.&#x2F;module&#39;;
+
+&#x2F;&#x2F; 全包导入
+import * as Module from &#39;.&#x2F;module&#39;;
+
+&#x2F;&#x2F; 导出
+export const variableName &#x3D; &#39;value&#39;; 
+export function functionName() &#123; &#125;
+
+&#x2F;&#x2F; 默认导出
+export default class ClassName &#123; &#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|Java |<strong>Kotlin</strong> 和 <strong>Java</strong> 使用 <code>import</code> 语句导入，但导出则依赖于类和函数的可见性（如 <code>public</code> 修饰符）。Java 中的类和接口默认是包私有的。要导出它们，可以使用 <code>public</code> 修饰符。 |</p><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">&#x2F;&#x2F; 导入
+import com.example.ModuleName;
+
+&#x2F;&#x2F; 全包导入
+import com.example.*;
+
+&#x2F;&#x2F; 导出
+public class ClassName &#123; &#125; 
+public static void functionName() &#123; &#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|Kotlin |<strong>Kotlin</strong> 和 <strong>Java</strong> 使用 <code>import</code> 语句导入，但导出则依赖于类和函数的可见性（如 <code>public</code> 修饰符）。Kotlin 没有显式的导出语法，因为所有公共类和函数默认都是可导出的。可以使用 <code>public</code> 修饰符来明确表示。Kotlin 导出导入的语法和 Java 是完全一致的。导出心智也是完全一致的。 |</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">&#x2F;&#x2F; 导入
+import com.example.ModuleName
+
+&#x2F;&#x2F; 全包导入
+import com.example.*
+
+&#x2F;&#x2F; 导出
+public val variableName &#x3D; &quot;value&quot;
+public fun functionName() &#123; &#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|</p><h2 id="Kotlin-进阶语法"><a href="#Kotlin-进阶语法" class="headerlink" title="Kotlin 进阶语法"></a>Kotlin 进阶语法</h2><h3 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h3><h4 id="回调"><a href="#回调" class="headerlink" title="回调"></a>回调</h4><p>TypeScript 和 Kotlin 都支持高阶函数，因此也都支持回调函数。但回调地狱的问题导致两者均已不常使用这种方案。</p><h4 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h4><p>TypeScript 和 Kotlin 相同点：</p><ol><li><strong>创建 Promise</strong>：<ul><li>两者都可以使用类似的方式来创建 Promise 对象，通常通过提供一个执行器函数（executor function），该函数接收 <code>resolve</code> 和 <code>reject</code> 回调。</li></ul></li><li><strong>链式调用</strong>：<ul><li>都支持使用 <code>.then()</code> 和 <code>.catch()</code> 方法进行链式调用，以处理成功和失败的回调。</li></ul></li></ol><p>TypeScript 和 Kotlin 不同点：</p><ol><li><strong>Promise 的创建</strong>：</li></ol><ul><li><strong>Kotlin</strong> 使用 <code>kotlin.js.Promise</code>：</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">val promise &#x3D; Promise&lt;String&gt; &#123; resolve, reject -&gt;
+    &#x2F;&#x2F; 模拟异步操作
+    window.setTimeout(&#123;
+        resolve(&quot;Hello from Kotlin!&quot;)
+    &#125;, 1000)
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><strong>TypeScript</strong> 使用原生 JavaScript 的 <code>Promise</code>：</li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">const promise &#x3D; new Promise&lt;string&gt;((resolve, reject) &#x3D;&gt; &#123;
+    &#x2F;&#x2F; 模拟异步操作
+    setTimeout(() &#x3D;&gt; &#123;
+        resolve(&quot;Hello from TypeScript!&quot;);
+    &#125;, 1000);
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ol><li><strong>使用 Promise</strong>：</li></ol><ul><li><strong>Kotlin</strong>：</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">promise.then &#123; result -&gt;
+    console.log(result) &#x2F;&#x2F; 输出: Hello from Kotlin!
+&#125;.catch &#123; error -&gt;
+    console.error(error)
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><strong>TypeScript</strong>：</li></ul><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">promise
+    .then(result &#x3D;&gt; &#123;
+        console.log(result); &#x2F;&#x2F; 输出: Hello from TypeScript!
+    &#125;)
+    .catch(error &#x3D;&gt; &#123;
+        console.error(error);
+    &#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ol><li><strong>类型系统</strong>：</li></ol><ul><li><strong>Kotlin</strong>：类型是显式的，使用 <code>Promise&lt;Type&gt;</code> 的形式定义返回值类型。</li><li><strong>TypeScript</strong>：类型也可以显式定义，但可以利用类型推断来简化代码。</li></ul><ol><li><strong>错误处理</strong>：</li></ol><ul><li><strong>Kotlin</strong> 的 Promise 使用 <code>.catch()</code> 方法与 TypeScript 类似，但在 Kotlin 中通常习惯使用 <code>try-catch</code> 来捕获异步调用中的异常。</li><li><strong>TypeScript</strong> 通过 <code>.catch()</code> 方法处理错误，语法更为直接。</li></ul><ol><li><strong>运行环境</strong>：</li></ol><ul><li><strong>Kotlin</strong> 的 Promise 一般在 Kotlin&#x2F;JS 环境下使用，依赖于 Kotlin 的标准库。</li><li><strong>TypeScript</strong> 直接运行在 JavaScript 环境中，具有更广泛的兼容性。</li></ul><h4 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h4><blockquote><p><a target="_blank" rel="noopener" href="https://developer.android.com/kotlin/coroutines?hl=zh-cn">https://developer.android.com/kotlin/coroutines?hl=zh-cn</a></p></blockquote><p>异步或非阻塞程序设计是开发领域的重要部分。 创建服务器端应用、 桌面应用或者移动端应用时，都很重要的一点是， 提供的体验不仅是从用户角度看着流畅， 而且还能在需要时伸缩（scalable，可扩充&#x2F;缩减规模）。</p><p>Kotlin 以一种灵活的方式解决了这个问题，在语言层面提供了<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Coroutine">协程</a>支持， 而将大部分功能委托给库。</p><p>我们使用安卓教程中的一个例子来认识在安卓中它是如何被使用的：</p><p>假设我们有这样的一个方法，该方法为<strong>耗时方法且为同步执行</strong>：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">fun makeLoginRequest(jsonBody: String): Result&lt;LoginResponse&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>如果在主线程执行 <code>makeLoginRequest()</code>，则会导致刚刚提及的阻塞状态。这对我们来说是不可能接受的。以下为这一过程的安卓原生代码：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class LoginViewModel(
+    private val loginRepository: LoginRepository
+): ViewModel() &#123;
+
+    fun login(username: String, token: String) &#123;
+        &#x2F;&#x2F; Create a new coroutine to move the execution off the UI thread
+        viewModelScope.launch(Dispatchers.IO) &#123;
+            val jsonBody &#x3D; &quot;&#123; username: \&quot;$username\&quot;, token: \&quot;$token\&quot;&#125;&quot;
+            loginRepository.makeLoginRequest(jsonBody)
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>我们可以做以下改进：</p><ol><li>在 Kotlin 项目中引入依赖：</li></ol><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">dependencies &#123;
+    implementation(&quot;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9&quot;)
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ol><li>改写代码，创建一个新的协程，然后在 I&#x2F;O 线程上执行网络请求：</li></ol><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class LoginViewModel(
+    private val loginRepository: LoginRepository
+): ViewModel() &#123;
+
+    fun login(username: String, token: String) &#123;
+        &#x2F;&#x2F; Create a new coroutine to move the execution off the UI thread
+        viewModelScope.launch(Dispatchers.IO) &#123;
+            val jsonBody &#x3D; &quot;&#123; username: \&quot;$username\&quot;, token: \&quot;$token\&quot;&#125;&quot;
+            loginRepository.makeLoginRequest(jsonBody)
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><code>viewModelScope</code> 是预定义的 <code>CoroutineScope</code>，包含在 <code>ViewModel</code> KTX 扩展中。请注意，所有协程都必须在一个作用域内运行。一个 <code>CoroutineScope</code> 管理一个或多个相关的协程。</li><li><code>launch</code> 是一个函数，用于创建协程并将其函数主体的执行分派给相应的调度程序。</li><li><code>Dispatchers.IO</code> 指示此协程应在为 I&#x2F;O 操作预留的线程上执行。</li></ul><p><code>login</code> 函数按以下方式执行：</p><ul><li>应用从主线程上的 <code>View</code> 层调用 <code>login</code> 函数。</li><li><code>launch</code> 会创建一个新的协程，并且网络请求在为 I&#x2F;O 操作预留的线程上独立发出。</li><li>在该协程运行时，<code>login</code> 函数会继续执行，并可能在网络请求完成前返回。请注意，为简单起见，我们暂时忽略掉网络响应。</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class LoginRepository(...) &#123;
+    ...
+    suspend fun makeLoginRequest(
+        jsonBody: String
+    ): Result&lt;LoginResponse&gt; &#123;
+
+        &#x2F;&#x2F; Move the execution of the coroutine to the I&#x2F;O dispatcher
+        return withContext(Dispatchers.IO) &#123;
+            &#x2F;&#x2F; Blocking network request code
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><code>withContext(Dispatchers.IO)</code> 将协程的执行操作移至一个 I&#x2F;O 线程，这样一来，我们的调用函数便是主线程安全的，并且支持根据需要更新界面。</p><p><code>makeLoginRequest</code> 还会用 <code>suspend</code> 关键字进行标记。Kotlin 利用此关键字强制从协程内调用函数。</p><p><strong>所有</strong> <code>**suspend**</code><strong>函数都必须在协程中执行，和 TypeScript 对比的时候，我认为它的意义和 await 比较类似，因为所有的 await 都必须在 async 函数下执行。suspend 方法必须在协程中执行也正是体现了这一理念。</strong></p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class LoginViewModel(
+    private val loginRepository: LoginRepository
+): ViewModel() &#123;
+
+    fun login(username: String, token: String) &#123;
+
+        &#x2F;&#x2F; Create a new coroutine on the UI thread
+        viewModelScope.launch &#123;
+            val jsonBody &#x3D; &quot;&#123; username: \&quot;$username\&quot;, token: \&quot;$token\&quot;&#125;&quot;
+
+            &#x2F;&#x2F; Make the network call and suspend execution until it finishes
+            val result &#x3D; loginRepository.makeLoginRequest(jsonBody)
+
+            &#x2F;&#x2F; Display result of the network request to the user
+            when (result) &#123;
+                is Result.Success&lt;LoginResponse&gt; -&gt; &#x2F;&#x2F; Happy path
+                else -&gt; &#x2F;&#x2F; Show error in UI
+            &#125;
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><code>login</code> 函数现在按以下方式执行：</p><ul><li>应用从主线程上的 <code>View</code> 层调用 <code>login()</code> 函数。</li><li><code>launch</code> 在主线程上创建新协程，然后协程开始执行。</li><li>在协程内，调用 <code>loginRepository.makeLoginRequest()</code> 现在会挂起协程的进一步执行操作，直至 <code>makeLoginRequest()</code> 中的 <code>withContext</code> 块结束运行。</li><li><code>withContext</code> 块结束运行后，<code>login()</code> 中的协程在主线程上恢复执行操作，并返回网络请求的结果。</li></ul><h3 id="延迟初始化-lateinit-lazy"><a href="#延迟初始化-lateinit-lazy" class="headerlink" title="延迟初始化 lateinit, lazy"></a>延迟初始化 lateinit, lazy</h3><p>lateinit, lazy 是 Kotlin 中两种实现延迟初始化的方式.</p><ul><li>lateinit 只能用于 var 标示的变量，by lazy 只能用于 val 标示的变量。</li><li>by lazy 只在第一次调用时进行初始化。</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">class User &#123;
+    private lateinit var name: String
+    private val password: String by lazy &#123;
+        println(&quot;lazy init&quot;)
+        &quot;admin&quot;
+    &#125;
+
+    fun setName(name: String) &#123;
+        this.name &#x3D; name
+    &#125;
+
+    fun show() &#123;
+        println(&quot;name &#x3D; $name&quot;)
+        println(&quot;--------------------&quot;)
+        println(&quot;第一次访问 password &#x3D; $password&quot;)
+        println(&quot;第二次访问 password &#x3D; $password&quot;)
+    &#125;
+&#125;
+
+fun main() &#123;
+    val user &#x3D; User()
+    user.setName(&quot;tomcat&quot;)
+    user.show()
+&#125;
+
+&#x2F;&#x2F; 输出结果
+&#x2F;&#x2F; name &#x3D; tomcat
+&#x2F;&#x2F; --------------------
+&#x2F;&#x2F; lazy init
+&#x2F;&#x2F; 第一次访问 password &#x3D; admin
+&#x2F;&#x2F; 第二次访问 password &#x3D; admin
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="委托-by"><a href="#委托-by" class="headerlink" title="委托 by"></a>委托 by</h3><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">&#x2F;**
+ * 定义 Base 接口
+ *
+ *&#x2F;
+interface Base &#123;
+    fun say()
+&#125;
+
+&#x2F;**
+ * 定义 Base 接口的实现类，并实现 say() 方法
+ *&#x2F;
+class BaseImpl : Base &#123;
+    override fun say() &#123;
+        println(&quot;BaseImpl say()&quot;)
+    &#125;
+&#125;
+
+&#x2F;**
+ * 定义 BaseProxy 类，并实现了 Base 接口，
+ * 关键字 by 将接口 Base 中所有的方法都委托给 base 对象，这样 BaseProxy 类就不需要去实现接口 Base 中的方法了，
+ * 简化了实现接口时要实现其中的方法。
+ *&#x2F;
+class BaseProxy(base: Base) : Base by base
+
+fun main() &#123;
+    val baseImpl &#x3D; BaseImpl()
+    &#x2F;&#x2F; 调用的是 BaseImpl 中的 say() 方法
+    BaseProxy(baseImpl).say()
+&#125;
+
+&#x2F;&#x2F; 输出结果
+&#x2F;&#x2F; BaseImpl say()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="扩展函数"><a href="#扩展函数" class="headerlink" title="扩展函数"></a>扩展函数</h3><p>扩展函数可以给类额外添加成员函数，通过「类名.方法名」方式实现。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">&#x2F;**
+ * 定义扩展函数，给 File 添加 readText() 方法
+ *&#x2F;
+fun File.readText(charset: Charset): String &#x3D; readBytes().toString(charset)
+
+&#x2F;&#x2F; 调用
+fun main() &#123;
+    val file &#x3D; File(&quot;&#x2F;Users&#x2F;xing&#x2F;Desktop&#x2F;Android.md&quot;)
+    print(file.readText(Charset.forName(&quot;utf-8&quot;)))
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="Lambda-表达式"><a href="#Lambda-表达式" class="headerlink" title="Lambda 表达式"></a>Lambda 表达式</h3><p>Lambda 表达式是一种匿名函数，可以在 Kotlin 中简洁地表示函数类型。它们用于实现高阶函数的功能，使得函数式编程变得更加方便。以下是对 Lambda 表达式的详细介绍以及一些示例。</p><p>Kotlin 中的 Lambda 表达式语法如下：</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">val lambdaName: Type &#x3D; &#123; parameters -&gt; body &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ul><li><code>lambdaName</code> 是 Lambda 表达式的名称（可选）。</li><li><code>Type</code> 是 Lambda 表达式的类型（可选）。</li><li><code>parameters</code> 是输入参数。</li><li><code>body</code> 是表达式或语句。</li></ul><p>示例：</p><ol><li><strong>简单的 Lambda 表达式</strong></li></ol><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">val square: (Int) -&gt; Int &#x3D; &#123; x -&gt; x * x &#125;
+println(square(5)) &#x2F;&#x2F; 输出: 25<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><ol><li><strong>无参数的 Lambda 表达式</strong></li></ol><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">val greet: () -&gt; String &#x3D; &#123; &quot;Hello, World!&quot; &#125;
+println(greet()) &#x2F;&#x2F; 输出: Hello, World!<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><ol><li><strong>多参数的 Lambda 表达式</strong></li></ol><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">val add: (Int, Int) -&gt; Int &#x3D; &#123; a, b -&gt; a + b &#125;
+println(add(3, 4)) &#x2F;&#x2F; 输出: 7<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><ol><li><strong>作为高阶函数的参数</strong></li></ol><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">fun operateOnNumbers(a: Int, b: Int, operation: (Int, Int) -&gt; Int): Int &#123;
+    return operation(a, b)
+&#125;
+
+val result &#x3D; operateOnNumbers(5, 3, add)
+println(result) &#x2F;&#x2F; 输出: 8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ol><li><strong>使用 Lambda 表达式作为参数</strong></li></ol><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">fun main() &#123;
+    val numbers &#x3D; listOf(1, 2, 3, 4, 5)
+    &#x2F;&#x2F; 使用 Lambda 表达式过滤列表
+    val evenNumbers &#x3D; numbers.filter &#123; it % 2 &#x3D;&#x3D; 0 &#125;
+    println(evenNumbers) &#x2F;&#x2F; 输出: [2, 4]
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ol><li><strong>多个 Lambda 表达式</strong></li></ol><p>在某些情况下，可以将多个 Lambda 表达式作为参数传递给高阶函数。</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">fun calculate(a: Int, b: Int, operation: (Int, Int) -&gt; Int): Int &#123;
+    return operation(a, b)
+&#125;
+
+fun main() &#123;
+    val sum &#x3D; calculate(10, 5) &#123; x, y -&gt; x + y &#125;
+    val difference &#x3D; calculate(10, 5) &#123; x, y -&gt; x - y &#125;
+  
+    println(&quot;Sum: $sum&quot;) &#x2F;&#x2F; 输出: Sum: 15
+    println(&quot;Difference: $difference&quot;) &#x2F;&#x2F; 输出: Difference: 5
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>lambda 表达式具有如下特性：</p><ul><li><strong>类型推断</strong>：Kotlin 可以自动推断 Lambda 表达式的类型，因此可以省略参数类型。</li><li><strong>单个参数的简化</strong>：如果 Lambda 表达式只有一个参数，可以省略参数名称，使用 <code>it</code> 作为默认名称。</li></ul><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">val double &#x3D; &#123; it: Int -&gt; it * 2 &#125;
+println(double(4)) &#x2F;&#x2F; 输出: 8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><ul><li><strong>多行 Lambda 表达式</strong>：如果 Lambda 表达式体包含多行代码，需要使用 <code>&#123;&#125;</code> 包围，并且最后一行是返回值。</li></ul><h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><p>Java 和 Kotlin 的注解机制相似，都是通过定义注解类型并在代码中使用，而 TypeScript 则通过装饰器实现类似的功能。它们的共同点在于都可以用于提供元数据，而不同之处在于实现机制、语法和使用场景。</p><table><thead><tr><th>语言</th><th>作用</th><th>举例</th></tr></thead><tbody><tr><td>TypeScript</td><td>TypeScript 中没有直接的注解机制，但可以通过装饰器（decorators）实现类似的功能。装饰器通常用于类和类成员，并提供元数据。#### 作用</td><td></td></tr></tbody></table><ul><li><strong>元数据</strong>：为类、方法、属性提供元数据。</li><li><strong>框架支持</strong>：常用于 Angular 等框架进行依赖注入和元编程。</li></ul><p>|</p><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">function MyAnnotation(value: string) &#123;
+    return function (target: any) &#123;
+        target.annotationValue &#x3D; value;
+    &#125;;
+&#125;
+
+@MyAnnotation(&quot;Hello, TypeScript!&quot;)
+class MyClass &#123;
+    static getAnnotation() &#123;
+        return (this as any).annotationValue;
+    &#125;
+&#125;
+
+console.log(MyClass.getAnnotation()); &#x2F;&#x2F; 输出: Hello, TypeScript!<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|Java |<strong>元数据</strong>：为代码元素（如类、方法、字段等）提供额外信息。<strong>运行时反射</strong>：可以在运行时通过反射获取注解信息。<strong>编译时检查</strong>：一些注解可以用于编译器进行静态检查。<strong>框架支持</strong>：许多框架（如 Spring）使用注解来进行依赖注入和配置。 |</p><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyAnnotation &#123;
+    String value();
+&#125;
+
+@MyAnnotation(&quot;Hello, Java!&quot;)
+public class MyClass &#123;
+    public static void main(String[] args) &#123;
+        MyAnnotation annotation &#x3D; MyClass.class.getAnnotation(MyAnnotation.class);
+        System.out.println(annotation.value()); &#x2F;&#x2F; 输出: Hello, Java!
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|Kotlin |<strong>元数据</strong>：与 Java 类似，Kotlin 的注解用于提供元数据。<strong>运行时反射</strong>：Kotlin 的注解也可以在运行时通过反射获取。<strong>简化语法</strong>：Kotlin 的注解语法更简洁。 |</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">@Target(AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class MyAnnotation(val value: String)
+
+@MyAnnotation(&quot;Hello, Kotlin!&quot;)
+class MyClass &#123;
+    companion object &#123;
+        @JvmStatic
+        fun main(args: Array&lt;String&gt;) &#123;
+            val annotation &#x3D; MyClass::class.annotations.find &#123; it is MyAnnotation &#125; as MyAnnotation
+            println(annotation.value) &#x2F;&#x2F; 输出: Hello, Kotlin!
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|</p><h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3><p>反射是一种强大的编程特性，允许程序在运行时检查和操作其自身的结构和行为。通过反射，开发者可以动态地获取类的信息、方法、字段等，并在运行时创建和操作对象。</p><p>Java 和 Kotlin 都提供了比较完整的反射机制，允许开发者在运行时操作类型信息，而 TypeScript 的反射能力相对较弱，主要依赖 JavaScript 的特性和装饰器来实现。</p><table><thead><tr><th>语言</th><th>说明</th><th>举例</th></tr></thead><tbody><tr><td>TypeScript</td><td><strong>没有内置反射 API</strong>：TypeScript 本身没有完整的反射机制，但可以通过装饰器和元数据实现某种程度的反射。<strong>运行时类型信息</strong>：可以使用 <code>typeof</code> 和 <code>instanceof</code> 来检查类型。<strong>与 JavaScript 结合</strong>：TypeScript 的反射能力依赖于 JavaScript 的反射机制。</td><td></td></tr></tbody></table><pre class="line-numbers language-TypeScript" data-language="TypeScript"><code class="language-TypeScript">function MyDecorator(target: any, propertyKey: string) &#123;
+    console.log(&#96;Decorated method: $&#123;propertyKey&#125;&#96;);
+&#125;
+
+class ReflectionExample &#123;
+    @MyDecorator
+    sayHello() &#123;
+        console.log(&quot;Hello, TypeScript!&quot;);
+    &#125;
+&#125;
+
+const example &#x3D; new ReflectionExample();
+example.sayHello(); &#x2F;&#x2F; 输出: Decorated method: sayHello
+                    &#x2F;&#x2F; 输出: Hello, TypeScript!<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|Java |<strong>完整的反射机制</strong>：Java 提供了完整的反射 API，可以检查类、方法、字段等。<strong>运行时类型信息</strong>：允许在运行时获取类型信息和修改对象的行为。<strong>动态代理</strong>：可以创建动态代理以实现 AOP（面向切面编程）。 |</p><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">import java.lang.reflect.Method;
+
+public class ReflectionExample &#123;
+    public void sayHello() &#123;
+        System.out.println(&quot;Hello, Java!&quot;);
+    &#125;
+
+    public static void main(String[] args) throws Exception &#123;
+        ReflectionExample example &#x3D; new ReflectionExample();
+        Method method &#x3D; example.getClass().getMethod(&quot;sayHello&quot;);
+        method.invoke(example); &#x2F;&#x2F; 输出: Hello, Java!
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|<br>|Kotlin |<strong>Kotlin 反射库</strong>：Kotlin 提供了反射支持，语法更简洁。<strong>类型安全</strong>：Kotlin 的反射 API 设计更加注重类型安全。<strong>扩展功能</strong>：可以通过扩展函数轻松操作 Kotlin 特性，如扩展属性和函数。 |</p><pre class="line-numbers language-Kotlin" data-language="Kotlin"><code class="language-Kotlin">import kotlin.reflect.full.declaredFunctions
+
+class ReflectionExample &#123;
+    fun sayHello() &#123;
+        println(&quot;Hello, Kotlin!&quot;)
+    &#125;
+&#125;
+
+fun main() &#123;
+    val example &#x3D; ReflectionExample()
+    val kClass &#x3D; example::class
+    val function &#x3D; kClass.declaredFunctions.find &#123; it.name &#x3D;&#x3D; &quot;sayHello&quot; &#125;
+    function?.call(example) &#x2F;&#x2F; 输出: Hello, Kotlin!
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>|</p><h2 id="开发感受"><a href="#开发感受" class="headerlink" title="开发感受"></a>开发感受</h2><p>Kotlin 是高级的 Java。</p><p>Java 和 Kotlin 很适合写 OOP 代码。Kotlin 比 Java 适合写面向过程的代码。</p><p>顺便再提一嘴 ArkTS，这玩意就是把 TS 变成了适合写 OOP 的样子，因此 TS 不是 Kotlin 的竞品，ArkTS 才是。</p></div><hr><div class="reprint" id="reprint-statement"><div class="reprint__author"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-user">文章作者: </i></span><span class="reprint-info"><a href="/about" rel="external nofollow noreferrer">海星来来</a></span></div><div class="reprint__type"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-link">文章链接: </i></span><span class="reprint-info"><a href="https://blog.pengdonglai.com/2025/01/29/android-1/">https://blog.pengdonglai.com/2025/01/29/android-1/</a></span></div><div class="reprint__notice"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-copyright">版权声明: </i></span><span class="reprint-info">本博客所有文章除特別声明外，均采用 <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hans" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a> 许可协议。转载请注明来源 <a href="/about" target="_blank">海星来来</a> !</span></div></div><script async defer>document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }</script><div class="tag_share" style="display:block"><div class="post-meta__tag-list" style="display:inline-block"><div class="article-tag"><a href="/tags/Android/"><span class="chip bg-color">Android</span> </a><a href="/tags/Kotlin/"><span class="chip bg-color">Kotlin</span> </a><a href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"><span class="chip bg-color">基础语法</span></a></div></div><div class="post_share" style="zoom:80%;width:fit-content;display:inline-block;float:right;margin:-.15rem 0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/share/css/share.min.css"><div id="article-share"><div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/share/js/social-share.min.js"></script></div></div></div></div></div><article id="prenext-posts" class="prev-next articles"><div class="row article-row"><div class="article col s12 m6" data-aos="fade-up"><div class="article-badge left-badge text-color"><i class="fas fa-chevron-left"></i>&nbsp;上一篇</div><div class="card"><a href="/2025/01/29/android-3/"><div class="card-image"><img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/10.webp" class="responsive-img" alt="安卓（3）-实用篇：UI（1）"> <span class="card-title">安卓（3）-实用篇：UI（1）</span></div></a><div class="card-content article-content"><div class="summary block-with-text">安卓小白，在线性感发牌</div><div class="publish-info"><span class="publish-date"><i class="far fa-clock fa-fw icon-date"></i>2025-01-29 </span><span class="publish-author"><i class="fas fa-bookmark fa-fw icon-category"></i> <a href="/categories/Android/" class="post-category">Android </a><a href="/categories/Android/UI/" class="post-category">UI</a></span></div></div><div class="card-action article-tags"><a href="/tags/Android/"><span class="chip bg-color">Android</span> </a><a href="/tags/Kotlin/"><span class="chip bg-color">Kotlin</span> </a><a href="/tags/Jetpack-Compose/"><span class="chip bg-color">Jetpack Compose</span> </a><a href="/tags/Activity/"><span class="chip bg-color">Activity</span></a></div></div></div><div class="article col s12 m6" data-aos="fade-up"><div class="article-badge right-badge text-color">下一篇&nbsp;<i class="fas fa-chevron-right"></i></div><div class="card"><a href="/2025/01/29/android-2/"><div class="card-image"><img src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/medias/featureimages/0.webp" class="responsive-img" alt="安卓（2）-语法基础：Kotlin 常用库（1）"> <span class="card-title">安卓（2）-语法基础：Kotlin 常用库（1）</span></div></a><div class="card-content article-content"><div class="summary block-with-text">安卓小白，在线性感发牌</div><div class="publish-info"><span class="publish-date"><i class="far fa-clock fa-fw icon-date"></i>2025-01-29 </span><span class="publish-author"><i class="fas fa-bookmark fa-fw icon-category"></i> <a href="/categories/Android/" class="post-category">Android </a><a href="/categories/Android/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-category">基础语法</a></span></div></div><div class="card-action article-tags"><a href="/tags/Android/"><span class="chip bg-color">Android</span> </a><a href="/tags/Kotlin/"><span class="chip bg-color">Kotlin</span> </a><a href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"><span class="chip bg-color">基础语法</span></a></div></div></div></div></article></div><script>$("#articleContent").on("copy",function(e){var n,t,o,i;void 0!==window.getSelection&&((""+(n=window.getSelection())).length<Number.parseInt("80")||(t=document.getElementsByTagName("body")[0],(o=document.createElement("div")).style.position="absolute",o.style.left="-99999px",t.appendChild(o),o.appendChild(n.getRangeAt(0).cloneContents()),"PRE"===n.getRangeAt(0).commonAncestorContainer.nodeName&&(o.innerHTML="<pre>"+o.innerHTML+"</pre>"),i=document.location.href,o.innerHTML+='<br />来源: 海祇岛的珊瑚森林<br />文章作者: 海星来来<br />文章链接: <a href="'+i+'">'+i+"</a><br />本文章著作权归作者所有，任何形式的转载都请注明出处。",n.selectAllChildren(o),window.setTimeout(function(){t.removeChild(o)},200)))})</script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/codeBlock/codeBlockFuction.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/codeBlock/codeLang.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/codeBlock/codeCopy.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/codeBlock/codeShrink.js"></script></div><div id="toc-aside" class="expanded col l3 hide-on-med-and-down"><div class="toc-widget card"><div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div><div id="toc-content"></div></div></div></div><div id="floating-toc-btn" class="hide-on-med-and-down"><a class="btn-floating btn-large bg-color"><i class="fas fa-list-ul"></i></a></div><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/tocbot/tocbot.min.js"></script><script>$(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });</script></main><footer class="page-footer bg-color"><div class="container row center-align" style="margin-bottom:0!important"><div class="col s12 m8 l8 copy-right">Copyright&nbsp;&copy; <span id="year">2019-2025</span> <span id="year">2019</span> <a href="/about" target="_blank">海星来来</a> |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a><br>&nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">149.4k</span>&nbsp;字 <span id="busuanzi_container_site_pv">|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv" class="white-color"></span>&nbsp;次 </span><span id="busuanzi_container_site_uv">|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv" class="white-color"></span>&nbsp;人</span><br><br></div><div class="col s12 m4 l4 social-link social-statis"><a href="https://github.com/umaru2001" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50"><i class="fab fa-github"></i> </a><a href="mailto:donglaistarfish@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50"><i class="fas fa-envelope-open"></i> </a><a href="https://www.zhihu.com/people/hao-ba-50-81-68" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/hao-ba-50-81-68" data-position="top" data-delay="50"><i class="fab fa-zhihu1">知</i> </a><a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50"><i class="fas fa-rss"></i></a></div></div></footer><div class="progress-bar"></div><div id="searchModal" class="modal"><div class="modal-content"><div class="search-header"><span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span> <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input"></div><div id="searchResult"></div></div></div><script>$(function(){!function(t,s,i){"use strict";$.ajax({url:t,dataType:"xml",success:function(t){var e=$("entry",t).map(function(){return{title:$("title",this).text(),content:$("content",this).text(),url:$("url",this).text()}}).get(),n=document.getElementById(s),r=document.getElementById(i);n.addEventListener("input",function(){var f='<ul class="search-result-list">',m=this.value.trim().toLowerCase().split(/[\s\-]+/);r.innerHTML="",this.value.trim().length<=0||(e.forEach(function(t){var n,e,r,s,i,l=!0,a=t.title.trim().toLowerCase(),c=t.content.trim().replace(/<[^>]+>/g,"").toLowerCase(),u=0===(u=t.url).indexOf("/")?t.url:"/"+u,o=-1,h=-1;""!==a&&""!==c&&m.forEach(function(t,e){n=a.indexOf(t),o=c.indexOf(t),n<0&&o<0?l=!1:(o<0&&(o=0),0===e&&(h=o))}),l&&(f+="<li><a href='"+u+"' class='search-result-title'>"+a+"</a>",e=t.content.trim().replace(/<[^>]+>/g,""),0<=h&&(s=h+80,(r=h-20)<0&&(r=0),0===r&&(s=100),s>e.length&&(s=e.length),i=e.substr(r,s),m.forEach(function(t){var e=new RegExp(t,"gi");i=i.replace(e,'<em class="search-keyword">'+t+"</em>")}),f+='<p class="search-result">'+i+"...</p>"),f+="</li>")}),f+="</ul>",r.innerHTML=f)})}})}("/search.xml","searchInput","searchResult")})</script><div id="backTop" class="top-scroll"><a class="btn-floating btn-large waves-effect waves-light" href="#!"><i class="fas fa-arrow-up"></i></a></div><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/materialize/materialize.min.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/masonry/masonry.pkgd.min.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/aos/aos.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/scrollprogress/scrollProgress.min.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/js/matery.js"></script><script src="/live2d-widget/autoload.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/others/clicklove.js" async></script><script async src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/others/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/js/tw_cn.js"></script><script>var defaultEncoding=2,translateDelay=0,cookieDomain="https://blog.pengdonglai.com",msgToTraditionalChinese="繁",msgToSimplifiedChinese="简",translateButtonId="translateLink";translateInitilization()</script><script src="https://cdn.jsdelivr.net/gh/umaru2001/umaru2001.github.io/libs/instantpage/instantpage.js" type="module"></script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 3,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,d=o();function o(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=o());for(var e,i=0;i<d.length;i++)0<=(e=(e=d[i]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,a,n,o=d[i];e=function(){d=d.filter(function(t){return o!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(o)},(t=o).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,n=t.getAttribute("data-original"),a.onload=function(){t.src=n,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=n},t.src!==n&&(a.src=n)))}()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)}(this);</script></body></html>

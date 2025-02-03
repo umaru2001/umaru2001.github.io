@@ -342,6 +342,15 @@ pre.line-numbers::-webkit-scrollbar {
   box-shadow: 20px 0 #ffbd2e, 40px 0 #27c93f;
 }
 
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+  font-size: inherit;
+}
+
 code {
   padding: 1px 5px;
   top: 13px !important;
